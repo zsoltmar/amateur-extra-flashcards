@@ -11,8 +11,8 @@ interface QuestionPoolProps {
 }
 
 export function QuestionPool({ questions, currentQuestionId, seenQuestionIds, answerResults = {}, onQuestionClick }: QuestionPoolProps) {
-  const squareSize = 10; // Slightly larger for sidebar width
-  const cols = 24; // Fit nicely in ~320px sidebar
+  const squareSize = 12; // Slightly larger for sidebar width
+  const cols = 21; // Fit nicely within ~330px sidebar including padding
 
   // Build alternating group index by unit prefix (e.g., E1, E2, ...)
   let lastUnit = "";

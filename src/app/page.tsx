@@ -164,7 +164,7 @@ export default function Home() {
       )}
 
       {/* Left Sidebar */}
-      <aside className={`order-last md:order-none md:fixed md:inset-y-0 md:left-0 z-40 md:w-80 w-full backdrop-blur-md border-t md:border-t-0 md:border-r border-black/10 dark:border-white/10 transition-transform bg-white/80 dark:bg-black/70 md:overflow-y-auto ${showSidebar ? 'md:translate-x-0' : 'md:-translate-x-full'}`}>
+      <aside className={`order-last md:order-none md:fixed md:inset-y-0 md:left-0 z-40 md:w-[330px] w-full backdrop-blur-md border-t md:border-t-0 md:border-r border-black/10 dark:border-white/10 transition-transform bg-white/80 dark:bg-black/70 md:overflow-y-auto overflow-x-hidden ${showSidebar ? 'md:translate-x-0' : 'md:-translate-x-full'}`}>
         <div className="h-full flex flex-col p-4 gap-4">
           {/* Top bar: theme + close */}
           <div className="flex items-center justify-between gap-2">
@@ -236,7 +236,7 @@ export default function Home() {
       </aside>
 
       {/* Main content shifts when sidebar open */}
-      <div className={`transition-[padding] ${showSidebar ? 'md:pl-80' : 'md:pl-0'}`}>
+      <div className={`transition-[padding] ${showSidebar ? 'md:pl-[330px]' : 'md:pl-0'}`}>
         <div className="container mx-auto px-4 py-8 min-h-screen flex flex-col items-center justify-center">
         
 
