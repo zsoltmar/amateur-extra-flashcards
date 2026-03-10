@@ -15,7 +15,7 @@ export default function Home() {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [originalQuestions, setOriginalQuestions] = useState<Question[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [mode, setMode] = useState<FlashcardMode>('answer-highlighted');
+  const [mode, setMode] = useState<FlashcardMode>('multiple-choice');
   const [stats, setStats] = useState<FlashcardStats>({
     totalQuestions: 0,
     answeredQuestions: 0,
