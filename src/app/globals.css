@@ -127,3 +127,17 @@
     @apply font-sans;
   }
 }
+
+/* Theme-aware subtle noise background (no visible grid) */
+.noise-bg {
+  background-color: #e3e9f1; /* light mode base */
+  background-image: url('/noise.svg');
+  background-repeat: repeat;
+  background-size: 512px 512px; /* larger tile to avoid tiling artifacts */
+}
+.dark .noise-bg {
+  background-color: #0b1220; /* dark mode base */
+  background-image: url('/noise.svg');
+  background-repeat: repeat;
+  background-size: 512px 512px;
+}
