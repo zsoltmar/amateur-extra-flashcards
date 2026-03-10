@@ -8,7 +8,7 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { QuestionPool } from '@/components/QuestionPool';
 // import { Stats } from '@/components/Stats';
 import { loadQuestions, shuffleArray, calculateAccuracy } from '@/lib/questions';
-import { ChevronLeft, ChevronRight, Check, X as XIcon, Target as TargetIcon } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Check, X as XIcon, Target as TargetIcon, Menu, PanelLeftClose, Info } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
 export default function Home() {
@@ -29,6 +29,7 @@ export default function Home() {
   // const [showStats, setShowStats] = useState(false);
   const [seenQuestionIds, setSeenQuestionIds] = useState<Set<string>>(new Set());
   const [answerResults, setAnswerResults] = useState<Record<string, boolean>>({});
+  const [showSidebar, setShowSidebar] = useState(true);
 
   useEffect(() => {
     loadQuestions().then((loadedQuestions) => {
@@ -125,6 +126,11 @@ export default function Home() {
   };
 
   const currentUnit = currentQuestion ? getUnitFromQuestionId(currentQuestion.id) : null;
+  const modeDescription = {
+    highlighted: 'Shows the correct answer only. Tap the card to advance.',
+    'answer-highlighted': 'Shows all choices and highlights the correct one. Tap to advance.',
+    'multiple-choice': 'Quiz mode: pick an answer. Immediate feedback and accuracy tracking.'
+  } as Record<FlashcardMode, string>;
 
   const handleQuestionClick = (originalIndex: number) => {
     const targetId = originalQuestions[originalIndex]?.id;
@@ -145,28 +151,93 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen noise-bg flex items-center">
-      <ThemeToggle />
-      {/* Mode Tabs - Fixed at upper-left, outside content window */}
-      <div className="fixed top-3 left-3 z-40">
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-medium text-slate-700 dark:text-white/70">Mode:</span>
-          <Tabs value={mode} onValueChange={(value) => setMode(value as FlashcardMode)}>
-            <TabsList className="inline-flex items-center gap-1 rounded-md bg-black/5 border border-black/10 p-1 dark:bg-white/10 dark:border-white/20">
-              <TabsTrigger value="highlighted" className="text-xs px-2 py-1 rounded text-slate-800 dark:text-white data-[state=active]:bg-black/10 dark:data-[state=active]:bg-white/20 cursor-pointer">
-                Answer only
-              </TabsTrigger>
-              <TabsTrigger value="answer-highlighted" className="text-xs px-2 py-1 rounded text-slate-800 dark:text-white data-[state=active]:bg-black/10 dark:data-[state=active]:bg-white/20 cursor-pointer">
-                Answer highlighted
-              </TabsTrigger>
-              <TabsTrigger value="multiple-choice" className="text-xs px-2 py-1 rounded text-slate-800 dark:text-white data-[state=active]:bg-black/10 dark:data-[state=active]:bg-white/20 cursor-pointer">
-                Quiz
-              </TabsTrigger>
-            </TabsList>
-          </Tabs>
+    <div className="min-h-screen noise-bg flex flex-col">
+      {/* Sidebar toggle button when collapsed */}
+      {!showSidebar && (
+        <button
+          onClick={() => setShowSidebar(true)}
+          aria-label="Open sidebar"
+          className="fixed top-3 left-3 z-40 text-slate-800 dark:text-white p-2 rounded-md bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/20 hover:opacity-80 cursor-pointer hidden md:block"
+        >
+          <Menu className="w-4 h-4" />
+        </button>
+      )}
+
+      {/* Left Sidebar */}
+      <aside className={`order-last md:order-none md:fixed md:inset-y-0 md:left-0 z-40 md:w-80 w-full backdrop-blur-md border-t md:border-t-0 md:border-r border-black/10 dark:border-white/10 transition-transform bg-white/80 dark:bg-black/70 md:overflow-y-auto ${showSidebar ? 'md:translate-x-0' : 'md:-translate-x-full'}`}>
+        <div className="h-full flex flex-col p-4 gap-4">
+          {/* Top bar: theme + close */}
+          <div className="flex items-center justify-between gap-2">
+            <ThemeToggle inline />
+            <button
+              onClick={() => setShowSidebar(false)}
+              aria-label="Close sidebar"
+              className="p-1 rounded-md text-slate-800 dark:text-white hover:opacity-80 cursor-pointer hidden md:inline-flex"
+            >
+              <PanelLeftClose className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Centered content (allow tooltips to escape) */}
+          <div className="flex-1 flex flex-col items-center justify-center text-center gap-4 overflow-visible">
+            {/* Mode Selector */}
+            <div className="space-y-2">
+              <div className="text-xs font-medium text-slate-700 dark:text-white/50">Study Mode</div>
+              <Tabs value={mode} onValueChange={(value) => setMode(value as FlashcardMode)}>
+                <TabsList className="inline-flex items-center gap-1 rounded-md bg-black/5 border border-black/10 p-1 dark:bg-white/10 dark:border-white/20">
+                  <TabsTrigger value="highlighted" className="text-xs px-2 py-1 rounded text-slate-800 dark:text-white data-[state=active]:bg-black/10 dark:data-[state=active]:bg-white/20 cursor-pointer">Answer only</TabsTrigger>
+                  <TabsTrigger value="answer-highlighted" className="text-xs px-2 py-1 rounded text-slate-800 dark:text-white data-[state=active]:bg-black/10 dark:data-[state=active]:bg-white/20 cursor-pointer">Answer highlighted</TabsTrigger>
+                  <TabsTrigger value="multiple-choice" className="text-xs px-2 py-1 rounded text-slate-800 dark:text-white data-[state=active]:bg-black/10 dark:data-[state=active]:bg-white/20 cursor-pointer">Quiz</TabsTrigger>
+                </TabsList>
+              </Tabs>
+              <div className="mt-2 text-[11px] leading-snug text-slate-800 dark:text-white/20 flex items-start gap-2">
+                <span>{modeDescription[mode]}</span>
+              </div>
+            </div>
+
+            {/* Pool Grid */}
+            <div className="w-full space-y-2 h-full flex flex-col items-center justify-center pb-10">
+              <div className="text-[11px] text-slate-600 dark:text-white/60">
+                {seenQuestionIds.size}/{originalQuestions.length} seen ({
+                  originalQuestions.length ? Math.floor((seenQuestionIds.size / originalQuestions.length) * 100) : 0
+                }%)
+              </div>
+              <div className="relative w-full flex items-center justify-center">
+                <QuestionPool
+                  questions={originalQuestions}
+                  currentQuestionId={currentQuestion?.id}
+                  seenQuestionIds={seenQuestionIds}
+                  answerResults={answerResults}
+                  onQuestionClick={handleQuestionClick}
+                />
+              </div>
+              <div className="text-[11px] leading-snug text-slate-700 dark:text-white/30">
+                The grid shows the entire question pool in order.<br />Click any square to jump.
+              </div>
+              <div className="flex items-center justify-center gap-4 text-[11px]">
+                <div className="flex items-center gap-1 text-slate-700 dark:text-white/70">
+                  <span className="inline-block w-3 h-3 rounded bg-blue-600" /> Seen
+                </div>
+                <div className="flex items-center gap-1 text-slate-700 dark:text-white/70">
+                  <span className="inline-block w-3 h-3 rounded bg-green-500" /> Correct
+                </div>
+                <div className="flex items-center gap-1 text-slate-700 dark:text-white/70">
+                  <span className="inline-block w-3 h-3 rounded bg-rose-600" /> Wrong
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom: Reset */}
+          <div className="pt-2 border-t border-black/10 dark:border-white/10 flex items-center justify-center">
+            <button onClick={() => setShowConfirmDialog(true)} className="underline text-xs text-slate-600 hover:text-slate-900 dark:text-white/60 dark:hover:text-white cursor-pointer">Reset</button>
+          </div>
         </div>
-      </div>
-      <div className="container mx-auto px-4 py-8">
+      </aside>
+
+      {/* Main content shifts when sidebar open */}
+      <div className={`transition-[padding] ${showSidebar ? 'md:pl-80' : 'md:pl-0'}`}>
+        <div className="container mx-auto px-4 py-8 min-h-screen flex flex-col items-center justify-center">
         
 
         {/* Subtle Progress Indicator */}
@@ -272,71 +343,8 @@ export default function Home() {
             </div>
           </div>
         )}
+        </div>
       </div>
-
-      {/* Bottom Controls */}
-      <div className="fixed bottom-3 left-0 right-0 z-40 flex items-center justify-center gap-2">
-        <button
-          onClick={() => {
-            setShowQuestionPool(!showQuestionPool);
-          }}
-          className="backdrop-blur-sm text-xs px-3 py-1.5 rounded-md transition-colors border bg-black/10 border-black/10 text-slate-800 hover:bg-black/20 dark:bg-white/10 dark:border-white/20 dark:text-white dark:hover:bg-white/20 cursor-pointer"
-        >
-          Pool progress
-        </button>
-      </div>
-
-      {/* Reset link - bottom right */}
-      <div className="fixed bottom-3 right-3 z-40">
-        <button
-          onClick={() => setShowConfirmDialog(true)}
-          className="underline text-xs text-slate-600 hover:text-slate-900 dark:text-white/60 dark:hover:text-white cursor-pointer"
-        >
-          Reset
-        </button>
-      </div>
-
-
-      {/* Question Pool - Compact Popover with Grid + Summary (centered above footer) */}
-      <AnimatePresence>
-        {showQuestionPool && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            className="fixed bottom-16 left-1/2 -translate-x-1/2 transform bg-black/90 backdrop-blur-sm border border-white/20 rounded-md p-3 z-30 shadow-lg w-fit max-w-[90vw]"
-          >
-            {/* Quiz stats with icons and labels */}
-            <div className="text-white text-xs mb-1 whitespace-nowrap flex items-center justify-center gap-4">
-              <span className="text-white/80">{stats.answeredQuestions}/{stats.totalQuestions} completed</span>
-              {mode === 'multiple-choice' && (
-                <>
-                  <span className="flex items-center gap-1 text-green-400"><Check className="w-3.5 h-3.5" /> {stats.correctAnswers}</span>
-                  <span className="flex items-center gap-1 text-rose-400"><XIcon className="w-3.5 h-3.5" /> {stats.wrongAnswers}</span>
-                  <span className="flex items-center gap-1 text-sky-400"><TargetIcon className="w-3.5 h-3.5" /> {stats.accuracy}%</span>
-                </>
-              )}
-            </div>
-            {/* Seen summary */}
-            <div className="text-white/80 text-[11px] mb-2 text-center whitespace-nowrap">
-              {seenQuestionIds.size}/{originalQuestions.length} seen ({
-                originalQuestions.length
-                  ? Math.floor((seenQuestionIds.size / originalQuestions.length) * 100)
-                  : 0
-              }%)
-            </div>
-            <div className="relative">
-              <QuestionPool
-                questions={originalQuestions}
-                currentQuestionId={currentQuestion?.id}
-                seenQuestionIds={seenQuestionIds}
-                answerResults={answerResults}
-                onQuestionClick={handleQuestionClick}
-              />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

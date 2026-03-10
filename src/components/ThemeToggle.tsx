@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { Sun, Moon } from 'lucide-react';
+import { Tooltip } from '@/components/ui/tooltip';
 
-export function ThemeToggle() {
+export function ThemeToggle({ inline = false, className = '' }: { inline?: boolean; className?: string }) {
   const [mounted, setMounted] = useState(false);
   const [isDark, setIsDark] = useState(true);
 
@@ -35,14 +36,18 @@ export function ThemeToggle() {
 
   if (!mounted) return null;
 
+  const base = 'hover:opacity-80 transition-opacity cursor-pointer';
+  const fixedPos = 'fixed top-3 right-3 z-50';
+  const color = 'text-slate-800 dark:text-white';
   return (
-    <button
-      onClick={toggleTheme}
-      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-      className="fixed top-3 right-3 z-50 text-slate-800 dark:text-white hover:opacity-80 transition-opacity cursor-pointer"
-      title={isDark ? 'Light mode' : 'Dark mode'}
-    >
-      {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-    </button>
+    <Tooltip content={isDark ? 'Light mode' : 'Dark mode'}>
+      <button
+        onClick={toggleTheme}
+        aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+        className={`${inline ? '' : fixedPos} ${color} ${base} ${className}`}
+      >
+        {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+      </button>
+    </Tooltip>
   );
 }
