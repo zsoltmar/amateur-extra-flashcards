@@ -9,6 +9,7 @@ import { QuestionPool } from '@/components/QuestionPool';
 // import { Stats } from '@/components/Stats';
 import { loadQuestions, shuffleArray, calculateAccuracy } from '@/lib/questions';
 import { ChevronLeft, ChevronRight, Check, X as XIcon, Target as TargetIcon, Menu, PanelLeftClose, Info } from 'lucide-react';
+import { Tooltip } from '@/components/ui/tooltip';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
 export default function Home() {
@@ -132,6 +133,13 @@ export default function Home() {
     'multiple-choice': 'Quiz mode: pick an answer. Immediate feedback and accuracy tracking.'
   } as Record<FlashcardMode, string>;
 
+  const totalCount = originalQuestions.length || 0;
+  const rightCount = Object.values(answerResults).filter((v) => v === true).length;
+  const wrongCount = Object.values(answerResults).filter((v) => v === false).length;
+  const seenCount = seenQuestionIds.size;
+  const pctTotal = (n: number) => (totalCount ? Math.round((n / totalCount) * 100) : 0);
+  const pctSeen = (n: number) => (seenCount ? Math.round((n / seenCount) * 100) : 0);
+
   const handleQuestionClick = (originalIndex: number) => {
     const targetId = originalQuestions[originalIndex]?.id;
     if (!targetId) return;
@@ -198,9 +206,10 @@ export default function Home() {
             {/* Pool Grid */}
             <div className="w-full space-y-2 h-full flex flex-col items-center justify-center pb-10">
               <div className="text-[11px] text-slate-600 dark:text-white/60">
-                {seenQuestionIds.size}/{originalQuestions.length} seen ({
-                  originalQuestions.length ? Math.floor((seenQuestionIds.size / originalQuestions.length) * 100) : 0
-                }%)
+                {seenCount}/{totalCount} seen ({pctTotal(seenCount)}%){' '}
+                {mode === 'multiple-choice' && (
+                  <span>• {stats.accuracy}% accuracy</span>
+                )}
               </div>
               <div className="relative w-full flex items-center justify-center">
                 <QuestionPool
@@ -214,16 +223,25 @@ export default function Home() {
               <div className="text-[11px] leading-snug text-slate-700 dark:text-white/30">
                 The grid shows the entire question pool in order.<br />Click any square to jump.
               </div>
-              <div className="flex items-center justify-center gap-4 text-[11px]">
-                <div className="flex items-center gap-1 text-slate-700 dark:text-white/70">
-                  <span className="inline-block w-3 h-3 rounded bg-blue-600" /> Seen
-                </div>
-                <div className="flex items-center gap-1 text-slate-700 dark:text-white/70">
-                  <span className="inline-block w-3 h-3 rounded bg-green-500" /> Correct
-                </div>
-                <div className="flex items-center gap-1 text-slate-700 dark:text-white/70">
-                  <span className="inline-block w-3 h-3 rounded bg-rose-600" /> Wrong
-                </div>
+              <div className="flex items-center justify-center gap-5 text-[11px]">
+                <Tooltip content={`${pctTotal(seenCount)}% of total`}>
+                  <div className="flex items-center gap-1 text-slate-700 dark:text-white/70 cursor-default select-none">
+                    <span className="inline-block w-3 h-3 rounded bg-blue-600" /> Seen
+                    <span className="font-semibold ml-1">{seenCount}</span>
+                  </div>
+                </Tooltip>
+                <Tooltip content={`${pctSeen(rightCount)}% of seen`}>
+                  <div className="flex items-center gap-1 text-slate-700 dark:text-white/70 cursor-default select-none">
+                    <span className="inline-block w-3 h-3 rounded bg-green-500" /> Correct
+                    <span className="font-semibold ml-1">{rightCount}</span>
+                  </div>
+                </Tooltip>
+                <Tooltip content={`${pctSeen(wrongCount)}% of seen`}>
+                  <div className="flex items-center gap-1 text-slate-700 dark:text-white/70 cursor-default select-none">
+                    <span className="inline-block w-3 h-3 rounded bg-rose-600" /> Wrong
+                    <span className="font-semibold ml-1">{wrongCount}</span>
+                  </div>
+                </Tooltip>
               </div>
             </div>
           </div>
@@ -243,7 +261,7 @@ export default function Home() {
         {/* Subtle Progress Indicator */}
         <div className="flex justify-center items-center gap-4 mb-6">
           <div className="text-slate-700 dark:text-white/60 text-sm">
-            Question {currentIndex + 1} of {questions.length}
+            {seenCount}/{totalCount} seen ({pctTotal(seenCount)}%)
             {mode === 'multiple-choice' && (
               <span> • {stats.accuracy}% accuracy</span>
             )}
