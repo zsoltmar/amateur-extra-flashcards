@@ -13,6 +13,8 @@ import { Tooltip } from '@/components/ui/tooltip';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
 export default function Home() {
+  const STORAGE_KEY = 'amxtra-progress-v1';
+  const UI_STORAGE_KEY = 'amxtra-ui-v1';
   const [questions, setQuestions] = useState<Question[]>([]);
   const [originalQuestions, setOriginalQuestions] = useState<Question[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -36,16 +38,97 @@ export default function Home() {
   useEffect(() => {
     loadQuestions().then((loadedQuestions) => {
       setOriginalQuestions(loadedQuestions);
-      const shuffled = shuffleArray(loadedQuestions);
-      setQuestions(shuffled);
-      setStats(prev => ({ ...prev, totalQuestions: shuffled.length }));
-      // Mark the initially visible question as seen
-      if (shuffled.length > 0) {
-        setSeenQuestionIds(new Set([shuffled[0].id]));
+
+      // Try to restore from localStorage
+      let saved: any = null;
+      try {
+        const raw = typeof window !== 'undefined' ? localStorage.getItem(STORAGE_KEY) : null;
+        if (raw) saved = JSON.parse(raw);
+      } catch {}
+
+      const byId = new Map(loadedQuestions.map((q) => [q.id, q] as const));
+      const allIds = new Set(loadedQuestions.map((q) => q.id));
+
+      let nextQuestions = shuffleArray(loadedQuestions);
+      let nextCurrentIndex = 0;
+      let nextSeen = new Set<string>();
+      let nextAnswerResults: Record<string, boolean> = {};
+      let nextMode: FlashcardMode = mode;
+      let nextAdvanceMode: 'random' | 'sequential' = 'random';
+
+      const validSavedOrder = Array.isArray(saved?.orderIds)
+        && saved.orderIds.length === loadedQuestions.length
+        && saved.orderIds.every((id: string) => allIds.has(id));
+
+      if (validSavedOrder) {
+        nextQuestions = saved.orderIds.map((id: string) => byId.get(id)!) as Question[];
+        const currId = saved.currentId as string | undefined;
+        const idx = currId ? nextQuestions.findIndex((q) => q.id === currId) : 0;
+        nextCurrentIndex = idx >= 0 ? idx : 0;
+        if (Array.isArray(saved.seenIds)) nextSeen = new Set<string>(saved.seenIds);
+        if (saved.answerResults && typeof saved.answerResults === 'object') nextAnswerResults = saved.answerResults as Record<string, boolean>;
+        if (saved.mode) nextMode = saved.mode as FlashcardMode;
+        if (saved.advanceMode) nextAdvanceMode = saved.advanceMode as 'random' | 'sequential';
+      } else {
+        // Fresh session fallback: mark first as seen
+        if (nextQuestions.length > 0) nextSeen = new Set([nextQuestions[0].id]);
       }
+
+      setQuestions(nextQuestions);
+      setCurrentIndex(nextCurrentIndex);
+      setSeenQuestionIds(nextSeen);
+      setAnswerResults(nextAnswerResults);
+      setMode(nextMode);
+      setAdvanceMode(nextAdvanceMode);
+      // Derive stats from answerResults
+      const right = Object.values(nextAnswerResults).filter((v) => v === true).length;
+      const answered = Object.keys(nextAnswerResults).length;
+      setStats({
+        totalQuestions: nextQuestions.length,
+        answeredQuestions: answered,
+        correctAnswers: right,
+        wrongAnswers: answered - right,
+        accuracy: calculateAccuracy(right, answered),
+      });
+
       setIsLoading(false);
     });
   }, []);
+
+  // Restore UI prefs (sidebar) on mount
+  useEffect(() => {
+    try {
+      const raw = typeof window !== 'undefined' ? localStorage.getItem(UI_STORAGE_KEY) : null;
+      if (!raw) return;
+      const ui = JSON.parse(raw);
+      if (typeof ui?.showSidebar === 'boolean') setShowSidebar(ui.showSidebar);
+    } catch {}
+  }, []);
+
+  // Persist progress to localStorage
+  useEffect(() => {
+    if (!questions.length) return;
+    try {
+      const data = {
+        version: 1,
+        orderIds: questions.map((q) => q.id),
+        currentId: questions[currentIndex]?.id,
+        seenIds: Array.from(seenQuestionIds),
+        answerResults,
+        mode,
+        advanceMode,
+        updatedAt: Date.now(),
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch {}
+  }, [questions, currentIndex, seenQuestionIds, answerResults, mode, advanceMode]);
+
+  // Persist UI prefs (sidebar)
+  useEffect(() => {
+    try {
+      localStorage.setItem(UI_STORAGE_KEY, JSON.stringify({ showSidebar }));
+    } catch {}
+  }, [showSidebar]);
 
   const currentQuestion = questions[currentIndex];
 
@@ -124,6 +207,7 @@ export default function Home() {
   }, [handlePrev, handleNext]);
 
   const handleRandomize = () => {
+    try { localStorage.removeItem(STORAGE_KEY); } catch {}
     const shuffled = shuffleArray(originalQuestions);
     setQuestions(shuffled);
     setCurrentIndex(0);
