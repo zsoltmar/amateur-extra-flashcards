@@ -22,14 +22,17 @@ export function Flashcard({ question, mode, onAnswer, onNext, isHard = false, on
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [hasAnswered, setHasAnswered] = useState(false);
 
-  // Extract image filename if present, or map figure references like "Figure E7-1" to public images (E7-1.png)
+  // Extract image filename if present, or map figure references like "Figure E7-1" or bare tokens like "E7-3" to public images (E7-1.png)
   const getImageFilename = (text: string) => {
     // Direct filename pattern
     const direct = text.match(/(\w+-\d+\.(png|jpg|gif))/i);
     if (direct) return direct[0];
-    // Figure reference like: Figure E7-1, In Figure E5-1, etc.
-    const figure = text.match(/Figure\s+([A-Z]\d+-\d+)/i);
+    // Figure reference like: Figure E7-1, Fig. E5-1 (allow hyphen or en/em dash)
+    const figure = text.match(/(?:Figure|Fig\.)\s*([A-Z]\d+[\-\u2013\u2014]\d+)/i);
     if (figure) return `${figure[1].toUpperCase()}.png`;
+    // Bare figure token like: E7-3 (allow en/em dash)
+    const bare = text.match(/\b([A-Z]\d+[\-\u2013\u2014]\d+)\b/i);
+    if (bare) return `${bare[1].toUpperCase()}.png`;
     return null;
   };
 

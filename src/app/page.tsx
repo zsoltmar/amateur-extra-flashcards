@@ -687,7 +687,12 @@ export default function Home() {
 
         {/* Flashcard Stack */}
         <div className="flex items-center justify-center min-h-[500px]">
-          <div className={`relative ${currentQuestion && (currentQuestion.question.includes('.png') || currentQuestion.question.includes('.jpg') || currentQuestion.question.includes('.gif') || /Figure\s+[A-Z]\d+-\d+/i.test(currentQuestion.question)) ? 'max-w-4xl' : 'max-w-2xl'} w-full`}>
+          <div className={`relative ${currentQuestion && (
+            currentQuestion.question.includes('.png') ||
+            currentQuestion.question.includes('.jpg') ||
+            currentQuestion.question.includes('.gif') ||
+            /(?:Figure|Fig\.)\s*[A-Z]\d+[\-\u2013\u2014]\d+|\b[A-Z]\d+[\-\u2013\u2014]\d+\b/i.test(currentQuestion.question)
+          ) ? 'max-w-4xl' : 'max-w-2xl'} w-full`}>
             {/* Subtle stacked cards background (glassmorphism + gentle motion) */}
             <motion.div
               className="absolute inset-0 rounded-2xl pointer-events-none z-0 bg-black/10 dark:bg-white/5 backdrop-blur-sm border border-black/10 dark:border-white/10"
