@@ -34,6 +34,9 @@ export default function Home() {
   const [answerResults, setAnswerResults] = useState<Record<string, boolean>>({});
   const [showSidebar, setShowSidebar] = useState(true);
   const [advanceMode, setAdvanceMode] = useState<'random' | 'sequential'>('random');
+  // Navigation history: list of visited question IDs and current position
+  const [navHistory, setNavHistory] = useState<string[]>([]);
+  const [navPos, setNavPos] = useState<number>(0);
 
   useEffect(() => {
     loadQuestions().then((loadedQuestions) => {
@@ -55,6 +58,8 @@ export default function Home() {
       let nextAnswerResults: Record<string, boolean> = {};
       let nextMode: FlashcardMode = mode;
       let nextAdvanceMode: 'random' | 'sequential' = 'random';
+      let nextHistory: string[] = [];
+      let nextHistoryPos = 0;
 
       const validSavedOrder = Array.isArray(saved?.orderIds)
         && saved.orderIds.length === loadedQuestions.length
@@ -69,9 +74,16 @@ export default function Home() {
         if (saved.answerResults && typeof saved.answerResults === 'object') nextAnswerResults = saved.answerResults as Record<string, boolean>;
         if (saved.mode) nextMode = saved.mode as FlashcardMode;
         if (saved.advanceMode) nextAdvanceMode = saved.advanceMode as 'random' | 'sequential';
+        if (Array.isArray(saved.navHistory)) nextHistory = saved.navHistory.filter((id: string) => allIds.has(id));
+        if (typeof saved.navPos === 'number') nextHistoryPos = Math.min(Math.max(0, saved.navPos), Math.max(0, nextHistory.length - 1));
       } else {
         // Fresh session fallback: mark first as seen
-        if (nextQuestions.length > 0) nextSeen = new Set([nextQuestions[0].id]);
+        if (nextQuestions.length > 0) {
+          const firstId = nextQuestions[0].id;
+          nextSeen = new Set([firstId]);
+          nextHistory = [firstId];
+          nextHistoryPos = 0;
+        }
       }
 
       setQuestions(nextQuestions);
@@ -80,6 +92,15 @@ export default function Home() {
       setAnswerResults(nextAnswerResults);
       setMode(nextMode);
       setAdvanceMode(nextAdvanceMode);
+      if (!nextHistory.length && nextQuestions.length) {
+        const currId = nextQuestions[nextCurrentIndex]?.id;
+        if (currId) {
+          nextHistory = [currId];
+          nextHistoryPos = 0;
+        }
+      }
+      setNavHistory(nextHistory);
+      setNavPos(nextHistoryPos);
       // Derive stats from answerResults
       const right = Object.values(nextAnswerResults).filter((v) => v === true).length;
       const answered = Object.keys(nextAnswerResults).length;
@@ -117,11 +138,13 @@ export default function Home() {
         answerResults,
         mode,
         advanceMode,
+        navHistory,
+        navPos,
         updatedAt: Date.now(),
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     } catch {}
-  }, [questions, currentIndex, seenQuestionIds, answerResults, mode, advanceMode]);
+  }, [questions, currentIndex, seenQuestionIds, answerResults, mode, advanceMode, navHistory, navPos]);
 
   // Persist UI prefs (sidebar)
   useEffect(() => {
@@ -131,6 +154,7 @@ export default function Home() {
   }, [showSidebar]);
 
   const currentQuestion = questions[currentIndex];
+  const canGoBack = navPos > 0 && navHistory.length > 0;
 
   const handleAnswer = (isCorrect: boolean) => {
     setStats(prev => {
@@ -156,8 +180,26 @@ export default function Home() {
       setSeenQuestionIds(prev => new Set([...prev, currentQuestion.id]));
     }
 
+    // If we're not at the tip of history, move forward within history
+    if (navPos < navHistory.length - 1) {
+      const nextIdInHistory = navHistory[navPos + 1];
+      const idx = questions.findIndex(q => q.id === nextIdInHistory);
+      if (idx !== -1) {
+        setCurrentIndex(idx);
+        setNavPos(navPos + 1);
+        // Ensure destination counts as seen as well
+        setSeenQuestionIds(prev => new Set([...prev, nextIdInHistory]));
+        return;
+      }
+    }
+
     if (!currentQuestion || originalQuestions.length === 0) {
-      setCurrentIndex((prev) => (prev + 1) % Math.max(questions.length, 1));
+      setCurrentIndex((prev) => {
+        const next = (prev + 1) % Math.max(questions.length, 1);
+        const destId = questions[next]?.id;
+        if (destId) setSeenQuestionIds(p => new Set([...p, destId]));
+        return next;
+      });
       return;
     }
 
@@ -167,7 +209,19 @@ export default function Home() {
       const nextOrig = (idxOrig + 1 + originalQuestions.length) % originalQuestions.length;
       const nextId = originalQuestions[nextOrig]?.id;
       const newIdx = questions.findIndex(q => q.id === nextId);
-      setCurrentIndex(newIdx >= 0 ? newIdx : (currentIndex + 1) % questions.length);
+      const destIdx = newIdx >= 0 ? newIdx : (currentIndex + 1) % questions.length;
+      const destId = questions[destIdx]?.id;
+      if (destId) {
+        // Mark destination as seen immediately on open
+        setSeenQuestionIds(prev => new Set([...prev, destId]));
+        setCurrentIndex(destIdx);
+        setNavHistory((prev) => {
+          const base = prev.slice(0, navPos + 1);
+          const updated = [...base, destId];
+          setNavPos(updated.length - 1);
+          return updated;
+        });
+      }
     } else {
       // Random advance: jump to a random question id from the pool
       let nextIdxOrig = Math.floor(Math.random() * originalQuestions.length);
@@ -176,13 +230,37 @@ export default function Home() {
       }
       const nextId = originalQuestions[nextIdxOrig].id;
       const newIdx = questions.findIndex(q => q.id === nextId);
-      setCurrentIndex(newIdx >= 0 ? newIdx : (currentIndex + 1) % questions.length);
+      const destIdx = newIdx >= 0 ? newIdx : (currentIndex + 1) % questions.length;
+      const destId = questions[destIdx]?.id;
+      if (destId) {
+        // Mark destination as seen immediately on open
+        setSeenQuestionIds(prev => new Set([...prev, destId]));
+        setCurrentIndex(destIdx);
+        setNavHistory((prev) => {
+          const base = prev.slice(0, navPos + 1);
+          const updated = [...base, destId];
+          setNavPos(updated.length - 1);
+          return updated;
+        });
+      }
     }
   };
 
   const toggleAdvanceMode = () => setAdvanceMode(m => (m === 'random' ? 'sequential' : 'random'));
 
   const handlePrev = () => {
+    if (navPos > 0 && navHistory.length) {
+      const newPos = navPos - 1;
+      const prevId = navHistory[newPos];
+      const idx = questions.findIndex(q => q.id === prevId);
+      if (idx !== -1) {
+        setCurrentIndex(idx);
+        setNavPos(newPos);
+        setSeenQuestionIds(prev => new Set([...prev, prevId]));
+        return;
+      }
+    }
+    // Fallback to previous index in current order
     const newIndex = currentIndex === 0 ? questions.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
     const targetId = questions[newIndex]?.id;
@@ -219,8 +297,11 @@ export default function Home() {
       wrongAnswers: 0,
       accuracy: 0
     }));
-    // Immediately mark the first visible card as seen
-    setSeenQuestionIds(new Set(shuffled.length ? [shuffled[0].id] : []));
+    // Immediately mark the first visible card as seen and reset history
+    const firstId = shuffled.length ? shuffled[0].id : undefined;
+    setSeenQuestionIds(new Set(firstId ? [firstId] : []));
+    setNavHistory(firstId ? [firstId] : []);
+    setNavPos(0);
     setAnswerResults({});
     setShowConfirmDialog(false);
   };
@@ -249,7 +330,15 @@ export default function Home() {
     const targetId = originalQuestions[originalIndex]?.id;
     if (!targetId) return;
     const newIndex = questions.findIndex(q => q.id === targetId);
-    if (newIndex !== -1) setCurrentIndex(newIndex);
+    if (newIndex !== -1) {
+      setCurrentIndex(newIndex);
+      setNavHistory(prev => {
+        const base = prev.slice(0, navPos + 1);
+        const updated = [...base, targetId];
+        setNavPos(updated.length - 1);
+        return updated;
+      });
+    }
     // Mark navigated-to question as seen
     setSeenQuestionIds(prev => new Set([...prev, targetId]));
     setShowQuestionPool(false);
@@ -464,7 +553,9 @@ export default function Home() {
           <button
             onClick={handlePrev}
             aria-label="Previous question"
-            className="text-sm px-3 py-2 rounded-md transition-colors border bg-black/10 border-black/10 text-slate-800 hover:bg-black/20 dark:bg-white/10 dark:border-white/20 dark:text-white dark:hover:bg-white/20 cursor-pointer"
+            disabled={!canGoBack}
+            aria-disabled={!canGoBack}
+            className="text-sm px-3 py-2 rounded-md transition-colors border bg-black/10 border-black/10 text-slate-800 hover:bg-black/20 dark:bg-white/10 dark:border-white/20 dark:text-white dark:hover:bg-white/20 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-black/10 disabled:dark:hover:bg-white/10"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
