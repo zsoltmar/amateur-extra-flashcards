@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Question, FlashcardMode, FlashcardStats } from '@/types/question';
 import { Flashcard } from '@/components/Flashcard';
@@ -32,8 +32,18 @@ export default function Home() {
   // const [showStats, setShowStats] = useState(false);
   const [seenQuestionIds, setSeenQuestionIds] = useState<Set<string>>(new Set());
   const [answerResults, setAnswerResults] = useState<Record<string, boolean>>({});
-  const [showSidebar, setShowSidebar] = useState(true);
-  const [advanceMode, setAdvanceMode] = useState<'random' | 'sequential'>('random');
+  const [showSidebar, setShowSidebar] = useState<boolean>(() => {
+    try {
+      if (typeof window === 'undefined') return true;
+      const raw = localStorage.getItem('amxtra-ui-v1');
+      if (!raw) return true;
+      const ui = JSON.parse(raw);
+      return typeof ui?.showSidebar === 'boolean' ? ui.showSidebar : true;
+    } catch {
+      return true;
+    }
+  });
+  const [advanceMode, setAdvanceMode] = useState<'random' | 'random-unique' | 'sequential'>('random');
   // Navigation history: list of visited question IDs and current position
   const [navHistory, setNavHistory] = useState<string[]>([]);
   const [navPos, setNavPos] = useState<number>(0);
@@ -43,7 +53,17 @@ export default function Home() {
       setOriginalQuestions(loadedQuestions);
 
       // Try to restore from localStorage
-      let saved: any = null;
+      type SavedState = {
+        orderIds?: string[];
+        currentId?: string;
+        seenIds?: string[];
+        answerResults?: Record<string, boolean>;
+        mode?: FlashcardMode;
+        advanceMode?: 'random' | 'random-unique' | 'sequential';
+        navHistory?: string[];
+        navPos?: number;
+      };
+      let saved: SavedState | null = null;
       try {
         const raw = typeof window !== 'undefined' ? localStorage.getItem(STORAGE_KEY) : null;
         if (raw) saved = JSON.parse(raw);
@@ -56,8 +76,8 @@ export default function Home() {
       let nextCurrentIndex = 0;
       let nextSeen = new Set<string>();
       let nextAnswerResults: Record<string, boolean> = {};
-      let nextMode: FlashcardMode = mode;
-      let nextAdvanceMode: 'random' | 'sequential' = 'random';
+      let nextMode: FlashcardMode = 'multiple-choice';
+      let nextAdvanceMode: 'random' | 'random-unique' | 'sequential' = 'random';
       let nextHistory: string[] = [];
       let nextHistoryPos = 0;
 
@@ -65,17 +85,25 @@ export default function Home() {
         && saved.orderIds.length === loadedQuestions.length
         && saved.orderIds.every((id: string) => allIds.has(id));
 
-      if (validSavedOrder) {
-        nextQuestions = saved.orderIds.map((id: string) => byId.get(id)!) as Question[];
-        const currId = saved.currentId as string | undefined;
+      if (saved && validSavedOrder) {
+        const s = saved as SavedState;
+        nextQuestions = s.orderIds!.map((id: string) => byId.get(id)!) as Question[];
+        const currId = s.currentId as string | undefined;
         const idx = currId ? nextQuestions.findIndex((q) => q.id === currId) : 0;
         nextCurrentIndex = idx >= 0 ? idx : 0;
-        if (Array.isArray(saved.seenIds)) nextSeen = new Set<string>(saved.seenIds);
-        if (saved.answerResults && typeof saved.answerResults === 'object') nextAnswerResults = saved.answerResults as Record<string, boolean>;
-        if (saved.mode) nextMode = saved.mode as FlashcardMode;
-        if (saved.advanceMode) nextAdvanceMode = saved.advanceMode as 'random' | 'sequential';
-        if (Array.isArray(saved.navHistory)) nextHistory = saved.navHistory.filter((id: string) => allIds.has(id));
-        if (typeof saved.navPos === 'number') nextHistoryPos = Math.min(Math.max(0, saved.navPos), Math.max(0, nextHistory.length - 1));
+        if (Array.isArray(s.seenIds)) nextSeen = new Set<string>(s.seenIds);
+        if (s.answerResults && typeof s.answerResults === 'object') nextAnswerResults = s.answerResults as Record<string, boolean>;
+        if (s.mode) nextMode = s.mode as FlashcardMode;
+        if (s.advanceMode) {
+          const m = s.advanceMode as string;
+          if (m === 'random' || m === 'sequential' || m === 'random-unique') {
+            nextAdvanceMode = m;
+          } else {
+            nextAdvanceMode = 'random';
+          }
+        }
+        if (Array.isArray(s.navHistory)) nextHistory = s.navHistory.filter((id: string) => allIds.has(id));
+        if (typeof s.navPos === 'number') nextHistoryPos = Math.min(Math.max(0, s.navPos), Math.max(0, nextHistory.length - 1));
       } else {
         // Fresh session fallback: mark first as seen
         if (nextQuestions.length > 0) {
@@ -114,16 +142,6 @@ export default function Home() {
 
       setIsLoading(false);
     });
-  }, []);
-
-  // Restore UI prefs (sidebar) on mount
-  useEffect(() => {
-    try {
-      const raw = typeof window !== 'undefined' ? localStorage.getItem(UI_STORAGE_KEY) : null;
-      if (!raw) return;
-      const ui = JSON.parse(raw);
-      if (typeof ui?.showSidebar === 'boolean') setShowSidebar(ui.showSidebar);
-    } catch {}
   }, []);
 
   // Persist progress to localStorage
@@ -174,7 +192,7 @@ export default function Home() {
     }
   };
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     // Mark current as seen
     if (currentQuestion) {
       setSeenQuestionIds(prev => new Set([...prev, currentQuestion.id]));
@@ -222,8 +240,8 @@ export default function Home() {
           return updated;
         });
       }
-    } else {
-      // Random advance: jump to a random question id from the pool
+    } else if (advanceMode === 'random') {
+      // Random advance: jump to any question id from the pool
       let nextIdxOrig = Math.floor(Math.random() * originalQuestions.length);
       if (originalQuestions.length > 1 && originalQuestions[nextIdxOrig].id === currentQuestion.id) {
         nextIdxOrig = (nextIdxOrig + 1) % originalQuestions.length;
@@ -243,12 +261,40 @@ export default function Home() {
           return updated;
         });
       }
+    } else {
+      // Random unique advance: pick only from unseen questions; when exhaust, fall back to random
+      const seenNow = new Set(seenQuestionIds);
+      if (currentQuestion?.id) seenNow.add(currentQuestion.id);
+      const unseen = originalQuestions.filter(q => !seenNow.has(q.id));
+      let nextId: string | undefined;
+      if (unseen.length > 0) {
+        const pick = unseen[Math.floor(Math.random() * unseen.length)];
+        nextId = pick.id;
+      } else {
+        // All seen: fall back to random among all
+        nextId = originalQuestions[Math.floor(Math.random() * originalQuestions.length)]?.id;
+      }
+      if (nextId) {
+        const newIdx = questions.findIndex(q => q.id === nextId);
+        const destIdx = newIdx >= 0 ? newIdx : (currentIndex + 1) % questions.length;
+        const destId = questions[destIdx]?.id;
+        if (destId) {
+          setSeenQuestionIds(prev => new Set([...prev, destId]));
+          setCurrentIndex(destIdx);
+          setNavHistory((prev) => {
+            const base = prev.slice(0, navPos + 1);
+            const updated = [...base, destId];
+            setNavPos(updated.length - 1);
+            return updated;
+          });
+        }
+      }
     }
-  };
+  }, [currentQuestion, navPos, navHistory, questions, currentIndex, originalQuestions, advanceMode, seenQuestionIds]);
 
-  const toggleAdvanceMode = () => setAdvanceMode(m => (m === 'random' ? 'sequential' : 'random'));
+  const toggleAdvanceMode = () => setAdvanceMode(m => (m === 'random' ? 'sequential' : m === 'sequential' ? 'random-unique' : 'random'));
 
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     if (navPos > 0 && navHistory.length) {
       const newPos = navPos - 1;
       const prevId = navHistory[newPos];
@@ -267,7 +313,7 @@ export default function Home() {
     if (targetId) {
       setSeenQuestionIds(prev => new Set([...prev, targetId]));
     }
-  };
+  }, [navPos, navHistory, questions, currentIndex]);
 
   // Keyboard navigation: Left/Right arrows navigate cards
   useEffect(() => {
@@ -306,13 +352,8 @@ export default function Home() {
     setShowConfirmDialog(false);
   };
 
-  // Extract unit from question ID (e.g., E5A04 -> E5)
-  const getUnitFromQuestionId = (questionId: string) => {
-    const match = questionId.match(/^([A-Z]\d+)/);
-    return match ? match[1] : questionId;
-  };
+  // (unit helper removed; not used)
 
-  const currentUnit = currentQuestion ? getUnitFromQuestionId(currentQuestion.id) : null;
   const modeDescription = {
     highlighted: 'Shows the correct answer only. Tap the card to advance.',
     'answer-highlighted': 'Shows all choices and highlights the correct one. Tap to advance.',
@@ -494,9 +535,9 @@ export default function Home() {
               <span className="text-slate-300 dark:text-white/20 mx-1">
                 &nbsp;•&nbsp;
               </span>
-              <Tooltip content="Toggle how Next chooses the following card. Random jumps anywhere in the pool. Sequential follows the pool order (E1A01 → E1A02 → …). You can switch anytime.">
+              <Tooltip content="Toggle how Next chooses the following card. Random unique picks only unseen cards until all are seen. Random jumps anywhere in the pool. Sequential follows the pool order (E1A01 → E1A02 → …). You can switch anytime.">
                 <button onClick={toggleAdvanceMode} className="underline text-xs text-slate-600 hover:text-slate-900 dark:text-white/50 dark:hover:text-white cursor-pointer">
-                  {advanceMode === 'random' ? 'Random advance' : 'Sequential advance'}
+                  {advanceMode === 'random-unique' ? 'Random unique advance' : advanceMode === 'random' ? 'Random advance' : 'Sequential advance'}
                 </button>
               </Tooltip>
             </div>
