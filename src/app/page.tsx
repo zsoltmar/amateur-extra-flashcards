@@ -43,15 +43,39 @@ export default function Home() {
       return true;
     }
   });
+
+  // Hard marks and pool filter
+  const HARD_STORAGE_KEY = 'amxtra-hard-v1';
+  const [hardQuestionIds, setHardQuestionIds] = useState<Set<string>>(() => {
+    try {
+      if (typeof window === 'undefined') return new Set<string>();
+      const raw = localStorage.getItem(HARD_STORAGE_KEY);
+      if (!raw) return new Set<string>();
+      const arr = JSON.parse(raw);
+      return Array.isArray(arr) ? new Set<string>(arr) : new Set<string>();
+    } catch {
+      return new Set<string>();
+    }
+  });
+  const [poolFilter, setPoolFilter] = useState<'all' | 'seen' | 'correct' | 'wrong' | 'hard'>(() => {
+    try {
+      if (typeof window === 'undefined') return 'all';
+      const raw = localStorage.getItem(UI_STORAGE_KEY);
+      if (!raw) return 'all';
+      const ui = JSON.parse(raw);
+      return ui?.poolFilter === 'seen' || ui?.poolFilter === 'correct' || ui?.poolFilter === 'wrong' || ui?.poolFilter === 'hard' ? ui.poolFilter : 'all';
+    } catch {
+      return 'all';
+    }
+  });
+
+  // Navigation and advance mode
   const [advanceMode, setAdvanceMode] = useState<'random' | 'random-unique' | 'sequential'>('random');
-  // Navigation history: list of visited question IDs and current position
   const [navHistory, setNavHistory] = useState<string[]>([]);
   const [navPos, setNavPos] = useState<number>(0);
 
   useEffect(() => {
     loadQuestions().then((loadedQuestions) => {
-      setOriginalQuestions(loadedQuestions);
-
       // Try to restore from localStorage
       type SavedState = {
         orderIds?: string[];
@@ -68,6 +92,7 @@ export default function Home() {
         const raw = typeof window !== 'undefined' ? localStorage.getItem(STORAGE_KEY) : null;
         if (raw) saved = JSON.parse(raw);
       } catch {}
+      setOriginalQuestions(loadedQuestions);
 
       const byId = new Map(loadedQuestions.map((q) => [q.id, q] as const));
       const allIds = new Set(loadedQuestions.map((q) => q.id));
@@ -164,12 +189,19 @@ export default function Home() {
     } catch {}
   }, [questions, currentIndex, seenQuestionIds, answerResults, mode, advanceMode, navHistory, navPos]);
 
-  // Persist UI prefs (sidebar)
+  // Persist UI prefs (sidebar + poolFilter)
   useEffect(() => {
     try {
-      localStorage.setItem(UI_STORAGE_KEY, JSON.stringify({ showSidebar }));
+      localStorage.setItem(UI_STORAGE_KEY, JSON.stringify({ showSidebar, poolFilter }));
     } catch {}
-  }, [showSidebar]);
+  }, [showSidebar, poolFilter]);
+
+  // Persist hard marks
+  useEffect(() => {
+    try {
+      localStorage.setItem(HARD_STORAGE_KEY, JSON.stringify(Array.from(hardQuestionIds)));
+    } catch {}
+  }, [hardQuestionIds]);
 
   const currentQuestion = questions[currentIndex];
   const canGoBack = navPos > 0 && navHistory.length > 0;
@@ -192,6 +224,16 @@ export default function Home() {
     }
   };
 
+  const toggleHardCurrent = () => {
+    const id = currentQuestion?.id;
+    if (!id) return;
+    setHardQuestionIds(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      return next;
+    });
+  };
+
   const handleNext = useCallback(() => {
     // Mark current as seen
     if (currentQuestion) {
@@ -211,7 +253,21 @@ export default function Home() {
       }
     }
 
-    if (!currentQuestion || originalQuestions.length === 0) {
+    const activePool = (() => {
+      switch (poolFilter) {
+        case 'hard':
+          return originalQuestions.filter(q => hardQuestionIds.has(q.id));
+        case 'seen':
+          return originalQuestions.filter(q => seenQuestionIds.has(q.id));
+        case 'correct':
+          return originalQuestions.filter(q => answerResults[q.id] === true);
+        case 'wrong':
+          return originalQuestions.filter(q => answerResults[q.id] === false);
+        default:
+          return originalQuestions;
+      }
+    })();
+    if (!currentQuestion || activePool.length === 0) {
       setCurrentIndex((prev) => {
         const next = (prev + 1) % Math.max(questions.length, 1);
         const destId = questions[next]?.id;
@@ -223,9 +279,10 @@ export default function Home() {
 
     if (advanceMode === 'sequential') {
       // Follow the pool (originalQuestions) order
-      const idxOrig = originalQuestions.findIndex(q => q.id === currentQuestion.id);
-      const nextOrig = (idxOrig + 1 + originalQuestions.length) % originalQuestions.length;
-      const nextId = originalQuestions[nextOrig]?.id;
+      const pool = activePool;
+      const idxOrig = pool.findIndex(q => q.id === currentQuestion.id);
+      const nextOrig = (idxOrig + 1 + pool.length) % pool.length;
+      const nextId = pool[nextOrig]?.id;
       const newIdx = questions.findIndex(q => q.id === nextId);
       const destIdx = newIdx >= 0 ? newIdx : (currentIndex + 1) % questions.length;
       const destId = questions[destIdx]?.id;
@@ -242,11 +299,12 @@ export default function Home() {
       }
     } else if (advanceMode === 'random') {
       // Random advance: jump to any question id from the pool
-      let nextIdxOrig = Math.floor(Math.random() * originalQuestions.length);
-      if (originalQuestions.length > 1 && originalQuestions[nextIdxOrig].id === currentQuestion.id) {
-        nextIdxOrig = (nextIdxOrig + 1) % originalQuestions.length;
+      const pool = activePool;
+      let nextIdxOrig = Math.floor(Math.random() * pool.length);
+      if (pool.length > 1 && pool[nextIdxOrig].id === currentQuestion.id) {
+        nextIdxOrig = (nextIdxOrig + 1) % pool.length;
       }
-      const nextId = originalQuestions[nextIdxOrig].id;
+      const nextId = pool[nextIdxOrig].id;
       const newIdx = questions.findIndex(q => q.id === nextId);
       const destIdx = newIdx >= 0 ? newIdx : (currentIndex + 1) % questions.length;
       const destId = questions[destIdx]?.id;
@@ -263,16 +321,17 @@ export default function Home() {
       }
     } else {
       // Random unique advance: pick only from unseen questions; when exhaust, fall back to random
+      const pool = activePool;
       const seenNow = new Set(seenQuestionIds);
       if (currentQuestion?.id) seenNow.add(currentQuestion.id);
-      const unseen = originalQuestions.filter(q => !seenNow.has(q.id));
+      const unseen = pool.filter(q => !seenNow.has(q.id));
       let nextId: string | undefined;
       if (unseen.length > 0) {
         const pick = unseen[Math.floor(Math.random() * unseen.length)];
         nextId = pick.id;
       } else {
         // All seen: fall back to random among all
-        nextId = originalQuestions[Math.floor(Math.random() * originalQuestions.length)]?.id;
+        nextId = pool[Math.floor(Math.random() * pool.length)]?.id;
       }
       if (nextId) {
         const newIdx = questions.findIndex(q => q.id === nextId);
@@ -290,7 +349,7 @@ export default function Home() {
         }
       }
     }
-  }, [currentQuestion, navPos, navHistory, questions, currentIndex, originalQuestions, advanceMode, seenQuestionIds]);
+  }, [currentQuestion, navPos, navHistory, questions, currentIndex, originalQuestions, advanceMode, seenQuestionIds, hardQuestionIds, poolFilter, answerResults]);
 
   const toggleAdvanceMode = () => setAdvanceMode(m => (m === 'random' ? 'sequential' : m === 'sequential' ? 'random-unique' : 'random'));
 
@@ -373,6 +432,7 @@ export default function Home() {
   const handleQuestionClick = (originalIndex: number) => {
     const targetId = originalQuestions[originalIndex]?.id;
     if (!targetId) return;
+    // When filtered, the grid only renders matching items; extra guard not needed
     const newIndex = questions.findIndex(q => q.id === targetId);
     if (newIndex !== -1) {
       setCurrentIndex(newIndex);
@@ -463,6 +523,8 @@ export default function Home() {
                   seenQuestionIds={seenQuestionIds}
                   answerResults={answerResults}
                   onQuestionClick={handleQuestionClick}
+                  hardQuestionIds={hardQuestionIds}
+                  filter={poolFilter}
                 />
               </div>
               {/* Progress: Seen over Total */}
@@ -500,24 +562,52 @@ export default function Home() {
                   <span>{wrongPctAnswered}%</span>
                 </div>
               </div>
-              <div className="flex items-center justify-center gap-5 text-[11px]">
-                <Tooltip content={`${pctTotal(seenCount)}% of total`}>
-                  <div className="flex items-center gap-1 text-slate-700 dark:text-white/70 cursor-default select-none">
-                    <span className="inline-block w-3 h-3 rounded bg-blue-600" /> Seen
+              <div className="flex items-center justify-center gap-3 text-[11px]">
+                <Tooltip content={`Seen — ${seenCount} of ${totalCount} (${pctTotal(seenCount)}%)`}>
+                  <button
+                    type="button"
+                    onClick={() => setPoolFilter(f => f === 'seen' ? 'all' : 'seen')}
+                    aria-pressed={poolFilter === 'seen'}
+                    className={`flex items-center gap-1 rounded px-1 py-0.5 select-none cursor-pointer text-slate-700 dark:text-white/70 ${poolFilter === 'seen' ? 'bg-blue-600/15 dark:bg-blue-500/20' : ''}`}
+                  >
+                    <span className="inline-block w-3 h-3 rounded bg-blue-600" />
                     <span className="font-semibold ml-1 text-slate-600 dark:text-white/40">{seenCount}</span>
-                  </div>
+                  </button>
                 </Tooltip>
-                <Tooltip content={`${pctSeen(rightCount)}% of seen`}>
-                  <div className="flex items-center gap-1 text-slate-700 dark:text-white/70 cursor-default select-none">
-                    <span className="inline-block w-3 h-3 rounded bg-green-500" /> Correct
+                <Tooltip content={`Correct — ${rightCount} (${pctSeen(rightCount)}% of seen)`}>
+                  <button
+                    type="button"
+                    onClick={() => setPoolFilter(f => f === 'correct' ? 'all' : 'correct')}
+                    aria-pressed={poolFilter === 'correct'}
+                    className={`flex items-center gap-1 rounded px-1 py-0.5 select-none cursor-pointer text-slate-700 dark:text-white/70 ${poolFilter === 'correct' ? 'bg-green-600/15 dark:bg-green-500/20' : ''}`}
+                  >
+                    <span className="inline-block w-3 h-3 rounded bg-green-500" />
                     <span className="font-semibold ml-1 text-slate-600 dark:text-white/40">{rightCount}</span>
-                  </div>
+                  </button>
                 </Tooltip>
-                <Tooltip content={`${pctSeen(wrongCount)}% of seen`}>
-                  <div className="flex items-center gap-1 text-slate-700 dark:text-white/70 cursor-default select-none">
-                    <span className="inline-block w-3 h-3 rounded bg-rose-600" /> Wrong
+                <Tooltip content={`Wrong — ${wrongCount} (${pctSeen(wrongCount)}% of seen)`}>
+                  <button
+                    type="button"
+                    onClick={() => setPoolFilter(f => f === 'wrong' ? 'all' : 'wrong')}
+                    aria-pressed={poolFilter === 'wrong'}
+                    className={`flex items-center gap-1 rounded px-1 py-0.5 select-none cursor-pointer text-slate-700 dark:text-white/70 ${poolFilter === 'wrong' ? 'bg-rose-600/15 dark:bg-rose-500/20' : ''}`}
+                  >
+                    <span className="inline-block w-3 h-3 rounded bg-rose-600" />
                     <span className="font-semibold ml-1 text-slate-600 dark:text-white/40">{wrongCount}</span>
-                  </div>
+                  </button>
+                </Tooltip>
+                <Tooltip content={`Hard — ${hardQuestionIds.size} marked`}>
+                  <button
+                    type="button"
+                    onClick={() => setPoolFilter(f => f === 'hard' ? 'all' : 'hard')}
+                    aria-pressed={poolFilter === 'hard'}
+                    className={`flex items-center gap-1 rounded px-1 py-0.5 select-none cursor-pointer text-slate-700 dark:text-white/70 ${poolFilter === 'hard' ? 'bg-amber-400/20 dark:bg-amber-300/20' : ''}`}
+                  >
+                    <span className="relative inline-block w-3 h-3 rounded bg-slate-400 dark:bg-slate-500">
+                      <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-amber-400" />
+                    </span>
+                    <span className="font-semibold ml-1 text-slate-600 dark:text-white/40">{hardQuestionIds.size}</span>
+                  </button>
                 </Tooltip>
               </div>
             </div>
@@ -540,6 +630,7 @@ export default function Home() {
                   {advanceMode === 'random-unique' ? 'Random unique advance' : advanceMode === 'random' ? 'Random advance' : 'Sequential advance'}
                 </button>
               </Tooltip>
+              {/* Filtering now handled by clicking stats above */}
             </div>
           </div>
         </div>
@@ -595,7 +686,7 @@ export default function Home() {
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: -20 }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               className="relative z-10"
             >
               {currentQuestion && (
@@ -604,6 +695,8 @@ export default function Home() {
                   mode={mode}
                   onAnswer={handleAnswer}
                   onNext={handleNext}
+                  isHard={hardQuestionIds.has(currentQuestion.id)}
+                  onToggleHard={toggleHardCurrent}
                 />
               )}
             </motion.div>

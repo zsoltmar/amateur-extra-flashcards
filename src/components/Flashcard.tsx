@@ -13,9 +13,11 @@ interface FlashcardProps {
   mode: FlashcardMode;
   onAnswer: (isCorrect: boolean) => void;
   onNext: () => void;
+  isHard?: boolean;
+  onToggleHard?: () => void;
 }
 
-export function Flashcard({ question, mode, onAnswer, onNext }: FlashcardProps) {
+export function Flashcard({ question, mode, onAnswer, onNext, isHard = false, onToggleHard }: FlashcardProps) {
   const [showAnswer, setShowAnswer] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [hasAnswered, setHasAnswered] = useState(false);
@@ -214,6 +216,21 @@ export function Flashcard({ question, mode, onAnswer, onNext }: FlashcardProps) 
       aria-label={isTapToAdvance ? 'Next card' : undefined}
     >
       <CardContent className={`p-8 flex relative ${hasImage ? 'gap-8' : 'min-h-[320px] justify-center items-center'}`}>
+        {/* Hard toggle button */}
+        <div className="absolute top-3 right-3 z-20">
+          <button
+            onClick={(e) => { e.stopPropagation(); if (onToggleHard) onToggleHard(); }}
+            className={`text-[11px] px-2 py-1 rounded-md border transition-colors cursor-pointer ${
+              isHard
+                ? 'bg-amber-500/20 text-amber-700 border-amber-500/40 dark:bg-amber-400/20 dark:text-amber-300'
+                : 'bg-black/10 text-slate-700 border-black/10 hover:bg-black/20 dark:bg-white/10 dark:text-white/80 dark:border-white/20 dark:hover:bg-white/20'
+            }`}
+            aria-pressed={isHard}
+            aria-label={isHard ? 'Unmark hard' : 'Mark as hard'}
+          >
+            {isHard ? 'Unmark hard' : 'Mark as hard'}
+          </button>
+        </div>
         {hasImage && (
           <div className="shrink-0">
             <Image 
