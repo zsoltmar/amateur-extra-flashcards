@@ -3,7 +3,7 @@
 import { Question, FlashcardMode } from '@/types/question';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { NumberPill } from '@/components/NumberPill';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import Image from 'next/image';
@@ -58,9 +58,7 @@ export function Flashcard({ question, mode, onAnswer, onNext }: FlashcardProps) 
   const renderQAMode = () => (
     <div className={`${hasImage ? 'flex-1' : ''} space-y-6`}>
       <div className="space-y-4">
-        <Badge variant="outline" className="text-xs">
-          {question.id}
-        </Badge>
+        <NumberPill id={question.id} />
         <h3 className="text-lg font-medium leading-relaxed">
           {cleanText}
         </h3>
@@ -100,15 +98,13 @@ export function Flashcard({ question, mode, onAnswer, onNext }: FlashcardProps) 
   );
 
   const renderHighlightedMode = () => (
-    <div className={`${hasImage ? 'flex-1' : 'w-full'} cursor-pointer`} onClick={handleNext}>
+    <div className={`w-full h-full relative select-none`}>
       {/* Sticky card number at top-left */}
-      <div className="absolute top-4 left-4">
-        <Badge variant="outline" className="text-xs border-black/20 text-slate-600 dark:border-white/20 dark:text-white/70">
-          {question.id}
-        </Badge>
+      <div className="flex items-center justify-center mb-4">
+        <NumberPill id={question.id} />
       </div>
       {/* Centered content */}
-      <div className={`${hasImage ? '' : 'grid place-content-center text-center gap-3'}`}>
+      <div className={`grid place-content-center text-center gap-3 w-full h-full`}>
         <h3 className="text-base md:text-lg font-medium leading-relaxed text-slate-900 dark:text-white">
           {cleanText}
         </h3>
@@ -120,11 +116,9 @@ export function Flashcard({ question, mode, onAnswer, onNext }: FlashcardProps) 
   );
 
   const renderAnswerHighlightedMode = () => (
-    <div className={`${hasImage ? 'flex-1' : ''} space-y-6 cursor-pointer`} onClick={handleNext}>
+    <div className={`${hasImage ? 'flex-1' : ''} space-y-6`}>
       <div className="space-y-4">
-        <Badge variant="outline" className="text-xs">
-          {question.id}
-        </Badge>
+        <NumberPill id={question.id} />
         <h3 className="text-lg font-medium leading-relaxed break-words whitespace-normal">
           {cleanText}
         </h3>
@@ -137,8 +131,10 @@ export function Flashcard({ question, mode, onAnswer, onNext }: FlashcardProps) 
               return (
                 <div
                   key={index}
-                  className={`w-full text-left rounded-md px-4 py-3 border transition-colors ${
-                    isCorrect ? 'border-sky-500 text-sky-500' : 'border-transparent text-slate-900 dark:text-white/75'
+                  className={`w-full text-left rounded-md px-4 py-3 transition-colors border ${
+                    isCorrect
+                      ? 'border-sky-500 text-sky-500'
+                      : 'border-transparent hover:border-black/20 dark:hover:border-white/30 text-slate-900 dark:text-white/90'
                   }`}
                 >
                   <div className="flex items-center gap-3 w-full">
@@ -159,9 +155,7 @@ export function Flashcard({ question, mode, onAnswer, onNext }: FlashcardProps) 
   const renderMultipleChoiceMode = () => (
     <div className={`${hasImage ? 'flex-1' : ''} space-y-6`}>
       <div className="space-y-4">
-        <Badge variant="outline" className="text-xs">
-          {question.id}
-        </Badge>
+        <NumberPill id={question.id} />
         <h3 className="text-lg font-medium leading-relaxed break-words whitespace-normal">
           {cleanText}
         </h3>
@@ -206,8 +200,19 @@ export function Flashcard({ question, mode, onAnswer, onNext }: FlashcardProps) 
     </div>
   );
 
+  const isTapToAdvance = mode === 'highlighted' || mode === 'answer-highlighted';
+
   return (
-    <Card className={`w-full ${hasImage ? 'min-h-[400px]' : 'min-h-[320px]'} mx-auto bg-white dark:bg-black`}>
+    <Card
+      className={`w-full ${hasImage ? 'min-h-[400px]' : 'min-h-[320px]'} mx-auto bg-white dark:bg-black ${
+        isTapToAdvance
+          ? 'cursor-pointer transition-shadow transition-colors hover:ring-sky-400/40 dark:hover:ring-sky-300/30 hover:shadow-[0_0_0_6px_rgba(56,189,248,0.10)] dark:hover:shadow-[0_0_0_6px_rgba(125,211,252,0.10)]'
+          : ''
+      }`}
+      onClick={isTapToAdvance ? handleNext : undefined}
+      role={isTapToAdvance ? 'button' : undefined}
+      aria-label={isTapToAdvance ? 'Next card' : undefined}
+    >
       <CardContent className={`p-8 flex relative ${hasImage ? 'gap-8' : 'min-h-[320px] justify-center items-center'}`}>
         {hasImage && (
           <div className="shrink-0">
@@ -220,7 +225,7 @@ export function Flashcard({ question, mode, onAnswer, onNext }: FlashcardProps) 
             />
           </div>
         )}
-        <div className={hasImage ? 'flex-1' : ''}>
+        <div className={hasImage ? 'flex-1' : 'w-full h-full'}>
           {mode === 'qa' && renderQAMode()}
           {mode === 'highlighted' && renderHighlightedMode()}
           {mode === 'answer-highlighted' && renderAnswerHighlightedMode()}

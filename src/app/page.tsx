@@ -31,6 +31,7 @@ export default function Home() {
   const [seenQuestionIds, setSeenQuestionIds] = useState<Set<string>>(new Set());
   const [answerResults, setAnswerResults] = useState<Record<string, boolean>>({});
   const [showSidebar, setShowSidebar] = useState(true);
+  const [advanceMode, setAdvanceMode] = useState<'random' | 'sequential'>('random');
 
   useEffect(() => {
     loadQuestions().then((loadedQuestions) => {
@@ -67,16 +68,36 @@ export default function Home() {
   };
 
   const handleNext = () => {
-    // Mark current question as seen
+    // Mark current as seen
     if (currentQuestion) {
       setSeenQuestionIds(prev => new Set([...prev, currentQuestion.id]));
     }
-    if (currentIndex < questions.length - 1) {
-      setCurrentIndex(prev => prev + 1);
+
+    if (!currentQuestion || originalQuestions.length === 0) {
+      setCurrentIndex((prev) => (prev + 1) % Math.max(questions.length, 1));
+      return;
+    }
+
+    if (advanceMode === 'sequential') {
+      // Follow the pool (originalQuestions) order
+      const idxOrig = originalQuestions.findIndex(q => q.id === currentQuestion.id);
+      const nextOrig = (idxOrig + 1 + originalQuestions.length) % originalQuestions.length;
+      const nextId = originalQuestions[nextOrig]?.id;
+      const newIdx = questions.findIndex(q => q.id === nextId);
+      setCurrentIndex(newIdx >= 0 ? newIdx : (currentIndex + 1) % questions.length);
     } else {
-      setCurrentIndex(0);
+      // Random advance: jump to a random question id from the pool
+      let nextIdxOrig = Math.floor(Math.random() * originalQuestions.length);
+      if (originalQuestions.length > 1 && originalQuestions[nextIdxOrig].id === currentQuestion.id) {
+        nextIdxOrig = (nextIdxOrig + 1) % originalQuestions.length;
+      }
+      const nextId = originalQuestions[nextIdxOrig].id;
+      const newIdx = questions.findIndex(q => q.id === nextId);
+      setCurrentIndex(newIdx >= 0 ? newIdx : (currentIndex + 1) % questions.length);
     }
   };
+
+  const toggleAdvanceMode = () => setAdvanceMode(m => (m === 'random' ? 'sequential' : 'random'));
 
   const handlePrev = () => {
     const newIndex = currentIndex === 0 ? questions.length - 1 : currentIndex - 1;
@@ -205,11 +226,18 @@ export default function Home() {
 
             {/* Pool Grid */}
             <div className="w-full space-y-2 h-full flex flex-col items-center justify-center pb-10">
-              <div className="text-[11px] text-slate-600 dark:text-white/60">
-                {seenCount}/{totalCount} seen ({pctTotal(seenCount)}%){' '}
-                {mode === 'multiple-choice' && (
-                  <span>• {stats.accuracy}% accuracy</span>
-                )}
+              {/* Header: left title, right stats */}
+              <div className="w-full flex items-center justify-between text-[11px] text-slate-600 dark:text-white/60 px-2">
+                <div className="font-medium text-slate-700 dark:text-white/40">Question pool grid</div>
+                <div>
+                  {seenCount}/{totalCount} seen
+                  {mode === 'multiple-choice' && (
+                    <span>
+                      <span className="text-slate-300 dark:text-white/20 mx-1">•</span>
+                      {stats.accuracy}% accuracy
+                    </span>
+                  )}
+                </div>
               </div>
               <div className="relative w-full flex items-center justify-center">
                 <QuestionPool
@@ -220,11 +248,8 @@ export default function Home() {
                   onQuestionClick={handleQuestionClick}
                 />
               </div>
-              <div className="text-[11px] leading-snug text-slate-700 dark:text-white/30">
-                The grid shows the entire question pool in order.<br />Click any square to jump.
-              </div>
               {/* Overall progress bar: seen over total, with wrong overlay from the left */}
-              <div className="w-full max-w-[280px] mx-auto">
+              <div className="w-full max-w-[280px] mx-auto mt-4">
                 <div className="relative h-2 rounded-full bg-black/10 dark:bg-white/10 overflow-hidden">
                   <div
                     className="absolute left-0 top-0 h-full bg-blue-600/80"
@@ -244,19 +269,19 @@ export default function Home() {
                 <Tooltip content={`${pctTotal(seenCount)}% of total`}>
                   <div className="flex items-center gap-1 text-slate-700 dark:text-white/70 cursor-default select-none">
                     <span className="inline-block w-3 h-3 rounded bg-blue-600" /> Seen
-                    <span className="font-semibold ml-1">{seenCount}</span>
+                    <span className="font-semibold ml-1 text-slate-600 dark:text-white/40">{seenCount}</span>
                   </div>
                 </Tooltip>
                 <Tooltip content={`${pctSeen(rightCount)}% of seen`}>
                   <div className="flex items-center gap-1 text-slate-700 dark:text-white/70 cursor-default select-none">
                     <span className="inline-block w-3 h-3 rounded bg-green-500" /> Correct
-                    <span className="font-semibold ml-1">{rightCount}</span>
+                    <span className="font-semibold ml-1 text-slate-600 dark:text-white/40">{rightCount}</span>
                   </div>
                 </Tooltip>
                 <Tooltip content={`${pctSeen(wrongCount)}% of seen`}>
                   <div className="flex items-center gap-1 text-slate-700 dark:text-white/70 cursor-default select-none">
                     <span className="inline-block w-3 h-3 rounded bg-rose-600" /> Wrong
-                    <span className="font-semibold ml-1">{wrongCount}</span>
+                    <span className="font-semibold ml-1 text-slate-600 dark:text-white/40">{wrongCount}</span>
                   </div>
                 </Tooltip>
               </div>
@@ -264,8 +289,23 @@ export default function Home() {
           </div>
 
           {/* Bottom: Reset */}
-          <div className="pt-2 border-t border-black/10 dark:border-white/10 flex items-center justify-center">
-            <button onClick={() => setShowConfirmDialog(true)} className="underline text-xs text-slate-600 hover:text-slate-900 dark:text-white/60 dark:hover:text-white cursor-pointer">Reset</button>
+          <div className="pt-2 border-t border-black/10 dark:border-white/10 flex flex-col items-center justify-center">
+            <div className="text-[11px] leading-snug text-slate-700 dark:text-white/30 text-center">
+              The grid shows the entire question pool in order
+            </div>
+            <div className="flex">
+              <button onClick={() => setShowConfirmDialog(true)} className="underline text-xs text-slate-600 hover:text-slate-900 dark:text-white/60 dark:hover:text-white cursor-pointer">
+                Reset
+              </button>
+              <span className="text-slate-300 dark:text-white/20 mx-1">
+                &nbsp;•&nbsp;
+              </span>
+              <Tooltip content="Toggle how Next chooses the following card. Random jumps anywhere in the pool. Sequential follows the pool order (E1A01 → E1A02 → …). You can switch anytime.">
+                <button onClick={toggleAdvanceMode} className="underline text-xs text-slate-600 hover:text-slate-900 dark:text-white/50 dark:hover:text-white cursor-pointer">
+                  {advanceMode === 'random' ? 'Random advance' : 'Sequential advance'}
+                </button>
+              </Tooltip>
+            </div>
           </div>
         </div>
       </aside>
