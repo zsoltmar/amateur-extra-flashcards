@@ -1,14 +1,14 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Question, FlashcardMode, FlashcardStats } from '@/types/question';
 import { Flashcard } from '@/components/Flashcard';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { QuestionPool } from '@/components/QuestionPool';
 // import { Stats } from '@/components/Stats';
 import { loadQuestions, shuffleArray, calculateAccuracy } from '@/lib/questions';
-import { ChevronLeft, ChevronRight, Check, X as XIcon, Target as TargetIcon, Menu, PanelLeftClose, Info } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Menu, PanelLeftClose, Maximize2, Minimize2 } from 'lucide-react';
 import { Tooltip } from '@/components/ui/tooltip';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
@@ -28,7 +28,7 @@ export default function Home() {
   });
   const [isLoading, setIsLoading] = useState(true);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
-  const [showQuestionPool, setShowQuestionPool] = useState(false);
+  // const [showQuestionPool, setShowQuestionPool] = useState(false);
   // const [showStats, setShowStats] = useState(false);
   const [seenQuestionIds, setSeenQuestionIds] = useState<Set<string>>(new Set());
   const [answerResults, setAnswerResults] = useState<Record<string, boolean>>({});
@@ -73,6 +73,25 @@ export default function Home() {
   const [advanceMode, setAdvanceMode] = useState<'random' | 'random-unique' | 'sequential'>('random');
   const [navHistory, setNavHistory] = useState<string[]>([]);
   const [navPos, setNavPos] = useState<number>(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    const onChange = () => setIsFullscreen(!!document.fullscreenElement);
+    document.addEventListener('fullscreenchange', onChange);
+    return () => document.removeEventListener('fullscreenchange', onChange);
+  }, []);
+
+  const toggleFullscreen = async () => {
+    if (typeof document === 'undefined') return;
+    try {
+      if (!document.fullscreenElement) {
+        await document.documentElement.requestFullscreen();
+      } else if (document.exitFullscreen) {
+        await document.exitFullscreen();
+      }
+    } catch {}
+  };
 
   useEffect(() => {
     loadQuestions().then((loadedQuestions) => {
@@ -92,8 +111,8 @@ export default function Home() {
         const raw = typeof window !== 'undefined' ? localStorage.getItem(STORAGE_KEY) : null;
         if (raw) saved = JSON.parse(raw);
       } catch {}
+      // Preserve original order for the pool grid and build a lookup map
       setOriginalQuestions(loadedQuestions);
-
       const byId = new Map(loadedQuestions.map((q) => [q.id, q] as const));
       const allIds = new Set(loadedQuestions.map((q) => q.id));
 
@@ -413,11 +432,7 @@ export default function Home() {
 
   // (unit helper removed; not used)
 
-  const modeDescription = {
-    highlighted: 'Shows the correct answer only. Tap the card to advance.',
-    'answer-highlighted': 'Shows all choices and highlights the correct one. Tap to advance.',
-    'multiple-choice': 'Quiz mode: pick an answer. Immediate feedback and accuracy tracking.'
-  } as Record<FlashcardMode, string>;
+  
 
   const totalCount = originalQuestions.length || 0;
   const rightCount = Object.values(answerResults).filter((v) => v === true).length;
@@ -445,7 +460,6 @@ export default function Home() {
     }
     // Mark navigated-to question as seen
     setSeenQuestionIds(prev => new Set([...prev, targetId]));
-    setShowQuestionPool(false);
   };
 
   if (isLoading) {
@@ -469,9 +483,20 @@ export default function Home() {
         </button>
       )}
 
+      {/* Fullscreen toggle (always visible) */}
+      <Tooltip content={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}>
+        <button
+          onClick={toggleFullscreen}
+          aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+          className="fixed top-3 right-3 z-40 text-slate-800 dark:text-white p-2 rounded-md bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/20 hover:opacity-80 cursor-pointer"
+        >
+          {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+        </button>
+      </Tooltip>
+
       {/* Left Sidebar */}
       <aside className={`order-last md:order-none md:fixed md:inset-y-0 md:left-0 z-40 md:w-[330px] w-full backdrop-blur-md border-t md:border-t-0 md:border-r border-black/10 dark:border-white/10 transition-transform bg-white/80 dark:bg-black/70 md:overflow-y-auto overflow-x-hidden ${showSidebar ? 'md:translate-x-0' : 'md:-translate-x-full'}`}>
-        <div className="h-full flex flex-col p-4 gap-4">
+        <div className="h-full flex flex-col p-4 gap-1">
           {/* Top bar: theme + close */}
           <div className="flex items-center justify-between gap-2">
             <ThemeToggle inline />
@@ -487,8 +512,7 @@ export default function Home() {
           {/* Centered content (allow tooltips to escape) */}
           <div className="flex-1 flex flex-col items-center justify-center text-center gap-4 overflow-visible">
             {/* Mode Selector */}
-            <div className="space-y-2">
-              <div className="text-xs font-medium text-slate-700 dark:text-white/50">Study Mode</div>
+            <div className="space-y-2 mt-2">
               <Tabs value={mode} onValueChange={(value) => setMode(value as FlashcardMode)}>
                 <TabsList className="inline-flex items-center gap-1 rounded-md bg-black/5 border border-black/10 p-1 dark:bg-white/10 dark:border-white/20">
                   <TabsTrigger value="highlighted" className="text-xs px-2 py-1 rounded text-slate-800 dark:text-white data-[state=active]:bg-black/10 dark:data-[state=active]:bg-white/20 cursor-pointer">Answer only</TabsTrigger>
@@ -496,13 +520,11 @@ export default function Home() {
                   <TabsTrigger value="multiple-choice" className="text-xs px-2 py-1 rounded text-slate-800 dark:text-white data-[state=active]:bg-black/10 dark:data-[state=active]:bg-white/20 cursor-pointer">Quiz</TabsTrigger>
                 </TabsList>
               </Tabs>
-              <div className="mt-2 text-[11px] leading-snug text-slate-800 dark:text-white/20 flex items-start gap-2">
-                <span>{modeDescription[mode]}</span>
-              </div>
+              
             </div>
 
             {/* Pool Grid */}
-            <div className="w-full space-y-2 h-full flex flex-col items-center justify-center pb-10">
+            <div className="w-full space-y-2 h-full flex flex-col items-center justify-center pb-5">
               {/* Header: left title, right stats */}
               <div className="w-full flex items-center justify-between text-[11px] text-slate-600 dark:text-white/60 px-2">
                 <div className="font-medium text-slate-700 dark:text-white/40">Question pool grid</div>
@@ -562,51 +584,63 @@ export default function Home() {
                   <span>{wrongPctAnswered}%</span>
                 </div>
               </div>
-              <div className="flex items-center justify-center gap-3 text-[11px]">
-                <Tooltip content={`Seen — ${seenCount} of ${totalCount} (${pctTotal(seenCount)}%)`}>
+              <div className="flex items-stretch w-full gap-2 px-2 text-[11px]">
+                <Tooltip content={`Seen — ${seenCount} of ${totalCount} (${pctTotal(seenCount)}%)`} className="w-full">
                   <button
                     type="button"
                     onClick={() => setPoolFilter(f => f === 'seen' ? 'all' : 'seen')}
                     aria-pressed={poolFilter === 'seen'}
-                    className={`flex items-center gap-1 rounded px-1 py-0.5 select-none cursor-pointer text-slate-700 dark:text-white/70 ${poolFilter === 'seen' ? 'bg-blue-600/15 dark:bg-blue-500/20' : ''}`}
+                    className={`w-full rounded-md border border-black/10 dark:border-white/20 px-2 py-2 select-none cursor-pointer text-slate-700 dark:text-white/70 transition-all duration-150 hover:-translate-y-0.5 hover:shadow-sm ${poolFilter === 'seen' ? 'bg-blue-600/10 dark:bg-blue-500/15 ring-1 ring-blue-500/30' : 'bg-black/5 dark:bg-white/5'}`}
                   >
-                    <span className="inline-block w-3 h-3 rounded bg-blue-600" />
-                    <span className="font-semibold ml-1 text-slate-600 dark:text-white/40">{seenCount}</span>
+                    <div className="flex flex-col items-center justify-center gap-1">
+                      <span className="inline-block w-4 h-4 rounded bg-blue-600" />
+                      <span className="text-[10px] text-slate-500 dark:text-white/50">Seen</span>
+                      <span className="font-semibold text-slate-700 dark:text-white/70">{seenCount}</span>
+                    </div>
                   </button>
                 </Tooltip>
-                <Tooltip content={`Correct — ${rightCount} (${pctSeen(rightCount)}% of seen)`}>
+                <Tooltip content={`Correct — ${rightCount} (${pctSeen(rightCount)}% of seen)`} className="w-full">
                   <button
                     type="button"
                     onClick={() => setPoolFilter(f => f === 'correct' ? 'all' : 'correct')}
                     aria-pressed={poolFilter === 'correct'}
-                    className={`flex items-center gap-1 rounded px-1 py-0.5 select-none cursor-pointer text-slate-700 dark:text-white/70 ${poolFilter === 'correct' ? 'bg-green-600/15 dark:bg-green-500/20' : ''}`}
+                    className={`w-full rounded-md border border-black/10 dark:border-white/20 px-2 py-2 select-none cursor-pointer text-slate-700 dark:text-white/70 transition-all duration-150 hover:-translate-y-0.5 hover:shadow-sm ${poolFilter === 'correct' ? 'bg-green-600/10 dark:bg-green-500/15 ring-1 ring-green-500/30' : 'bg-black/5 dark:bg-white/5'}`}
                   >
-                    <span className="inline-block w-3 h-3 rounded bg-green-500" />
-                    <span className="font-semibold ml-1 text-slate-600 dark:text-white/40">{rightCount}</span>
+                    <div className="flex flex-col items-center justify-center gap-1">
+                      <span className="inline-block w-4 h-4 rounded bg-green-500" />
+                      <span className="text-[10px] text-slate-500 dark:text-white/50">Correct</span>
+                      <span className="font-semibold text-slate-700 dark:text-white/70">{rightCount}</span>
+                    </div>
                   </button>
                 </Tooltip>
-                <Tooltip content={`Wrong — ${wrongCount} (${pctSeen(wrongCount)}% of seen)`}>
+                <Tooltip content={`Wrong — ${wrongCount} (${pctSeen(wrongCount)}% of seen)`} className="w-full">
                   <button
                     type="button"
                     onClick={() => setPoolFilter(f => f === 'wrong' ? 'all' : 'wrong')}
                     aria-pressed={poolFilter === 'wrong'}
-                    className={`flex items-center gap-1 rounded px-1 py-0.5 select-none cursor-pointer text-slate-700 dark:text-white/70 ${poolFilter === 'wrong' ? 'bg-rose-600/15 dark:bg-rose-500/20' : ''}`}
+                    className={`w-full rounded-md border border-black/10 dark:border-white/20 px-2 py-2 select-none cursor-pointer text-slate-700 dark:text-white/70 transition-all duration-150 hover:-translate-y-0.5 hover:shadow-sm ${poolFilter === 'wrong' ? 'bg-rose-600/10 dark:bg-rose-500/15 ring-1 ring-rose-500/30' : 'bg-black/5 dark:bg-white/5'}`}
                   >
-                    <span className="inline-block w-3 h-3 rounded bg-rose-600" />
-                    <span className="font-semibold ml-1 text-slate-600 dark:text-white/40">{wrongCount}</span>
+                    <div className="flex flex-col items-center justify-center gap-1">
+                      <span className="inline-block w-4 h-4 rounded bg-rose-600" />
+                      <span className="text-[10px] text-slate-500 dark:text-white/50">Wrong</span>
+                      <span className="font-semibold text-slate-700 dark:text-white/70">{wrongCount}</span>
+                    </div>
                   </button>
                 </Tooltip>
-                <Tooltip content={`Hard — ${hardQuestionIds.size} marked`}>
+                <Tooltip content={`Hard — ${hardQuestionIds.size} marked`} className="w-full">
                   <button
                     type="button"
                     onClick={() => setPoolFilter(f => f === 'hard' ? 'all' : 'hard')}
                     aria-pressed={poolFilter === 'hard'}
-                    className={`flex items-center gap-1 rounded px-1 py-0.5 select-none cursor-pointer text-slate-700 dark:text-white/70 ${poolFilter === 'hard' ? 'bg-amber-400/20 dark:bg-amber-300/20' : ''}`}
+                    className={`w-full rounded-md border border-black/10 dark:border-white/20 px-2 py-2 select-none cursor-pointer text-slate-700 dark:text-white/70 transition-all duration-150 hover:-translate-y-0.5 hover:shadow-sm ${poolFilter === 'hard' ? 'bg-amber-400/10 dark:bg-amber-300/15 ring-1 ring-amber-400/30' : 'bg-black/5 dark:bg-white/5'}`}
                   >
-                    <span className="relative inline-block w-3 h-3 rounded bg-slate-400 dark:bg-slate-500">
-                      <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-amber-400" />
-                    </span>
-                    <span className="font-semibold ml-1 text-slate-600 dark:text-white/40">{hardQuestionIds.size}</span>
+                    <div className="flex flex-col items-center justify-center gap-1">
+                      <span className="relative inline-block w-4 h-4 rounded bg-slate-400 dark:bg-slate-500">
+                        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-amber-400" />
+                      </span>
+                      <span className="text-[10px] text-slate-500 dark:text-white/50">Hard</span>
+                      <span className="font-semibold text-slate-700 dark:text-white/70">{hardQuestionIds.size}</span>
+                    </div>
                   </button>
                 </Tooltip>
               </div>
@@ -749,6 +783,10 @@ export default function Home() {
           </div>
         )}
         </div>
+      </div>
+      {/* Pool version note */}
+      <div className="relative sm:fixed sm:bottom-2 sm:right-3 z-30 text-[10px] px-2 py-1 rounded text-center text-slate-700 dark:text-white/60 border border-black/10 dark:border-white/10 pointer-events-none">
+        Amateur Extra question pool valid through 2028
       </div>
     </div>
   );

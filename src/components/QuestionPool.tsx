@@ -65,7 +65,7 @@ export function QuestionPool({ questions, currentQuestionId, seenQuestionIds, an
           return (
             <div key={question.id} className="relative group">
               <div
-                className={`border ${borderGroupClass} transition-colors cursor-pointer hover:bg-black/20 dark:hover:bg-white/30 ${
+                className={`border ${borderGroupClass} transition-colors transition-transform duration-150 hover:-translate-y-0.5 hover:shadow-sm cursor-pointer hover:bg-black/20 dark:hover:bg-white/30 ${
                   isCurrent
                     ? 'bg-blue-500 ring-2 ring-black dark:ring-white'
                     : result === false

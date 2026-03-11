@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom';
 
 type Side = 'top' | 'bottom' | 'left' | 'right';
 
-export function Tooltip({ content, side = 'top', children }: { content: ReactNode; side?: Side; children: ReactNode }) {
+export function Tooltip({ content, side = 'top', children, className = 'relative inline-flex' }: { content: ReactNode; side?: Side; children: ReactNode; className?: string }) {
   const anchorRef = useRef<HTMLSpanElement | null>(null);
   const tipRef = useRef<HTMLDivElement | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -78,7 +78,7 @@ export function Tooltip({ content, side = 'top', children }: { content: ReactNod
   return (
     <span
       ref={anchorRef}
-      className="relative inline-flex"
+      className={className}
       onMouseEnter={show}
       onMouseLeave={hide}
       onFocus={show}
