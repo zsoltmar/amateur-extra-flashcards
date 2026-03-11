@@ -325,6 +325,9 @@ export default function Home() {
   const seenCount = seenQuestionIds.size;
   const pctTotal = (n: number) => (totalCount ? Math.round((n / totalCount) * 100) : 0);
   const pctSeen = (n: number) => (seenCount ? Math.round((n / seenCount) * 100) : 0);
+  const answeredCount = stats.answeredQuestions || 0;
+  const correctPctAnswered = answeredCount ? Math.round((stats.correctAnswers / answeredCount) * 100) : 0;
+  const wrongPctAnswered = answeredCount ? 100 - correctPctAnswered : 0;
 
   const handleQuestionClick = (originalIndex: number) => {
     const targetId = originalQuestions[originalIndex]?.id;
@@ -421,21 +424,39 @@ export default function Home() {
                   onQuestionClick={handleQuestionClick}
                 />
               </div>
-              {/* Overall progress bar: seen over total, with wrong overlay from the left */}
-              <div className="w-full max-w-[280px] mx-auto mt-4">
+              {/* Progress: Seen over Total */}
+              <div className="w-full max-w-[280px] mx-auto mt-4 space-y-1">
+                <div className="flex items-center justify-between text-[10px] text-slate-600 dark:text-white/60">
+                  <span>
+                    <span className="font-medium text-slate-700 dark:text-white/70">{seenCount}</span> seen of <span className="font-medium text-slate-700 dark:text-white/70">{totalCount}</span>
+                  </span>
+                  <span>{pctTotal(seenCount)}% seen</span>
+                </div>
                 <div className="relative h-2 rounded-full bg-black/10 dark:bg-white/10 overflow-hidden">
                   <div
                     className="absolute left-0 top-0 h-full bg-blue-600/80"
                     style={{ width: `${pctTotal(seenCount)}%` }}
                   />
+                </div>
+              </div>
+
+              {/* Progress: Right vs Wrong among answered */}
+              <div className="w-full max-w-[280px] mx-auto space-y-1">
+                <div className="relative h-2 rounded-full bg-black/10 dark:bg-white/10 overflow-hidden">
+                  {/* Right on the left (green) */}
                   <div
-                    className="absolute left-0 top-0 h-full bg-rose-600"
-                    style={{ width: `${pctTotal(wrongCount)}%` }}
+                    className="absolute left-0 top-0 h-full bg-emerald-600"
+                    style={{ width: `${correctPctAnswered}%` }}
+                  />
+                  {/* Wrong on the right (red) */}
+                  <div
+                    className="absolute right-0 top-0 h-full bg-rose-600"
+                    style={{ width: `${wrongPctAnswered}%` }}
                   />
                 </div>
-                <div className="mt-1 flex items-center justify-between text-[10px] text-slate-600 dark:text-white/60">
-                  <span>{pctTotal(seenCount)}% seen</span>
-                  <span>{pctSeen(wrongCount)}% wrong of seen</span>
+                <div className="flex items-center justify-between text-[10px] text-slate-600 dark:text-white/60">
+                  <span>{correctPctAnswered}%</span>
+                  <span>{wrongPctAnswered}%</span>
                 </div>
               </div>
               <div className="flex items-center justify-center gap-5 text-[11px]">
