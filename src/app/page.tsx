@@ -408,7 +408,7 @@ export default function Home() {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [handlePrev, handleNext]);
 
-  const handleRandomize = () => {
+  const performReset = (keepHard: boolean) => {
     try { localStorage.removeItem(STORAGE_KEY); } catch {}
     const shuffled = shuffleArray(originalQuestions);
     setQuestions(shuffled);
@@ -427,6 +427,10 @@ export default function Home() {
     setNavHistory(firstId ? [firstId] : []);
     setNavPos(0);
     setAnswerResults({});
+    if (!keepHard) {
+      setHardQuestionIds(new Set());
+      try { localStorage.removeItem(HARD_STORAGE_KEY); } catch {}
+    }
     setShowConfirmDialog(false);
   };
 
@@ -765,10 +769,10 @@ export default function Home() {
         {/* Confirmation Dialog */}
         {showConfirmDialog && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 max-w-sm mx-4">
-              <h3 className="text-lg font-semibold mb-4">Reset?</h3>
-              <p className="text-gray-600 mb-6">
-                This will reset your progress and shuffle all questions. Are you sure?
+            <div className="bg-white rounded-lg p-6 max-w-lg mx-4">
+              <h3 className="text-lg font-semibold mb-4 text-black text-center">Reset?</h3>
+              <p className="text-gray-600 mb-6 text-center">
+                This will reset your progress and shuffle all questions.<br />Are you sure?
               </p>
               <div className="flex gap-3 justify-end">
                 <button
@@ -778,7 +782,13 @@ export default function Home() {
                   Cancel
                 </button>
                 <button
-                  onClick={handleRandomize}
+                  onClick={() => performReset(true)}
+                  className="px-4 py-2 bg-black rounded border border-black/10 text-white hover:bg-black/80 transition-colors cursor-pointer"
+                >
+                  Reset but keep hard markers
+                </button>
+                <button
+                  onClick={() => performReset(false)}
                   className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors cursor-pointer"
                 >
                   Reset
