@@ -137,7 +137,11 @@ export default function Home() {
         nextCurrentIndex = idx >= 0 ? idx : 0;
         if (Array.isArray(s.seenIds)) nextSeen = new Set<string>(s.seenIds);
         if (s.answerResults && typeof s.answerResults === 'object') nextAnswerResults = s.answerResults as Record<string, boolean>;
-        if (s.mode) nextMode = s.mode as FlashcardMode;
+        if (s.mode) {
+          const savedMode = s.mode as string;
+          // Map deprecated 'highlighted' to the new 'answer-highlighted'
+          nextMode = savedMode === 'highlighted' ? 'answer-highlighted' : (savedMode as FlashcardMode);
+        }
         if (s.advanceMode) {
           const m = s.advanceMode as string;
           if (m === 'random' || m === 'sequential' || m === 'random-unique') {
@@ -519,8 +523,7 @@ export default function Home() {
             <div className="space-y-2 mt-2">
               <Tabs value={mode} onValueChange={(value) => setMode(value as FlashcardMode)}>
                 <TabsList className="inline-flex items-center gap-1 rounded-md bg-black/5 border border-black/10 p-1 dark:bg-white/10 dark:border-white/20">
-                  <TabsTrigger value="highlighted" className="text-xs px-2 py-1 rounded text-slate-800 dark:text-white data-[state=active]:bg-black/10 dark:data-[state=active]:bg-white/20 cursor-pointer">Answer only</TabsTrigger>
-                  <TabsTrigger value="answer-highlighted" className="text-xs px-2 py-1 rounded text-slate-800 dark:text-white data-[state=active]:bg-black/10 dark:data-[state=active]:bg-white/20 cursor-pointer">Answer highlighted</TabsTrigger>
+                  <TabsTrigger value="answer-highlighted" className="text-xs px-2 py-1 rounded text-slate-800 dark:text-white data-[state=active]:bg-black/10 dark:data-[state=active]:bg-white/20 cursor-pointer">Answers & Hints</TabsTrigger>
                   <TabsTrigger value="multiple-choice" className="text-xs px-2 py-1 rounded text-slate-800 dark:text-white data-[state=active]:bg-black/10 dark:data-[state=active]:bg-white/20 cursor-pointer">Quiz</TabsTrigger>
                 </TabsList>
               </Tabs>

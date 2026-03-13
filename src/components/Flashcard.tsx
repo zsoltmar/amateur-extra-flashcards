@@ -5,7 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { NumberPill } from '@/components/NumberPill';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 interface FlashcardProps {
@@ -21,6 +21,115 @@ export function Flashcard({ question, mode, onAnswer, onNext, isHard = false, on
   const [showAnswer, setShowAnswer] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [hasAnswered, setHasAnswered] = useState(false);
+  const isProd = typeof process !== 'undefined' && process.env.NODE_ENV === 'production';
+  const [showHints, setShowHints] = useState(false);
+  const hintsGetUrl = isProd ? '/hints.json' : '/api/hints';
+
+  type AnswerHints = Record<string, string[]>; // key: answer index as string
+  type OneHint = { question?: string[]; answers?: AnswerHints; notes?: string };
+  type HintsMap = Record<string, OneHint>;
+  const [hints, setHints] = useState<HintsMap>({});
+  const [editHints, setEditHints] = useState(false);
+  const currentHint = hints[question.id] || {};
+  const [notesDraft, setNotesDraft] = useState<string>(currentHint.notes || '');
+
+  useEffect(() => {
+    // Load hints JSON (static in prod, API in dev)
+    fetch(hintsGetUrl)
+      .then(r => r.ok ? r.json() : {})
+      .then((data) => setHints(data || {}))
+      .catch(() => {});
+  }, [hintsGetUrl]);
+
+  useEffect(() => {
+    // Sync note draft when question changes
+    setNotesDraft(hints[question.id]?.notes || '');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [question.id]);
+
+  const toggleWord = (scope: 'question' | 'answer', answerIndex?: number, word?: string) => {
+    if (!word) return;
+    const key = word.trim();
+    if (!key) return;
+    setHints(prev => {
+      const next: HintsMap = { ...prev };
+      const one: OneHint = { ...(next[question.id] || {}) };
+      if (scope === 'question') {
+        const list = new Set((one.question || []).map(w => w.toLowerCase()));
+        const low = key.toLowerCase();
+        if (list.has(low)) list.delete(low); else list.add(low);
+        one.question = Array.from(list);
+      } else {
+        const idx = String(answerIndex ?? 0);
+        const answers = { ...(one.answers || {}) } as AnswerHints;
+        const setList = new Set((answers[idx] || []).map(w => w.toLowerCase()));
+        const low = key.toLowerCase();
+        if (setList.has(low)) setList.delete(low); else setList.add(low);
+        answers[idx] = Array.from(setList);
+        one.answers = answers;
+      }
+      next[question.id] = one;
+      return next;
+    });
+  };
+
+  const saveHints = async () => {
+    try {
+      const body = JSON.stringify({ hints: { ...hints, [question.id]: { ...(hints[question.id] || {}), notes: notesDraft } } });
+      const res = await fetch('/api/hints', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body });
+      if (res.ok) {
+        const updated = await fetch(hintsGetUrl).then(r => r.json());
+        setHints(updated || {});
+      }
+    } catch {}
+  };
+
+  const revertHints = async () => {
+    try {
+      const data = await fetch(hintsGetUrl).then(r => r.json());
+      setHints(data || {});
+      setNotesDraft(data?.[question.id]?.notes || '');
+    } catch {}
+  };
+
+  const setNotes = (v: string) => {
+    setNotesDraft(v);
+    setHints(prev => ({
+      ...prev,
+      [question.id]: { ...(prev[question.id] || {}), notes: v }
+    }));
+  };
+
+  // Split text into tokens preserving punctuation/spaces
+  const tokenize = (text: string) => {
+    const parts: { t: string; isWord: boolean }[] = [];
+    const regex = /(\w+|[^\w])/g;
+    let m: RegExpExecArray | null;
+    while ((m = regex.exec(text)) !== null) {
+      const token = m[0];
+      const isWord = /\w+/.test(token);
+      parts.push({ t: token, isWord });
+    }
+    return parts;
+  };
+
+  // Highlight helper: wrap tokens that match any of keys (case-insensitive)
+  const renderWithHighlights = (text: string, keys?: string[]) => {
+    const keySet = new Set((keys || []).map(k => k.toLowerCase()));
+    return tokenize(text).map((p, i) => {
+      if (p.isWord && keySet.has(p.t.toLowerCase())) {
+        return (
+          <mark
+            key={i}
+            className="px-1 rounded bg-amber-400 text-black font-semibold ring-1 ring-amber-500/40 dark:bg-amber-300 dark:text-black dark:ring-amber-400/40"
+          >
+            {p.t}
+          </mark>
+        );
+      }
+      return <span key={i}>{p.t}</span>;
+    });
+  };
 
   // Extract image filename if present, or map figure references like "Figure E7-1" or bare tokens like "E7-3" to public images (E7-1.png)
   const getImageFilename = (text: string) => {
@@ -102,67 +211,104 @@ export function Flashcard({ question, mode, onAnswer, onNext, isHard = false, on
     </div>
   );
 
-  const renderHighlightedMode = () => (
-    <div className={`w-full h-full relative select-none`}>
-      {/* Sticky card number at top-left */}
-      <div className="flex items-center justify-center mb-4">
-        <NumberPill id={question.id} />
-      </div>
-      {/* Centered content */}
-      <div className={`grid place-content-center text-center gap-3 w-full h-full`}>
-        <h3 className="text-base md:text-lg font-medium leading-relaxed text-slate-900 dark:text-white">
-          {cleanText}
-        </h3>
-        <p className="text-xl md:text-2xl font-semibold text-sky-600 dark:text-sky-400 leading-relaxed">
-          {question.answers[question.correct]}
-        </p>
-      </div>
-    </div>
-  );
+  // Removed 'highlighted' mode
 
-  const renderAnswerHighlightedMode = () => (
-    <div className={`${hasImage ? 'flex-1' : ''} space-y-6`}>
-      <div className="space-y-4">
-        <NumberPill id={question.id} />
-        <h3 className="text-lg font-medium leading-relaxed break-words whitespace-normal">
-          {cleanText}
-        </h3>
-      </div>
+  const renderAnswerHighlightedMode = () => {
+    const qKeys = currentHint.question || [];
+    const aKeys = currentHint.answers || {};
+    return (
+      <div className={`${hasImage ? 'flex-1' : ''} space-y-6`}>
+        <div className="space-y-4">
+          <NumberPill id={question.id} />
+          {!editHints && (
+            <h3 className="text-lg font-medium leading-relaxed break-words whitespace-normal">
+              {renderWithHighlights(cleanText, qKeys)}
+            </h3>
+          )}
+          {editHints && (
+            <div className="text-lg font-medium leading-relaxed break-words whitespace-normal">
+              {tokenize(cleanText).map((p, i) => p.isWord ? (
+                <button key={i} type="button" onClick={(e)=>{e.stopPropagation(); toggleWord('question', undefined, p.t);}}
+                  className={`px-1 rounded cursor-pointer ${qKeys?.includes(p.t.toLowerCase()) ? 'bg-amber-400 dark:bg-amber-300 text-black font-semibold ring-1 ring-amber-500/40' : 'hover:bg-black/10 dark:hover:bg-white/10'}`}>
+                  {p.t}
+                </button>
+              ) : <span key={i}>{p.t}</span>)}
+            </div>
+          )}
+        </div>
 
-      {/* Match quiz layout to avoid jump: same spacing, padding, borders */}
-      <div className="space-y-3">
-            {question.answers.map((answer, index) => {
-              const isCorrect = index === question.correct;
-              return (
-                <div
-                  key={index}
-                  className={`w-full text-left rounded-md px-4 py-3 transition-colors border ${
-                    isCorrect
-                      ? 'border-sky-500 text-sky-500'
-                      : 'border-transparent hover:border-black/20 dark:hover:border-white/30 text-slate-900 dark:text-white/90'
-                  }`}
-                >
-                  <div className="flex items-center gap-3 w-full">
-                    <span className={`text-xs font-semibold tracking-wide ${
-                      isCorrect ? 'text-sky-500' : 'text-slate-500 dark:text-white/60'
-                    }`}>
-                      {String.fromCharCode(65 + index)}.
+        {/* Answers list with highlights */}
+        <div className="space-y-3">
+          {question.answers.map((answer, index) => {
+            const isCorrect = index === question.correct;
+            const keys = aKeys[String(index)] || [];
+            return (
+              <div
+                key={index}
+                className={`w-full text-left rounded-md px-4 py-3 transition-colors border ${
+                  isCorrect
+                    ? 'border-sky-500 text-sky-500'
+                    : 'border-transparent hover:border-black/20 dark:hover:border-white/30 text-slate-900 dark:text-white/90'
+                }`}
+              >
+                <div className="flex items-center gap-3 w-full">
+                  <span className={`text-xs font-semibold tracking-wide ${
+                    isCorrect ? 'text-sky-500' : 'text-slate-500 dark:text-white/60'
+                  }`}>
+                    {String.fromCharCode(65 + index)}.
+                  </span>
+                  {!editHints && (
+                    <span className={`text-lg break-words whitespace-normal ${isCorrect ? 'font-semibold' : ''}`}>
+                      {renderWithHighlights(answer, keys)}
                     </span>
-                    <span className={`text-lg break-words whitespace-normal ${isCorrect ? 'font-semibold' : ''}`}>{answer}</span>
-                  </div>
+                  )}
+                  {editHints && (
+                    <span className={`text-lg break-words whitespace-normal ${isCorrect ? 'font-semibold' : ''}`}>
+                      {tokenize(answer).map((p, i) => p.isWord ? (
+                        <button key={i} type="button" onClick={(e)=>{e.stopPropagation(); toggleWord('answer', index, p.t);}}
+                          className={`px-1 rounded cursor-pointer ${keys?.includes(p.t.toLowerCase()) ? 'bg-amber-400 dark:bg-amber-300 text-black font-semibold ring-1 ring-amber-500/40' : 'hover:bg-black/10 dark:hover:bg-white/10'}`}>
+                          {p.t}
+                        </button>
+                      ) : <span key={i}>{p.t}</span>)}
+                    </span>
+                  )}
                 </div>
-              );
-            })}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Notes */}
+        {!editHints && currentHint.notes && (
+          <div className="text-[12px] text-slate-600 dark:text-white/60 border border-amber-400/30 bg-amber-400/10 rounded-md px-3 py-2">
+            Hint: {currentHint.notes}
+          </div>
+        )}
+        {editHints && (
+          <div className="space-y-2">
+            <div className="text-xs text-slate-500 dark:text-white/60">Notes (optional)</div>
+            <textarea
+              value={notesDraft}
+              onChange={(e)=> setNotes(e.target.value)}
+              className="w-full min-h-[64px] rounded-md border border-black/10 dark:border-white/20 bg-transparent px-2 py-1 text-sm"
+              placeholder="Add a short hint sentence..."
+            />
+            <div className="flex gap-2">
+              <Button type="button" onClick={(e)=>{e.stopPropagation(); saveHints();}} className="cursor-pointer">Save hints</Button>
+              <Button type="button" variant="outline" onClick={(e)=>{e.stopPropagation(); revertHints();}} className="cursor-pointer">Revert</Button>
+            </div>
+          </div>
+        )}
       </div>
-    </div>
-  );
+    );
+  };
 
   const renderMultipleChoiceMode = () => (
     <div className={`${hasImage ? 'flex-1' : ''} space-y-6`}>
       <div className="space-y-4">
         <NumberPill id={question.id} />
         <h3 className="text-lg font-medium leading-relaxed break-words whitespace-normal">
-          {cleanText}
+          {showHints ? renderWithHighlights(cleanText, (hints[question.id]?.question || [])) : cleanText}
         </h3>
       </div>
 
@@ -196,16 +342,24 @@ export function Flashcard({ question, mode, onAnswer, onNext, isHard = false, on
                 }`}>
                   {String.fromCharCode(65 + index)}.
                 </span>
-                <span className={`text-lg break-words whitespace-normal ${showCorrect || showWrong ? 'font-semibold' : ''}`}>{answer}</span>
+                <span className={`text-lg break-words whitespace-normal ${showCorrect || showWrong ? 'font-semibold' : ''}`}>
+                  {showHints ? renderWithHighlights(answer, (hints[question.id]?.answers?.[String(index)] || [])) : answer}
+                </span>
               </div>
             </motion.button>
           );
         })}
       </div>
+
+      {showHints && (hints[question.id]?.notes) && (
+        <div className="text-[12px] text-slate-700 dark:text-white/70 border border-amber-400/40 bg-amber-300/20 rounded-md px-3 py-2">
+          Hint: {hints[question.id]?.notes}
+        </div>
+      )}
     </div>
   );
 
-  const isTapToAdvance = mode === 'highlighted' || mode === 'answer-highlighted';
+  const isTapToAdvance = (mode === 'answer-highlighted') && !editHints;
 
   return (
     <Card
@@ -219,7 +373,7 @@ export function Flashcard({ question, mode, onAnswer, onNext, isHard = false, on
       aria-label={isTapToAdvance ? 'Next card' : undefined}
     >
       <CardContent className={`p-8 flex relative ${hasImage ? 'gap-8' : 'min-h-[320px] justify-center items-center'}`}>
-        {/* Hard toggle button */}
+        {/* Hard toggle button + Hints controls */}
         <div className="absolute top-3 right-3 z-20">
           <button
             onClick={(e) => { e.stopPropagation(); if (onToggleHard) onToggleHard(); }}
@@ -233,6 +387,32 @@ export function Flashcard({ question, mode, onAnswer, onNext, isHard = false, on
           >
             {isHard ? 'Unmark hard' : 'Mark as hard'}
           </button>
+          {mode === 'multiple-choice' && (
+            <button
+              onClick={(e)=>{ e.stopPropagation(); setShowHints(v => !v); }}
+              aria-pressed={showHints}
+              aria-label={showHints ? 'Hide hints' : 'Show hints'}
+              className={`ml-2 text-[11px] px-2 py-1 rounded-md border transition-colors cursor-pointer ${
+                showHints
+                  ? 'bg-amber-400/30 text-amber-800 border-amber-500/40 dark:bg-amber-300/30 dark:text-black'
+                  : 'bg-black/10 text-slate-700 border-black/10 hover:bg-black/20 dark:bg-white/10 dark:text-white/80 dark:border-white/20 dark:hover:bg-white/20'
+              }`}
+            >
+              {showHints ? 'Hints on' : 'Hints'}
+            </button>
+          )}
+          {!isProd && mode === 'answer-highlighted' && (
+            <button
+              onClick={(e)=>{ e.stopPropagation(); setEditHints(v => !v); }}
+              className={`ml-2 text-[11px] px-2 py-1 rounded-md border transition-colors cursor-pointer ${
+                editHints
+                  ? 'bg-sky-500/20 text-sky-700 border-sky-500/40 dark:bg-sky-400/20 dark:text-sky-300'
+                  : 'bg-black/10 text-slate-700 border-black/10 hover:bg-black/20 dark:bg-white/10 dark:text-white/80 dark:border-white/20 dark:hover:bg-white/20'
+              }`}
+            >
+              {editHints ? 'Exit hints edit' : 'Edit hints'}
+            </button>
+          )}
         </div>
         {hasImage && (
           <div className="shrink-0">
@@ -247,7 +427,6 @@ export function Flashcard({ question, mode, onAnswer, onNext, isHard = false, on
         )}
         <div className={hasImage ? 'flex-1' : 'w-full h-full'}>
           {mode === 'qa' && renderQAMode()}
-          {mode === 'highlighted' && renderHighlightedMode()}
           {mode === 'answer-highlighted' && renderAnswerHighlightedMode()}
           {mode === 'multiple-choice' && renderMultipleChoiceMode()}
         </div>

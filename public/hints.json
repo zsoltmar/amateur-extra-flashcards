@@ -1,0 +1,7258 @@
+{
+  "E1A01": {
+    "answers": {
+      "3": [
+        "upper"
+      ]
+    },
+    "question": [
+      "usb"
+    ],
+    "notes": "Upper part is where it gets out of bounds"
+  },
+  "E1A03": {
+    "answers": {
+      "2": [
+        "14"
+      ]
+    },
+    "question": [
+      "8",
+      "2"
+    ],
+    "notes": "28 = 14 + 14, look for 14.14"
+  },
+  "E1A02": {
+    "answers": {
+      "3": [
+        "3",
+        "khz"
+      ]
+    },
+    "question": [
+      "lsb"
+    ],
+    "notes": ""
+  },
+  "E1A04": {
+    "answers": {
+      "2": [
+        "no",
+        "band",
+        "extend"
+      ]
+    },
+    "question": [
+      "cq",
+      "lsb"
+    ],
+    "notes": ""
+  },
+  "E1A05": {
+    "answers": {
+      "2": [
+        "alien"
+      ]
+    },
+    "question": [
+      "united",
+      "states",
+      "craft",
+      "vessel"
+    ],
+    "notes": ""
+  },
+  "E1A06": {
+    "question": [
+      "60",
+      "meter"
+    ],
+    "answers": {
+      "1": [
+        "center"
+      ]
+    },
+    "notes": ""
+  },
+  "E1A07": {
+    "question": [
+      "2200",
+      "meter"
+    ],
+    "answers": {
+      "2": [
+        "1"
+      ]
+    },
+    "notes": "Usually, the higher the band meter, the lower the allowed power"
+  },
+  "E1A08": {
+    "answers": {
+      "1": [
+        "originating"
+      ]
+    },
+    "question": [
+      "violation"
+    ],
+    "notes": ""
+  },
+  "E1A09": {
+    "question": [
+      "alaska",
+      "630",
+      "meter"
+    ],
+    "answers": {
+      "3": [
+        "5"
+      ]
+    },
+    "notes": ""
+  },
+  "E1A10": {
+    "answers": {
+      "0": [
+        "master"
+      ]
+    },
+    "question": [
+      "ship",
+      "aircraft",
+      "or"
+    ],
+    "notes": ""
+  },
+  "E1A11": {
+    "question": [
+      "us",
+      "registered"
+    ],
+    "answers": {
+      "1": [
+        "any",
+        "fcc",
+        "issued"
+      ]
+    },
+    "notes": ""
+  },
+  "E1B01": {
+    "question": [
+      "spurious"
+    ],
+    "answers": {
+      "3": [
+        "information"
+      ]
+    },
+    "notes": ""
+  },
+  "E1B02": {
+    "answers": {
+      "0": [
+        "3"
+      ]
+    },
+    "question": [
+      "slow"
+    ],
+    "notes": "Slow - low: smallest number"
+  },
+  "E1B03": {
+    "question": [
+      "monitoring"
+    ],
+    "answers": {
+      "0": [
+        "1"
+      ]
+    },
+    "notes": "How close is too close? 1 mile feels too close :)"
+  },
+  "E1B04": {
+    "question": [
+      "70",
+      "centimeter",
+      "interference"
+    ],
+    "answers": {
+      "2": [
+        "cease",
+        "operation"
+      ]
+    },
+    "notes": ""
+  },
+  "E1B05": {
+    "question": [
+      "quiet"
+    ],
+    "answers": {
+      "2": [
+        "observatory"
+      ]
+    },
+    "notes": "Shh in the observatory"
+  },
+  "E1B06": {
+    "question": [
+      "airport",
+      "antenna"
+    ],
+    "answers": {
+      "0": [
+        "17",
+        "aviation"
+      ]
+    },
+    "notes": ""
+  },
+  "E1B07": {
+    "question": [
+      "regulations"
+    ],
+    "answers": {
+      "2": [
+        "state"
+      ]
+    },
+    "notes": ""
+  },
+  "E1B08": {
+    "question": [
+      "interference",
+      "broadcast"
+    ],
+    "answers": {
+      "0": [
+        "cease"
+      ],
+      "1": [
+        "cease"
+      ],
+      "2": [
+        "cease"
+      ],
+      "3": [
+        "avoid"
+      ]
+    },
+    "notes": ""
+  },
+  "E1B09": {
+    "question": [
+      "races"
+    ],
+    "answers": {
+      "2": [
+        "civil"
+      ]
+    },
+    "notes": ""
+  },
+  "E1B10": {
+    "question": [
+      "races",
+      "authorized"
+    ],
+    "answers": {
+      "0": [
+        "operator"
+      ]
+    },
+    "notes": ""
+  },
+  "E1B11": {
+    "question": [
+      "prb",
+      "1"
+    ],
+    "answers": {
+      "1": [
+        "reasonable"
+      ]
+    },
+    "notes": "PRB - Pretty ReasonaBle"
+  },
+  "E1C01": {
+    "question": [
+      "60"
+    ],
+    "answers": {
+      "3": [
+        "8"
+      ]
+    },
+    "notes": "Biggest"
+  },
+  "E1C02": {
+    "question": [
+      "foreign"
+    ],
+    "answers": {
+      "2": [
+        "remarks",
+        "personal",
+        "nature"
+      ]
+    },
+    "notes": ""
+  },
+  "E1C03": {
+    "question": [
+      "wait",
+      "utc"
+    ],
+    "answers": {
+      "1": [
+        "30",
+        "days"
+      ]
+    },
+    "notes": "The only number"
+  },
+  "E1C04": {
+    "question": [
+      "iarp"
+    ],
+    "answers": {
+      "0": [
+        "americas"
+      ]
+    },
+    "notes": ""
+  },
+  "E1C05": {
+    "question": [
+      "automatically",
+      "third"
+    ],
+    "answers": {
+      "1": [
+        "rtty",
+        "data"
+      ]
+    },
+    "notes": ""
+  },
+  "E1C06": {
+    "question": [
+      "cept"
+    ],
+    "answers": {
+      "2": [
+        "fcc"
+      ]
+    },
+    "notes": ""
+  },
+  "E1C07": {
+    "question": [
+      "notifications",
+      "630",
+      "2200"
+    ],
+    "answers": {
+      "3": [
+        "utc"
+      ]
+    },
+    "notes": ""
+  },
+  "E1C08": {
+    "question": [
+      "duration",
+      "malfunctions"
+    ],
+    "answers": {
+      "1": [
+        "minutes",
+        "3"
+      ]
+    },
+    "notes": "As long as a typical song"
+  },
+  "E1C09": {
+    "question": [
+      "index"
+    ],
+    "answers": {
+      "1": [
+        "1"
+      ]
+    },
+    "notes": ""
+  },
+  "E1C10": {
+    "question": [
+      "maximum",
+      "30"
+    ],
+    "answers": {
+      "0": [
+        "43"
+      ],
+      "1": [],
+      "2": [],
+      "3": []
+    },
+    "notes": "Notice that they are all something3. 30, there's no 33, so 43!"
+  },
+  "E1C12": {
+    "question": [
+      "band",
+      "phone"
+    ],
+    "answers": {
+      "3": [
+        "band"
+      ]
+    },
+    "notes": "You can phone the entire band"
+  },
+  "E1D01": {
+    "question": [
+      "telemetry"
+    ],
+    "answers": {
+      "0": [
+        "instrument"
+      ]
+    },
+    "notes": ""
+  },
+  "E1D02": {
+    "question": [
+      "encrypted"
+    ],
+    "answers": {
+      "1": [
+        "space"
+      ]
+    },
+    "notes": ""
+  },
+  "E1D03": {
+    "question": [
+      "space",
+      "telecommand"
+    ],
+    "answers": {
+      "1": [
+        "terminate"
+      ]
+    },
+    "notes": ""
+  },
+  "E1D04": {
+    "question": [
+      "balloon"
+    ],
+    "answers": {
+      "0": [
+        "call",
+        "sign"
+      ]
+    },
+    "notes": ""
+  },
+  "E1D05": {
+    "question": [
+      "station",
+      "telecommand",
+      "location"
+    ],
+    "answers": {
+      "3": [
+        "all"
+      ]
+    },
+    "notes": ""
+  },
+  "E1D06": {
+    "answers": {
+      "0": [
+        "1"
+      ]
+    },
+    "question": [
+      "model",
+      "craft"
+    ],
+    "notes": "Model craft is small, number is small"
+  },
+  "E1D07": {
+    "answers": {
+      "0": [
+        "40",
+        "20",
+        "15",
+        "10"
+      ]
+    },
+    "question": [
+      "space",
+      "stations"
+    ],
+    "notes": ""
+  },
+  "E1D08": {
+    "question": [
+      "vhf",
+      "space"
+    ],
+    "answers": {
+      "3": [
+        "2"
+      ]
+    },
+    "notes": ""
+  },
+  "E1D09": {
+    "question": [
+      "uhf"
+    ],
+    "answers": {
+      "1": [
+        "70",
+        "13"
+      ]
+    },
+    "notes": ""
+  },
+  "E1D10": {
+    "question": [
+      "telecommand",
+      "space"
+    ],
+    "answers": {
+      "1": [
+        "space"
+      ]
+    },
+    "notes": ""
+  },
+  "E1D11": {
+    "question": [
+      "earth"
+    ],
+    "answers": {
+      "3": [
+        "control"
+      ]
+    },
+    "notes": ""
+  },
+  "E1D12": {
+    "answers": {
+      "0": [
+        "beacon"
+      ]
+    },
+    "notes": "",
+    "question": [
+      "way",
+      "one"
+    ]
+  },
+  "E1E01": {
+    "question": [
+      "out",
+      "pocket"
+    ],
+    "answers": {
+      "0": [
+        "coordinating"
+      ]
+    },
+    "notes": ""
+  },
+  "E1E02": {
+    "question": [
+      "maintaining"
+    ],
+    "answers": {
+      "2": [
+        "vecs"
+      ]
+    },
+    "notes": ""
+  },
+  "E1E03": {
+    "question": [
+      "volunteer",
+      "examiner",
+      "coordinator"
+    ],
+    "answers": {
+      "2": [
+        "organization",
+        "fcc"
+      ]
+    },
+    "notes": ""
+  },
+  "E1E04": {
+    "question": [
+      "volunteer",
+      "accredited"
+    ],
+    "answers": {
+      "3": [
+        "fcc",
+        "requirements"
+      ]
+    },
+    "notes": ""
+  },
+  "E1E05": {
+    "question": [
+      "does",
+      "not",
+      "pass"
+    ],
+    "answers": {
+      "1": [
+        "return"
+      ]
+    },
+    "notes": ""
+  },
+  "E1E06": {
+    "question": [
+      "responsible"
+    ],
+    "answers": {
+      "2": [
+        "each"
+      ]
+    },
+    "notes": ""
+  },
+  "E1E07": {
+    "question": [
+      "fails",
+      "comply",
+      "to"
+    ],
+    "answers": {
+      "1": [
+        "terminate",
+        "candidate"
+      ]
+    },
+    "notes": ""
+  },
+  "E1E08": {
+    "question": [
+      "not",
+      "administer"
+    ],
+    "answers": {
+      "2": [
+        "relatives"
+      ]
+    },
+    "notes": ""
+  },
+  "E1E09": {
+    "question": [
+      "fraudulently"
+    ],
+    "answers": {
+      "0": [
+        "revocation"
+      ]
+    },
+    "notes": ""
+  },
+  "E1E10": {
+    "question": [
+      "successful",
+      "examination"
+    ],
+    "answers": {
+      "2": [
+        "submit"
+      ]
+    },
+    "notes": ""
+  },
+  "E1E11": {
+    "question": [
+      "passing",
+      "team"
+    ],
+    "answers": {
+      "1": [
+        "three"
+      ]
+    },
+    "notes": ""
+  },
+  "E1F01": {
+    "answers": {
+      "1": [
+        "222"
+      ]
+    },
+    "question": [
+      "spread",
+      "spectrum"
+    ],
+    "notes": ""
+  },
+  "E1F02": {
+    "question": [
+      "canada"
+    ],
+    "answers": {
+      "2": [
+        "canadian"
+      ]
+    },
+    "notes": ""
+  },
+  "E1F03": {
+    "question": [
+      "dealer"
+    ],
+    "answers": {
+      "3": [
+        "modified"
+      ]
+    },
+    "notes": ""
+  },
+  "E1F04": {
+    "question": [
+      "line",
+      "a"
+    ],
+    "answers": {
+      "0": [
+        "canada"
+      ]
+    },
+    "notes": "A as in cAnAdA"
+  },
+  "E1F05": {
+    "question": [
+      "line",
+      "a",
+      "north"
+    ],
+    "answers": {
+      "3": [
+        "420"
+      ]
+    },
+    "notes": ""
+  },
+  "E1F06": {
+    "question": [
+      "sta"
+    ],
+    "answers": {
+      "0": [
+        "experimental"
+      ]
+    },
+    "notes": ""
+  },
+  "E1F07": {
+    "question": [
+      "business"
+    ],
+    "answers": {
+      "3": [
+        "neither"
+      ]
+    },
+    "notes": ""
+  },
+  "E1F08": {
+    "question": [
+      "prohibited"
+    ],
+    "answers": {
+      "0": [
+        "compensation"
+      ]
+    },
+    "notes": ""
+  },
+  "E1F09": {
+    "question": [
+      "cannot",
+      "mesh"
+    ],
+    "answers": {
+      "2": [
+        "encoded",
+        "obscure"
+      ]
+    },
+    "notes": ""
+  },
+  "E1F10": {
+    "question": [
+      "auxiliary"
+    ],
+    "answers": {
+      "1": [
+        "technician",
+        "general",
+        "advanced",
+        "amateur",
+        "extra"
+      ]
+    },
+    "notes": "All but Novice"
+  },
+  "E1F11": {
+    "question": [
+      "grant"
+    ],
+    "answers": {
+      "3": [
+        "spurious"
+      ]
+    },
+    "notes": ""
+  },
+  "E2A01": {
+    "question": [
+      "ascending"
+    ],
+    "answers": {
+      "2": [
+        "south"
+      ]
+    },
+    "notes": "Rising is from below to above, S to N"
+  },
+  "E2A02": {
+    "question": [
+      "inverting",
+      "linear",
+      "transponder"
+    ],
+    "answers": {
+      "3": [
+        "all"
+      ]
+    },
+    "notes": ""
+  },
+  "E2A03": {
+    "question": [
+      "inverting",
+      "processed"
+    ],
+    "answers": {
+      "3": [
+        "mixed"
+      ]
+    },
+    "notes": ""
+  },
+  "E2A04": {
+    "question": [
+      "mode"
+    ],
+    "answers": {
+      "1": [
+        "frequency"
+      ]
+    },
+    "notes": ""
+  },
+  "E2A05": {
+    "question": [
+      "mode"
+    ],
+    "answers": {
+      "3": [
+        "frequency"
+      ]
+    },
+    "notes": ""
+  },
+  "E2A06": {
+    "question": [
+      "keplerian"
+    ],
+    "answers": {
+      "0": [
+        "satellite"
+      ]
+    },
+    "notes": "Space"
+  },
+  "E2A07": {
+    "question": [
+      "linear",
+      "transponder"
+    ],
+    "answers": {
+      "3": [
+        "all"
+      ]
+    },
+    "notes": ""
+  },
+  "E2A08": {
+    "question": [
+      "linear",
+      "transponder",
+      "satellite"
+    ],
+    "answers": {
+      "1": [
+        "reducing"
+      ]
+    },
+    "notes": ""
+  },
+  "E2A09": {
+    "question": [
+      "l",
+      "s"
+    ],
+    "answers": {
+      "0": [
+        "23",
+        "13"
+      ]
+    },
+    "notes": ""
+  },
+  "E2A10": {
+    "question": [
+      "one",
+      "position"
+    ],
+    "answers": {
+      "1": [
+        "geostationary"
+      ]
+    },
+    "notes": "Doesn't move, it's stationary"
+  },
+  "E2A11": {
+    "question": [
+      "spin",
+      "rotation"
+    ],
+    "answers": {
+      "1": [
+        "circularly"
+      ]
+    },
+    "notes": "Round and round"
+  },
+  "E2A12": {
+    "question": [
+      "store",
+      "forward"
+    ],
+    "answers": {
+      "2": [
+        "hold",
+        "for",
+        "later"
+      ]
+    },
+    "notes": ""
+  },
+  "E2A13": {
+    "question": [
+      "relay"
+    ],
+    "answers": {
+      "1": [
+        "store"
+      ]
+    },
+    "notes": "It's a sat thing"
+  },
+  "E2B01": {
+    "question": [
+      "3",
+      "4"
+    ],
+    "answers": {
+      "0": [
+        "correction",
+        "error"
+      ]
+    },
+    "notes": ""
+  },
+  "E2B02": {
+    "question": [
+      "lines"
+    ],
+    "answers": {
+      "2": [
+        "525"
+      ]
+    },
+    "notes": "NTSC is old school tv resolution"
+  },
+  "E2B03": {
+    "question": [
+      "scanning",
+      "pattern"
+    ],
+    "answers": {
+      "3": [
+        "odd",
+        "even"
+      ]
+    },
+    "notes": ""
+  },
+  "E2B04": {
+    "question": [
+      "color"
+    ],
+    "answers": {
+      "0": [
+        "sequentially"
+      ]
+    },
+    "notes": ""
+  },
+  "E2B05": {
+    "question": [
+      "vestigial",
+      "sideband"
+    ],
+    "answers": {
+      "2": [
+        "reduces",
+        "bandwidth"
+      ]
+    },
+    "notes": ""
+  },
+  "E2B06": {
+    "question": [
+      "vestigial",
+      "sideband"
+    ],
+    "answers": {
+      "0": [
+        "transmitted",
+        "one",
+        "portion",
+        "and",
+        "a"
+      ]
+    },
+    "notes": ""
+  },
+  "E2B07": {
+    "question": [
+      "dvb",
+      "t"
+    ],
+    "answers": {
+      "1": [
+        "qam",
+        "qpsk"
+      ]
+    },
+    "notes": "The Qs"
+  },
+  "E2B08": {
+    "question": [
+      "fast",
+      "scan"
+    ],
+    "answers": {
+      "0": [
+        "cable"
+      ]
+    },
+    "notes": ""
+  },
+  "E2B09": {
+    "question": [
+      "drm",
+      "sstv"
+    ],
+    "answers": {
+      "3": [
+        "ssb"
+      ]
+    },
+    "notes": "SStv SSb"
+  },
+  "E2B10": {
+    "question": [
+      "brightness"
+    ],
+    "answers": {
+      "0": [
+        "frequency",
+        "tone"
+      ]
+    },
+    "notes": ""
+  },
+  "E2B11": {
+    "question": [
+      "vis",
+      "sstv"
+    ],
+    "answers": {
+      "1": [
+        "mode"
+      ]
+    },
+    "notes": ""
+  },
+  "E2B12": {
+    "question": [
+      "picture",
+      "line"
+    ],
+    "answers": {
+      "0": [
+        "tone",
+        "frequencies"
+      ]
+    },
+    "notes": ""
+  },
+  "E2C01": {
+    "question": [
+      "us"
+    ],
+    "answers": {
+      "3": [
+        "no"
+      ]
+    },
+    "notes": ""
+  },
+  "E2C02": {
+    "question": [
+      "data"
+    ],
+    "answers": {
+      "2": [
+        "adif"
+      ]
+    },
+    "notes": ""
+  },
+  "E2C03": {
+    "question": [
+      "contesting"
+    ],
+    "answers": {
+      "0": [
+        "30"
+      ]
+    },
+    "notes": "Longer the band, the more restrictions"
+  },
+  "E2C04": {
+    "question": [
+      "mesh",
+      "networks"
+    ],
+    "answers": {
+      "1": [
+        "unlicensed",
+        "wireless"
+      ]
+    },
+    "notes": ""
+  },
+  "E2C05": {
+    "question": [
+      "dx",
+      "qsl"
+    ],
+    "answers": {
+      "1": [
+        "receiving",
+        "sending"
+      ]
+    },
+    "notes": ""
+  },
+  "E2C06": {
+    "question": [
+      "contest"
+    ],
+    "answers": {
+      "2": [
+        "weak",
+        "signal"
+      ]
+    },
+    "notes": ""
+  },
+  "E2C07": {
+    "question": [
+      "cabrillo"
+    ],
+    "answers": {
+      "0": [
+        "logs"
+      ]
+    },
+    "notes": "CabrilLOGS"
+  },
+  "E2C08": {
+    "question": [
+      "lotw"
+    ],
+    "answers": {
+      "3": [
+        "all"
+      ]
+    },
+    "notes": ""
+  },
+  "E2C09": {
+    "question": [
+      "mesh",
+      "network",
+      "equipment"
+    ],
+    "answers": {
+      "2": [
+        "router"
+      ]
+    },
+    "notes": ""
+  },
+  "E2C10": {
+    "question": [
+      "dx",
+      "different"
+    ],
+    "answers": {
+      "3": [
+        "all"
+      ]
+    },
+    "notes": ""
+  },
+  "E2C11": {
+    "question": [
+      "contest",
+      "dx",
+      "pileup"
+    ],
+    "answers": {
+      "0": [
+        "once"
+      ]
+    },
+    "notes": "Don't be rude"
+  },
+  "E2C12": {
+    "question": [
+      "delay"
+    ],
+    "answers": {
+      "2": [
+        "latency"
+      ]
+    },
+    "notes": ""
+  },
+  "E2D01": {
+    "answers": {
+      "1": [
+        "msk144"
+      ]
+    },
+    "question": [
+      "meteor",
+      "scatter"
+    ],
+    "notes": "MeteorSKatter"
+  },
+  "E2D02": {
+    "question": [
+      "ft8",
+      "ft4",
+      "contest"
+    ],
+    "answers": {
+      "3": [
+        "grid"
+      ]
+    },
+    "notes": ""
+  },
+  "E2D03": {
+    "question": [
+      "eme"
+    ],
+    "answers": {
+      "3": [
+        "q65"
+      ]
+    },
+    "notes": "Eliminate the others"
+  },
+  "E2D04": {
+    "question": [
+      "balloons",
+      "tracking"
+    ],
+    "answers": {
+      "2": [
+        "aprs"
+      ]
+    },
+    "notes": ""
+  },
+  "E2D05": {
+    "question": [
+      "jt65"
+    ],
+    "answers": {
+      "1": [
+        "signal",
+        "to",
+        "noise"
+      ]
+    },
+    "notes": ""
+  },
+  "E2D06": {
+    "question": [
+      "eme",
+      "contacts"
+    ],
+    "answers": {
+      "0": [
+        "alternating",
+        "synchronous"
+      ]
+    },
+    "notes": ""
+  },
+  "E2D07": {
+    "question": [
+      "aprs"
+    ],
+    "answers": {
+      "2": [
+        "ax"
+      ]
+    },
+    "notes": "The one with the number stands out"
+  },
+  "E2D08": {
+    "question": [
+      "aprs",
+      "beacon"
+    ],
+    "answers": {
+      "2": [
+        "unnumbered"
+      ]
+    },
+    "notes": ""
+  },
+  "E2D09": {
+    "question": [
+      "jt65"
+    ],
+    "answers": {
+      "0": [
+        "afsk"
+      ]
+    },
+    "notes": ""
+  },
+  "E2D10": {
+    "question": [
+      "wide3",
+      "1"
+    ],
+    "answers": {
+      "2": [
+        "digipeater"
+      ]
+    },
+    "notes": ""
+  },
+  "E2D11": {
+    "question": [
+      "aprs",
+      "relay"
+    ],
+    "answers": {
+      "3": [
+        "digipeaters"
+      ]
+    },
+    "notes": ""
+  },
+  "E2E01": {
+    "question": [
+      "below",
+      "30"
+    ],
+    "answers": {
+      "1": [
+        "fsk"
+      ]
+    },
+    "notes": "Shortest"
+  },
+  "E2E02": {
+    "question": [
+      "wsjt",
+      "x"
+    ],
+    "answers": {
+      "1": [
+        "clocks"
+      ]
+    },
+    "notes": ""
+  },
+  "E2E03": {
+    "question": [
+      "ft4"
+    ],
+    "answers": {
+      "1": [
+        "phase"
+      ]
+    },
+    "notes": ""
+  },
+  "E2E04": {
+    "question": [
+      "fst4"
+    ],
+    "answers": {
+      "3": [
+        "all"
+      ]
+    },
+    "notes": "FST4, ALL4"
+  },
+  "E2E05": {
+    "answers": {
+      "0": [
+        "wspr"
+      ]
+    },
+    "question": [
+      "keyboard",
+      "to",
+      "support",
+      "not"
+    ],
+    "notes": "WithoutSuPpoRt"
+  },
+  "E2E06": {
+    "question": [
+      "ft8"
+    ],
+    "answers": {
+      "2": [
+        "15"
+      ]
+    },
+    "notes": "Not 8s"
+  },
+  "E2E07": {
+    "question": [
+      "q65",
+      "jt65"
+    ],
+    "answers": {
+      "2": [
+        "averaged"
+      ]
+    },
+    "notes": ""
+  },
+  "E2E08": {
+    "answers": {
+      "1": [
+        "pactor"
+      ]
+    },
+    "question": [
+      "binary"
+    ],
+    "notes": ""
+  },
+  "E2E09": {
+    "question": [
+      "variable",
+      "length"
+    ],
+    "answers": {
+      "3": [
+        "psk31"
+      ]
+    },
+    "notes": "No hint, just have to know :)"
+  },
+  "E2E10": {
+    "question": [
+      "narrowest"
+    ],
+    "answers": {
+      "2": [
+        "ft8"
+      ]
+    },
+    "notes": "Also the narrowest answer"
+  },
+  "E2E11": {
+    "question": [
+      "direct",
+      "audio"
+    ],
+    "answers": {
+      "0": [
+        "vfo"
+      ]
+    },
+    "notes": ""
+  },
+  "E2E12": {
+    "question": [
+      "ale"
+    ],
+    "answers": {
+      "0": [
+        "call",
+        "sign"
+      ]
+    },
+    "notes": ""
+  },
+  "E2E13": {
+    "question": [
+      "throughput"
+    ],
+    "answers": {
+      "3": [
+        "pactor",
+        "iv"
+      ]
+    },
+    "notes": ""
+  },
+  "E3A01": {
+    "question": [
+      "maximum",
+      "separation"
+    ],
+    "answers": {
+      "3": [
+        "12"
+      ]
+    },
+    "notes": "Biggest number also"
+  },
+  "E3A02": {
+    "question": [
+      "fading"
+    ],
+    "answers": {
+      "1": [
+        "fading"
+      ]
+    },
+    "notes": ""
+  },
+  "E3A03": {
+    "question": [
+      "eme",
+      "least",
+      "loss"
+    ],
+    "answers": {
+      "0": [
+        "perigee"
+      ]
+    },
+    "notes": ""
+  },
+  "E3A04": {
+    "question": [
+      "electromagnetic",
+      "wave"
+    ],
+    "answers": {
+      "3": [
+        "right",
+        "angle"
+      ]
+    },
+    "notes": ""
+  },
+  "E3A05": {
+    "question": [
+      "electromagnetic",
+      "wave"
+    ],
+    "answers": {
+      "2": [
+        "right",
+        "angles"
+      ]
+    },
+    "notes": ""
+  },
+  "E3A06": {
+    "question": [
+      "muf",
+      "decreases"
+    ],
+    "answers": {
+      "1": [
+        "lower",
+        "frequency"
+      ]
+    },
+    "notes": ""
+  },
+  "E3A07": {
+    "question": [
+      "ducts"
+    ],
+    "answers": {
+      "2": [
+        "water"
+      ]
+    },
+    "notes": ""
+  },
+  "E3A08": {
+    "question": [
+      "region",
+      "earth"
+    ],
+    "answers": {
+      "0": [
+        "e"
+      ]
+    },
+    "notes": ""
+  },
+  "E3A09": {
+    "question": [
+      "meteor",
+      "scatter"
+    ],
+    "answers": {
+      "2": [
+        "148"
+      ]
+    },
+    "notes": ""
+  },
+  "E3A10": {
+    "question": [
+      "medium"
+    ],
+    "answers": {
+      "3": [
+        "index",
+        "of",
+        "refraction"
+      ]
+    },
+    "notes": ""
+  },
+  "E3A11": {
+    "question": [
+      "microwave",
+      "range"
+    ],
+    "answers": {
+      "1": [
+        "100"
+      ]
+    },
+    "notes": ""
+  },
+  "E3A12": {
+    "answers": {
+      "2": [
+        "geomagnetic",
+        "severe"
+      ]
+    },
+    "question": [
+      "auroral"
+    ],
+    "notes": "Auroras only in severe geomagnetic storms"
+  },
+  "E3A13": {
+    "question": [
+      "best"
+    ],
+    "answers": {
+      "0": [
+        "cw"
+      ]
+    },
+    "notes": ""
+  },
+  "E3A14": {
+    "question": [
+      "circularly"
+    ],
+    "answers": {
+      "1": [
+        "rotating"
+      ]
+    },
+    "notes": ""
+  },
+  "E3B01": {
+    "question": [
+      "transequatorial"
+    ],
+    "answers": {
+      "0": [
+        "perpendicular"
+      ]
+    },
+    "notes": ""
+  },
+  "E3B02": {
+    "question": [
+      "range",
+      "transequatorial"
+    ],
+    "answers": {
+      "2": [
+        "5",
+        "000"
+      ]
+    },
+    "notes": ""
+  },
+  "E3B03": {
+    "question": [
+      "day"
+    ],
+    "answers": {
+      "2": [
+        "afternoon",
+        "evening"
+      ]
+    },
+    "notes": ""
+  },
+  "E3B04": {
+    "question": [
+      "extraordinary",
+      "ordinary"
+    ],
+    "answers": {
+      "1": [
+        "ionosphere"
+      ]
+    },
+    "notes": ""
+  },
+  "E3B05": {
+    "question": [
+      "160"
+    ],
+    "answers": {
+      "3": [
+        "darkness"
+      ]
+    },
+    "notes": ""
+  },
+  "E3B06": {
+    "question": [
+      "long",
+      "path"
+    ],
+    "answers": {
+      "1": [
+        "40",
+        "20"
+      ]
+    },
+    "notes": ""
+  },
+  "E3B07": {
+    "question": [
+      "lowering",
+      "angle"
+    ],
+    "answers": {
+      "2": [
+        "hop"
+      ]
+    },
+    "notes": ""
+  },
+  "E3B08": {
+    "question": [
+      "frequency",
+      "increased"
+    ],
+    "answers": {
+      "2": [
+        "decreases"
+      ]
+    },
+    "notes": ""
+  },
+  "E3B09": {
+    "question": [
+      "sporadic",
+      "e"
+    ],
+    "answers": {
+      "0": [
+        "summer",
+        "solstice"
+      ]
+    },
+    "notes": ""
+  },
+  "E3B10": {
+    "question": [
+      "hop"
+    ],
+    "answers": {
+      "0": [
+        "earth",
+        "reflector"
+      ]
+    },
+    "notes": ""
+  },
+  "E3B11": {
+    "question": [
+      "day"
+    ],
+    "answers": {
+      "3": [
+        "sunrise",
+        "sunset"
+      ]
+    },
+    "notes": ""
+  },
+  "E3B12": {
+    "question": [
+      "hop",
+      "chordal"
+    ],
+    "answers": {
+      "1": [
+        "without"
+      ]
+    },
+    "notes": ""
+  },
+  "E3B13": {
+    "question": [
+      "ground",
+      "wave"
+    ],
+    "answers": {
+      "0": [
+        "vertical"
+      ]
+    },
+    "notes": ""
+  },
+  "E3C01": {
+    "question": [
+      "blackouts"
+    ],
+    "answers": {
+      "3": [
+        "flares"
+      ]
+    },
+    "notes": ""
+  },
+  "E3C02": {
+    "question": [
+      "rising",
+      "a",
+      "k"
+    ],
+    "answers": {
+      "0": [
+        "increasing",
+        "geomagnetic"
+      ]
+    },
+    "notes": ""
+  },
+  "E3C03": {
+    "question": [
+      "absorption"
+    ],
+    "answers": {
+      "1": [
+        "auroral"
+      ]
+    },
+    "notes": ""
+  },
+  "E3C04": {
+    "question": [
+      "bz"
+    ],
+    "answers": {
+      "2": [
+        "interplanetary"
+      ]
+    },
+    "notes": ""
+  },
+  "E3C05": {
+    "question": [
+      "bz",
+      "sun"
+    ],
+    "answers": {
+      "0": [
+        "southward"
+      ]
+    },
+    "notes": ""
+  },
+  "E3C06": {
+    "answers": {
+      "0": [
+        "15"
+      ]
+    },
+    "question": [
+      "horizon"
+    ],
+    "notes": ""
+  },
+  "E3C07": {
+    "answers": {
+      "3": [
+        "x"
+      ]
+    },
+    "question": [
+      "greatest",
+      "solar",
+      "flare"
+    ],
+    "notes": ""
+  },
+  "E3C08": {
+    "question": [
+      "geomagnetic"
+    ],
+    "answers": {
+      "3": [
+        "g5"
+      ]
+    },
+    "notes": ""
+  },
+  "E3C09": {
+    "question": [
+      "reporting"
+    ],
+    "answers": {
+      "3": [
+        "cw",
+        "digital"
+      ]
+    },
+    "notes": ""
+  },
+  "E3C10": {
+    "question": [
+      "304a"
+    ],
+    "answers": {
+      "1": [
+        "angstroms"
+      ]
+    },
+    "notes": ""
+  },
+  "E3C11": {
+    "question": [
+      "voacap"
+    ],
+    "answers": {
+      "2": [
+        "hf"
+      ]
+    },
+    "notes": ""
+  },
+  "E3C12": {
+    "question": [
+      "rise"
+    ],
+    "answers": {
+      "1": [
+        "impact"
+      ]
+    },
+    "notes": ""
+  },
+  "E4A01": {
+    "answers": {
+      "0": [
+        "sampling",
+        "rate"
+      ]
+    },
+    "question": [
+      "highest",
+      "frequency"
+    ],
+    "notes": ""
+  },
+  "E4A02": {
+    "question": [
+      "spectrum",
+      "analyzer"
+    ],
+    "answers": {
+      "1": [
+        "frequency",
+        "amplitude"
+      ]
+    },
+    "notes": ""
+  },
+  "E4A03": {
+    "question": [
+      "spurious",
+      "signals"
+    ],
+    "answers": {
+      "1": [
+        "spectrum"
+      ]
+    },
+    "notes": ""
+  },
+  "E4A04": {
+    "question": [
+      "compensation"
+    ],
+    "answers": {
+      "0": [
+        "flat"
+      ]
+    },
+    "notes": ""
+  },
+  "E4A05": {
+    "question": [
+      "prescaler"
+    ],
+    "answers": {
+      "3": [
+        "reduce"
+      ]
+    },
+    "notes": ""
+  },
+  "E4A06": {
+    "question": [
+      "aliasing"
+    ],
+    "answers": {
+      "0": [
+        "jittery"
+      ]
+    },
+    "notes": ""
+  },
+  "E4A07": {
+    "question": [
+      "swr"
+    ],
+    "answers": {
+      "1": [
+        "swr"
+      ]
+    },
+    "notes": ""
+  },
+  "E4A08": {
+    "question": [
+      "measure",
+      "swr"
+    ],
+    "answers": {
+      "3": [
+        "all"
+      ]
+    },
+    "notes": ""
+  },
+  "E4A09": {
+    "question": [
+      "probe"
+    ],
+    "answers": {
+      "0": [
+        "ground"
+      ]
+    },
+    "notes": ""
+  },
+  "E4A10": {
+    "question": [
+      "ripple"
+    ],
+    "answers": {
+      "3": [
+        "line"
+      ]
+    },
+    "notes": ""
+  },
+  "E4A11": {
+    "question": [
+      "antenna",
+      "analyzer"
+    ],
+    "answers": {
+      "3": [
+        "all"
+      ]
+    },
+    "notes": ""
+  },
+  "E4B01": {
+    "question": [
+      "counter"
+    ],
+    "answers": {
+      "1": [
+        "time"
+      ]
+    },
+    "notes": ""
+  },
+  "E4B02": {
+    "question": [
+      "sensitivity"
+    ],
+    "answers": {
+      "0": [
+        "impedance"
+      ]
+    },
+    "notes": ""
+  },
+  "E4B03": {
+    "answers": {
+      "2": [
+        "s21"
+      ]
+    },
+    "question": [
+      "gain"
+    ],
+    "notes": "No acronym in question"
+  },
+  "E4B04": {
+    "question": [
+      "vswr"
+    ],
+    "answers": {
+      "0": [
+        "s11"
+      ]
+    },
+    "notes": "Acronym in quesion"
+  },
+  "E4B05": {
+    "answers": {
+      "1": [
+        "50",
+        "short",
+        "open"
+      ]
+    },
+    "question": [
+      "rf"
+    ],
+    "notes": ""
+  },
+  "E4B06": {
+    "question": [
+      "100",
+      "25"
+    ],
+    "answers": {
+      "3": [
+        "75"
+      ]
+    },
+    "notes": ""
+  },
+  "E4B07": {
+    "question": [
+      "subscripts"
+    ],
+    "answers": {
+      "0": [
+        "port"
+      ]
+    },
+    "notes": ""
+  },
+  "E4B08": {
+    "question": [
+      "q"
+    ],
+    "answers": {
+      "2": [
+        "bandwidth"
+      ]
+    },
+    "notes": ""
+  },
+  "E4B09": {
+    "question": [
+      "network",
+      "analyzer"
+    ],
+    "answers": {
+      "1": [
+        "frequency"
+      ]
+    },
+    "notes": ""
+  },
+  "E4B10": {
+    "question": [
+      "intermodulation"
+    ],
+    "answers": {
+      "1": [
+        "af",
+        "spectrum",
+        "analyzer"
+      ]
+    },
+    "notes": ""
+  },
+  "E4B11": {
+    "question": [
+      "measured"
+    ],
+    "answers": {
+      "3": [
+        "all"
+      ]
+    },
+    "notes": ""
+  },
+  "E4C01": {
+    "question": [
+      "phase",
+      "noise"
+    ],
+    "answers": {
+      "3": [
+        "interference"
+      ]
+    },
+    "notes": ""
+  },
+  "E4C02": {
+    "question": [
+      "eliminating",
+      "interference"
+    ],
+    "answers": {
+      "0": [
+        "preselector"
+      ]
+    },
+    "notes": ""
+  },
+  "E4C03": {
+    "question": [
+      "fm",
+      "suppression"
+    ],
+    "answers": {
+      "2": [
+        "capture"
+      ]
+    },
+    "notes": ""
+  },
+  "E4C04": {
+    "question": [
+      "noise",
+      "figure"
+    ],
+    "answers": {
+      "3": [
+        "theoretical"
+      ]
+    },
+    "notes": ""
+  },
+  "E4C05": {
+    "question": [
+      "174"
+    ],
+    "answers": {
+      "1": [
+        "perfect"
+      ]
+    },
+    "notes": ""
+  },
+  "E4C06": {
+    "question": [
+      "50",
+      "000",
+      "1"
+    ],
+    "answers": {
+      "3": [
+        "13"
+      ]
+    },
+    "notes": "Largest number"
+  },
+  "E4C07": {
+    "question": [
+      "mds",
+      "receiver"
+    ],
+    "answers": {
+      "1": [
+        "minimum",
+        "discernible"
+      ]
+    },
+    "notes": ""
+  },
+  "E4C08": {
+    "question": [
+      "overloaded"
+    ],
+    "answers": {
+      "3": [
+        "reference",
+        "voltage"
+      ]
+    },
+    "notes": ""
+  },
+  "E4C09": {
+    "question": [
+      "superheterodyne"
+    ],
+    "answers": {
+      "2": [
+        "image",
+        "responses"
+      ]
+    },
+    "notes": ""
+  },
+  "E4C10": {
+    "question": [
+      "variety"
+    ],
+    "answers": {
+      "2": [
+        "interference",
+        "noise",
+        "signal"
+      ]
+    },
+    "notes": ""
+  },
+  "E4C11": {
+    "question": [
+      "attenuation"
+    ],
+    "answers": {
+      "3": [
+        "atmospheric"
+      ]
+    },
+    "notes": ""
+  },
+  "E4C12": {
+    "question": [
+      "roofing"
+    ],
+    "answers": {
+      "2": [
+        "blocking"
+      ]
+    },
+    "notes": ""
+  },
+  "E4C13": {
+    "question": [
+      "reciprocal"
+    ],
+    "answers": {
+      "3": [
+        "desired"
+      ]
+    },
+    "notes": ""
+  },
+  "E4C14": {
+    "question": [
+      "if"
+    ],
+    "answers": {
+      "2": [
+        "interference"
+      ]
+    },
+    "notes": ""
+  },
+  "E4D01": {
+    "question": [
+      "blocking"
+    ],
+    "answers": {
+      "0": [
+        "1"
+      ]
+    },
+    "notes": "The only answer with a number"
+  },
+  "E4D02": {
+    "question": [
+      "dynamic",
+      "poor",
+      "range"
+    ],
+    "answers": {
+      "0": [
+        "spurious"
+      ]
+    },
+    "notes": ""
+  },
+  "E4D03": {
+    "question": [
+      "intermodulation",
+      "interference"
+    ],
+    "answers": {
+      "1": [
+        "mix"
+      ]
+    },
+    "notes": ""
+  },
+  "E4D04": {
+    "answers": {
+      "1": [
+        "circulator"
+      ]
+    },
+    "question": [
+      "interference",
+      "intermodulation"
+    ],
+    "notes": ""
+  },
+  "E4D05": {
+    "answers": {
+      "0": [
+        "34",
+        "61"
+      ]
+    },
+    "question": [
+      "52"
+    ],
+    "notes": ""
+  },
+  "E4D06": {
+    "question": [
+      "sensitivity"
+    ],
+    "answers": {
+      "2": [
+        "desensitization"
+      ]
+    },
+    "notes": ""
+  },
+  "E4D07": {
+    "question": [
+      "reduces"
+    ],
+    "answers": {
+      "0": [
+        "attenuation"
+      ]
+    },
+    "notes": ""
+  },
+  "E4D08": {
+    "question": [
+      "intermodulation"
+    ],
+    "answers": {
+      "2": [
+        "nonlinear"
+      ]
+    },
+    "notes": ""
+  },
+  "E4D09": {
+    "question": [
+      "preselector"
+    ],
+    "answers": {
+      "2": [
+        "band"
+      ]
+    },
+    "notes": ""
+  },
+  "E4D10": {
+    "question": [
+      "third",
+      "order"
+    ],
+    "answers": {
+      "2": [
+        "theoretically"
+      ]
+    },
+    "notes": ""
+  },
+  "E4D11": {
+    "question": [
+      "odd",
+      "order"
+    ],
+    "answers": {
+      "0": [
+        "two",
+        "signals"
+      ]
+    },
+    "notes": ""
+  },
+  "E4D12": {
+    "question": [
+      "10"
+    ],
+    "answers": {
+      "2": [
+        "8db"
+      ]
+    },
+    "notes": ""
+  },
+  "E4D13": {
+    "answers": {
+      "0": [
+        "51"
+      ]
+    },
+    "question": [
+      "10",
+      "40"
+    ],
+    "notes": ""
+  },
+  "E4D14": {
+    "question": [
+      "minimum"
+    ],
+    "answers": {
+      "3": [
+        "picowatts"
+      ]
+    },
+    "notes": "Smallest"
+  },
+  "E4E01": {
+    "question": [
+      "anf"
+    ],
+    "answers": {
+      "0": [
+        "removal"
+      ]
+    },
+    "notes": ""
+  },
+  "E4E02": {
+    "answers": {
+      "3": [
+        "all"
+      ]
+    },
+    "question": [
+      "digital",
+      "noise",
+      "reduction"
+    ],
+    "notes": ""
+  },
+  "E4E03": {
+    "question": [
+      "noise",
+      "blanker"
+    ],
+    "answers": {
+      "1": [
+        "impulse",
+        "noise"
+      ]
+    },
+    "notes": ""
+  },
+  "E4E04": {
+    "question": [
+      "automobile",
+      "charging"
+    ],
+    "answers": {
+      "3": [
+        "ferrite",
+        "chokes"
+      ]
+    },
+    "notes": ""
+  },
+  "E4E05": {
+    "question": [
+      "ac",
+      "motor"
+    ],
+    "answers": {
+      "1": [
+        "ac",
+        "line"
+      ]
+    },
+    "notes": ""
+  },
+  "E4E06": {
+    "question": [
+      "computer",
+      "network"
+    ],
+    "answers": {
+      "2": [
+        "frequencies",
+        "specific"
+      ]
+    },
+    "notes": ""
+  },
+  "E4E07": {
+    "question": [
+      "shielded"
+    ],
+    "answers": {
+      "1": [
+        "common",
+        "mode"
+      ]
+    },
+    "notes": ""
+  },
+  "E4E08": {
+    "question": [
+      "unshielded"
+    ],
+    "answers": {
+      "1": [
+        "common",
+        "mode"
+      ]
+    },
+    "notes": ""
+  },
+  "E4E09": {
+    "question": [
+      "noise",
+      "blanker"
+    ],
+    "answers": {
+      "2": [
+        "spurious",
+        "emissions"
+      ]
+    },
+    "notes": ""
+  },
+  "E4E10": {
+    "answers": {
+      "0": [
+        "arcing"
+      ],
+      "1": [
+        "doorbell"
+      ],
+      "2": [
+        "display"
+      ],
+      "3": [
+        "all"
+      ]
+    },
+    "notes": "",
+    "question": [
+      "interference",
+      "intermittent"
+    ]
+  },
+  "E4E11": {
+    "question": [
+      "spurious",
+      "signals"
+    ],
+    "answers": {
+      "1": [
+        "mixing",
+        "reradiating"
+      ]
+    },
+    "notes": ""
+  },
+  "E4E12": {
+    "question": [
+      "interference"
+    ],
+    "answers": {
+      "0": [
+        "power",
+        "supplies"
+      ]
+    },
+    "notes": ""
+  },
+  "E4E13": {
+    "question": [
+      "surge",
+      "protector"
+    ],
+    "answers": {
+      "2": [
+        "ground",
+        "panel"
+      ]
+    },
+    "notes": ""
+  },
+  "E4E14": {
+    "question": [
+      "ground",
+      "panel"
+    ],
+    "answers": {
+      "3": [
+        "lightning"
+      ]
+    },
+    "notes": ""
+  },
+  "E5A01": {
+    "question": [
+      "voltage",
+      "higher"
+    ],
+    "answers": {
+      "0": [
+        "resonance"
+      ]
+    },
+    "notes": ""
+  },
+  "E5A02": {
+    "answers": {
+      "2": [
+        "3"
+      ]
+    },
+    "question": [
+      "22",
+      "50",
+      "40"
+    ],
+    "notes": ""
+  },
+  "E5A03": {
+    "question": [
+      "impedance"
+    ],
+    "answers": {
+      "3": [
+        "circuit",
+        "resistance"
+      ]
+    },
+    "notes": ""
+  },
+  "E5A04": {
+    "question": [
+      "impedance"
+    ],
+    "answers": {
+      "0": [
+        "circuit",
+        "resistance"
+      ]
+    },
+    "notes": ""
+  },
+  "E5A05": {
+    "question": [
+      "q",
+      "increasing"
+    ],
+    "answers": {
+      "0": [
+        "bandwidth",
+        "decreased"
+      ]
+    },
+    "notes": ""
+  },
+  "E5A06": {
+    "question": [
+      "lc",
+      "resonance"
+    ],
+    "answers": {
+      "1": [
+        "maximum",
+        "it",
+        "is"
+      ]
+    },
+    "notes": "Has \"it is at a\", then maximum, if not, then Minimum"
+  },
+  "E5A07": {
+    "notes": "Has \"it is at a\", then maximum, if not, then Minimum",
+    "answers": {
+      "0": [
+        "minimum"
+      ]
+    },
+    "question": [
+      "resonance",
+      "rlc"
+    ]
+  },
+  "E5A08": {
+    "answers": {
+      "2": [
+        "phase",
+        "in"
+      ]
+    },
+    "question": [
+      "current",
+      "through",
+      "voltage",
+      "across",
+      "series"
+    ],
+    "notes": ""
+  },
+  "E5A09": {
+    "question": [
+      "q",
+      "rlc"
+    ],
+    "answers": {
+      "0": [
+        "reactance"
+      ],
+      "1": [
+        "reactance"
+      ],
+      "2": [
+        "resistance"
+      ],
+      "3": [
+        "reactance"
+      ]
+    },
+    "notes": "The only one starting with Resistance"
+  },
+  "E5A10": {
+    "answers": {
+      "0": [
+        "7",
+        "mhz"
+      ]
+    },
+    "question": [
+      "10"
+    ],
+    "notes": ""
+  },
+  "E5A11": {
+    "answers": {
+      "2": [
+        "47"
+      ]
+    },
+    "question": [
+      "7"
+    ],
+    "notes": ""
+  },
+  "E5A12": {
+    "answers": {
+      "2": [
+        "31"
+      ]
+    },
+    "question": [
+      "3"
+    ],
+    "notes": ""
+  },
+  "E5A13": {
+    "question": [
+      "increasing",
+      "q"
+    ],
+    "answers": {
+      "2": [
+        "increase"
+      ]
+    },
+    "notes": ""
+  },
+  "E5B01": {
+    "question": [
+      "time",
+      "required"
+    ],
+    "answers": {
+      "1": [
+        "time",
+        "constant"
+      ]
+    },
+    "notes": ""
+  },
+  "E5B02": {
+    "question": [
+      "susceptance"
+    ],
+    "answers": {
+      "3": [
+        "b"
+      ]
+    },
+    "notes": ""
+  },
+  "E5B03": {
+    "question": [
+      "polar"
+    ],
+    "answers": {
+      "1": [
+        "angle",
+        "reciprocal"
+      ]
+    },
+    "notes": ""
+  },
+  "E5B04": {
+    "answers": {
+      "3": [
+        "220"
+      ]
+    },
+    "question": [
+      "220"
+    ],
+    "notes": ""
+  },
+  "E5B05": {
+    "question": [
+      "reactance",
+      "susceptance"
+    ],
+    "answers": {
+      "3": [
+        "reciprocal"
+      ]
+    },
+    "notes": ""
+  },
+  "E5B06": {
+    "question": [
+      "susceptance"
+    ],
+    "answers": {
+      "2": [
+        "imaginary"
+      ]
+    },
+    "notes": ""
+  },
+  "E5B07": {
+    "question": [
+      "500",
+      "250"
+    ],
+    "answers": {
+      "2": [
+        "14",
+        "lagging"
+      ]
+    },
+    "notes": ""
+  },
+  "E5B08": {
+    "question": [
+      "300",
+      "100"
+    ],
+    "answers": {
+      "0": [
+        "63",
+        "lagging"
+      ]
+    },
+    "notes": ""
+  },
+  "E5B09": {
+    "question": [
+      "capacitor"
+    ],
+    "answers": {
+      "3": [
+        "current",
+        "90"
+      ]
+    },
+    "notes": ""
+  },
+  "E5B10": {
+    "question": [
+      "inductor"
+    ],
+    "answers": {
+      "0": [
+        "voltage",
+        "90"
+      ]
+    },
+    "notes": ""
+  },
+  "E5B11": {
+    "question": [
+      "25",
+      "75",
+      "100"
+    ],
+    "answers": {
+      "1": [
+        "27",
+        "leading"
+      ]
+    },
+    "notes": ""
+  },
+  "E5B12": {
+    "question": [
+      "admittance"
+    ],
+    "answers": {
+      "0": [
+        "impedance"
+      ]
+    },
+    "notes": ""
+  },
+  "E5C01": {
+    "question": [
+      "100",
+      "reactance"
+    ],
+    "answers": {
+      "0": [
+        "j100"
+      ]
+    },
+    "notes": ""
+  },
+  "E5C02": {
+    "question": [
+      "polar"
+    ],
+    "answers": {
+      "2": [
+        "phase"
+      ]
+    },
+    "notes": ""
+  },
+  "E5C03": {
+    "question": [
+      "reactance",
+      "polar"
+    ],
+    "answers": {
+      "2": [
+        "positive",
+        "90"
+      ]
+    },
+    "notes": ""
+  },
+  "E5C04": {
+    "question": [
+      "y",
+      "circuit"
+    ],
+    "answers": {
+      "3": [
+        "logarithmic"
+      ]
+    },
+    "notes": ""
+  },
+  "E5C05": {
+    "question": [
+      "phase"
+    ],
+    "answers": {
+      "2": [
+        "phasor"
+      ]
+    },
+    "notes": ""
+  },
+  "E5C06": {
+    "question": [
+      "j25"
+    ],
+    "answers": {
+      "1": [
+        "25",
+        "capacitive"
+      ]
+    },
+    "notes": ""
+  },
+  "E5C07": {
+    "question": [
+      "resistance"
+    ],
+    "answers": {
+      "3": [
+        "horizontal"
+      ]
+    },
+    "notes": ""
+  },
+  "E5C08": {
+    "question": [
+      "phase"
+    ],
+    "answers": {
+      "3": [
+        "polar"
+      ]
+    },
+    "notes": ""
+  },
+  "E5C09": {
+    "question": [
+      "axes"
+    ],
+    "answers": {
+      "0": [
+        "resistive",
+        "reactive",
+        "x",
+        "y"
+      ]
+    },
+    "notes": ""
+  },
+  "E5C10": {
+    "question": [
+      "14"
+    ],
+    "answers": {
+      "1": [
+        "4"
+      ]
+    },
+    "notes": ""
+  },
+  "E5C11": {
+    "answers": {
+      "1": [
+        "3"
+      ]
+    },
+    "question": [
+      "3"
+    ],
+    "notes": ""
+  },
+  "E5C12": {
+    "answers": {
+      "0": [
+        "1"
+      ]
+    },
+    "question": [
+      "21"
+    ],
+    "notes": ""
+  },
+  "E5D01": {
+    "question": [
+      "skin"
+    ],
+    "answers": {
+      "0": [
+        "surface"
+      ]
+    },
+    "notes": ""
+  },
+  "E5D02": {
+    "question": [
+      "short"
+    ],
+    "answers": {
+      "1": [
+        "minimize"
+      ]
+    },
+    "notes": ""
+  },
+  "E5D03": {
+    "answers": {
+      "2": [
+        "90",
+        "out",
+        "phase"
+      ]
+    },
+    "question": [
+      "current",
+      "voltage"
+    ],
+    "notes": ""
+  },
+  "E5D04": {
+    "question": [
+      "short"
+    ],
+    "answers": {
+      "1": [
+        "phase",
+        "shift",
+        "reduce"
+      ]
+    },
+    "notes": ""
+  },
+  "E5D05": {
+    "question": [
+      "parasitic",
+      "electrolytic"
+    ],
+    "answers": {
+      "2": [
+        "inductance"
+      ]
+    },
+    "notes": ""
+  },
+  "E5D06": {
+    "question": [
+      "inductor"
+    ],
+    "answers": {
+      "3": [
+        "inter",
+        "turn"
+      ]
+    },
+    "notes": ""
+  },
+  "E5D07": {
+    "question": [
+      "self",
+      "resonance"
+    ],
+    "answers": {
+      "1": [
+        "parasitic"
+      ]
+    },
+    "notes": ""
+  },
+  "E5D08": {
+    "question": [
+      "film"
+    ],
+    "answers": {
+      "3": [
+        "skin"
+      ]
+    },
+    "notes": ""
+  },
+  "E5D09": {
+    "question": [
+      "ideal"
+    ],
+    "answers": {
+      "1": [
+        "not",
+        "dissipated"
+      ]
+    },
+    "notes": ""
+  },
+  "E5D10": {
+    "question": [
+      "diameter"
+    ],
+    "answers": {
+      "3": [
+        "increases"
+      ]
+    },
+    "notes": ""
+  },
+  "E5D11": {
+    "question": [
+      "100"
+    ],
+    "answers": {
+      "1": [
+        "100"
+      ]
+    },
+    "notes": ""
+  },
+  "E5D12": {
+    "answers": {
+      "3": [
+        "wattless",
+        "nonproductive"
+      ]
+    },
+    "notes": ""
+  },
+  "E6A01": {
+    "question": [
+      "gallium",
+      "arsenide"
+    ],
+    "answers": {
+      "2": [
+        "microwave"
+      ]
+    },
+    "notes": ""
+  },
+  "E6A02": {
+    "answers": {
+      "0": [
+        "n"
+      ]
+    },
+    "question": [
+      "electrons"
+    ],
+    "notes": ""
+  },
+  "E6A03": {
+    "question": [
+      "pn"
+    ],
+    "answers": {
+      "2": [
+        "depletion",
+        "region"
+      ]
+    },
+    "notes": ""
+  },
+  "E6A04": {
+    "answers": {
+      "2": [
+        "acceptor"
+      ]
+    },
+    "question": [
+      "impurity"
+    ],
+    "notes": ""
+  },
+  "E6A05": {
+    "question": [
+      "input",
+      "impedance",
+      "fet"
+    ],
+    "answers": {
+      "2": [
+        "higher",
+        "input",
+        "impedance"
+      ]
+    },
+    "notes": ""
+  },
+  "E6A06": {
+    "question": [
+      "beta"
+    ],
+    "answers": {
+      "1": [
+        "change"
+      ]
+    },
+    "notes": ""
+  },
+  "E6A07": {
+    "question": [
+      "npn"
+    ],
+    "answers": {
+      "3": [
+        "volts",
+        "6",
+        "0",
+        "7"
+      ]
+    },
+    "notes": ""
+  },
+  "E6A08": {
+    "answers": {
+      "3": [
+        "alpha",
+        "cutoff"
+      ]
+    },
+    "question": [
+      "decreased"
+    ],
+    "notes": ""
+  },
+  "E6A09": {
+    "question": [
+      "depletion"
+    ],
+    "answers": {
+      "0": [
+        "no",
+        "current",
+        "flow",
+        "voltage",
+        "gate"
+      ]
+    },
+    "notes": ""
+  },
+  "E6A10": {
+    "answers": {
+      "1": [
+        "4"
+      ]
+    },
+    "question": [
+      "n"
+    ],
+    "notes": "Arrow points toward gate"
+  },
+  "E6A11": {
+    "question": [
+      "p"
+    ],
+    "answers": {
+      "0": [
+        "1"
+      ]
+    },
+    "notes": "Arrow points away from gate"
+  },
+  "E6A12": {
+    "question": [
+      "zener"
+    ],
+    "answers": {
+      "3": [
+        "static"
+      ]
+    },
+    "notes": ""
+  },
+  "E6B01": {
+    "question": [
+      "useful"
+    ],
+    "answers": {
+      "1": [
+        "constant",
+        "drop",
+        "voltage"
+      ]
+    },
+    "notes": ""
+  },
+  "E6B02": {
+    "question": [
+      "schottky"
+    ],
+    "answers": {
+      "3": [
+        "drop",
+        "lower"
+      ]
+    },
+    "notes": ""
+  },
+  "E6B03": {
+    "question": [
+      "led",
+      "drop"
+    ],
+    "answers": {
+      "1": [
+        "band",
+        "gap"
+      ]
+    },
+    "notes": "The Gap Band :)"
+  },
+  "E6B04": {
+    "question": [
+      "capacitor",
+      "voltage",
+      "controlled"
+    ],
+    "answers": {
+      "0": [
+        "varactor"
+      ]
+    },
+    "notes": ""
+  },
+  "E6B05": {
+    "question": [
+      "pin"
+    ],
+    "answers": {
+      "3": [
+        "junction"
+      ]
+    },
+    "notes": ""
+  },
+  "E6B06": {
+    "question": [
+      "schottky"
+    ],
+    "answers": {
+      "3": [
+        "mixer"
+      ]
+    },
+    "notes": ""
+  },
+  "E6B07": {
+    "answers": {
+      "1": [
+        "temperature"
+      ]
+    },
+    "question": [
+      "fail"
+    ],
+    "notes": "Magic smoke"
+  },
+  "E6B08": {
+    "question": [
+      "schottky"
+    ],
+    "answers": {
+      "0": [
+        "metal",
+        "semiconductor"
+      ]
+    },
+    "notes": ""
+  },
+  "E6B09": {
+    "question": [
+      "point",
+      "contact"
+    ],
+    "answers": {
+      "2": [
+        "rf"
+      ]
+    },
+    "notes": ""
+  },
+  "E6B10": {
+    "question": [
+      "schottky"
+    ],
+    "answers": {
+      "1": [
+        "6"
+      ]
+    },
+    "notes": "Reverse S"
+  },
+  "E6B11": {
+    "question": [
+      "pin"
+    ],
+    "answers": {
+      "0": [
+        "forward",
+        "current"
+      ]
+    },
+    "notes": ""
+  },
+  "E6C01": {
+    "question": [
+      "hysteresis"
+    ],
+    "answers": {
+      "0": [
+        "unstable"
+      ]
+    },
+    "notes": "Hysterical input = unstable output"
+  },
+  "E6C02": {
+    "question": [
+      "comparator"
+    ],
+    "answers": {
+      "1": [
+        "changes",
+        "output"
+      ]
+    },
+    "notes": ""
+  },
+  "E6C03": {
+    "question": [
+      "tri",
+      "state"
+    ],
+    "answers": {
+      "0": [
+        "0",
+        "1",
+        "output"
+      ]
+    },
+    "notes": ""
+  },
+  "E6C04": {
+    "question": [
+      "bicmos"
+    ],
+    "answers": {
+      "2": [
+        "cmos",
+        "bipolar"
+      ]
+    },
+    "notes": ""
+  },
+  "E6C05": {
+    "question": [
+      "digital",
+      "logic"
+    ],
+    "answers": {
+      "3": [
+        "cmos"
+      ]
+    },
+    "notes": ""
+  },
+  "E6C06": {
+    "question": [
+      "cmos"
+    ],
+    "answers": {
+      "2": [
+        "half"
+      ]
+    },
+    "notes": ""
+  },
+  "E6C07": {
+    "question": [
+      "pull"
+    ],
+    "answers": {
+      "1": [
+        "open",
+        "circuit"
+      ]
+    },
+    "notes": ""
+  },
+  "E6C08": {
+    "answers": {
+      "1": [
+        "2"
+      ]
+    },
+    "notes": "Dot marks the NOT",
+    "question": [
+      "nand"
+    ]
+  },
+  "E6C09": {
+    "question": [
+      "fpga"
+    ],
+    "answers": {
+      "1": [
+        "hdl"
+      ]
+    },
+    "notes": ""
+  },
+  "E6C10": {
+    "question": [
+      "nor"
+    ],
+    "answers": {
+      "3": [
+        "4"
+      ]
+    },
+    "notes": "OR with NOT dot"
+  },
+  "E6C11": {
+    "question": [
+      "inversion"
+    ],
+    "answers": {
+      "2": [
+        "5"
+      ]
+    },
+    "notes": "Single input, single output"
+  },
+  "E6D01": {
+    "question": [
+      "piezoelectricity"
+    ],
+    "answers": {
+      "2": [
+        "flex"
+      ]
+    },
+    "notes": ""
+  },
+  "E6D02": {
+    "question": [
+      "quartz"
+    ],
+    "answers": {
+      "0": [
+        "shunt"
+      ]
+    },
+    "notes": ""
+  },
+  "E6D03": {
+    "question": [
+      "piezoelectric"
+    ],
+    "answers": {
+      "0": [
+        "deformation",
+        "voltage"
+      ]
+    },
+    "notes": ""
+  },
+  "E6D04": {
+    "question": [
+      "thin",
+      "layers"
+    ],
+    "answers": {
+      "1": [
+        "eddy",
+        "currents"
+      ]
+    },
+    "notes": ""
+  },
+  "E6D05": {
+    "question": [
+      "ferrite"
+    ],
+    "answers": {
+      "2": [
+        "fewer",
+        "turns"
+      ]
+    },
+    "notes": ""
+  },
+  "E6D06": {
+    "question": [
+      "inductance"
+    ],
+    "answers": {
+      "3": [
+        "permeability"
+      ]
+    },
+    "notes": ""
+  },
+  "E6D07": {
+    "question": [
+      "primary"
+    ],
+    "answers": {
+      "3": [
+        "magnetizing"
+      ]
+    },
+    "notes": ""
+  },
+  "E6D08": {
+    "question": [
+      "magnetic",
+      "temperature"
+    ],
+    "answers": {
+      "1": [
+        "iron"
+      ]
+    },
+    "notes": ""
+  },
+  "E6D09": {
+    "question": [
+      "parasitic",
+      "suppressors"
+    ],
+    "answers": {
+      "2": [
+        "ferrite"
+      ]
+    },
+    "notes": ""
+  },
+  "E6D10": {
+    "question": [
+      "toroidal"
+    ],
+    "answers": {
+      "0": [
+        "confine"
+      ]
+    },
+    "notes": ""
+  },
+  "E6D11": {
+    "question": [
+      "decreases"
+    ],
+    "answers": {
+      "1": [
+        "brass"
+      ]
+    },
+    "notes": ""
+  },
+  "E6D12": {
+    "question": [
+      "saturation"
+    ],
+    "answers": {
+      "2": [
+        "magnetic",
+        "flux",
+        "excessive"
+      ]
+    },
+    "notes": ""
+  },
+  "E6E01": {
+    "question": [
+      "gaas"
+    ],
+    "answers": {
+      "1": [
+        "electron",
+        "mobility"
+      ]
+    },
+    "notes": ""
+  },
+  "E6E02": {
+    "answers": {
+      "0": [
+        "dip"
+      ]
+    },
+    "question": [
+      "through",
+      "hole"
+    ],
+    "notes": ""
+  },
+  "E6E03": {
+    "question": [
+      "mmics"
+    ],
+    "answers": {
+      "3": [
+        "gallium",
+        "nitride"
+      ]
+    },
+    "notes": ""
+  },
+  "E6E04": {
+    "answers": {
+      "0": [
+        "50"
+      ]
+    },
+    "question": [
+      "mmics",
+      "common"
+    ],
+    "notes": ""
+  },
+  "E6E05": {
+    "question": [
+      "noise",
+      "low"
+    ],
+    "answers": {
+      "0": [
+        "0",
+        "5"
+      ]
+    },
+    "notes": ""
+  },
+  "E6E06": {
+    "question": [
+      "mmics"
+    ],
+    "answers": {
+      "3": [
+        "frequency"
+      ]
+    },
+    "notes": ""
+  },
+  "E6E07": {
+    "question": [
+      "mmics"
+    ],
+    "answers": {
+      "3": [
+        "microstrip"
+      ]
+    },
+    "notes": ""
+  },
+  "E6E08": {
+    "question": [
+      "mmic"
+    ],
+    "answers": {
+      "2": [
+        "output"
+      ]
+    },
+    "notes": ""
+  },
+  "E6E09": {
+    "question": [
+      "least",
+      "parasitic"
+    ],
+    "answers": {
+      "3": [
+        "surface"
+      ]
+    },
+    "notes": ""
+  },
+  "E6E10": {
+    "question": [
+      "surface",
+      "mount"
+    ],
+    "answers": {
+      "3": [
+        "all"
+      ]
+    },
+    "notes": ""
+  },
+  "E6E11": {
+    "question": [
+      "dip"
+    ],
+    "answers": {
+      "3": [
+        "rows",
+        "two"
+      ]
+    },
+    "notes": ""
+  },
+  "E6E12": {
+    "question": [
+      "higher",
+      "dip"
+    ],
+    "answers": {
+      "2": [
+        "lead"
+      ]
+    },
+    "notes": ""
+  },
+  "E6F01": {
+    "question": [
+      "energy"
+    ],
+    "answers": {
+      "2": [
+        "electrons"
+      ]
+    },
+    "notes": ""
+  },
+  "E6F02": {
+    "question": [
+      "photoconductive"
+    ],
+    "answers": {
+      "0": [
+        "decreases"
+      ]
+    },
+    "notes": ""
+  },
+  "E6F03": {
+    "question": [
+      "optoisolator"
+    ],
+    "answers": {
+      "3": [
+        "phototransistor",
+        "led"
+      ]
+    },
+    "notes": ""
+  },
+  "E6F04": {
+    "question": [
+      "photovoltaic"
+    ],
+    "answers": {
+      "1": [
+        "light",
+        "electrical"
+      ]
+    },
+    "notes": ""
+  },
+  "E6F05": {
+    "question": [
+      "encoder",
+      "optical"
+    ],
+    "answers": {
+      "0": [
+        "patterned",
+        "wheel"
+      ]
+    },
+    "notes": ""
+  },
+  "E6F06": {
+    "question": [
+      "materials"
+    ],
+    "answers": {
+      "2": [
+        "crystalline"
+      ]
+    },
+    "notes": ""
+  },
+  "E6F07": {
+    "question": [
+      "solid",
+      "state"
+    ],
+    "answers": {
+      "1": [
+        "electromechanical",
+        "semiconductors"
+      ]
+    },
+    "notes": ""
+  },
+  "E6F08": {
+    "question": [
+      "optoisolators"
+    ],
+    "answers": {
+      "2": [
+        "isolation",
+        "electrical"
+      ]
+    },
+    "notes": ""
+  },
+  "E6F09": {
+    "question": [
+      "efficiency"
+    ],
+    "answers": {
+      "3": [
+        "converted",
+        "current"
+      ]
+    },
+    "notes": ""
+  },
+  "E6F10": {
+    "question": [
+      "common"
+    ],
+    "answers": {
+      "1": [
+        "silicon"
+      ]
+    },
+    "notes": ""
+  },
+  "E6F11": {
+    "answers": {
+      "0": [
+        "0",
+        "5"
+      ]
+    },
+    "question": [
+      "open",
+      "circuit"
+    ],
+    "notes": ""
+  },
+  "E7A01": {
+    "question": [
+      "bistable"
+    ],
+    "answers": {
+      "2": [
+        "flip",
+        "flop"
+      ]
+    },
+    "notes": "Either this or that"
+  },
+  "E7A02": {
+    "question": [
+      "decade"
+    ],
+    "answers": {
+      "0": [
+        "10",
+        "one"
+      ]
+    },
+    "notes": ""
+  },
+  "E7A03": {
+    "question": [
+      "by",
+      "2",
+      "divide"
+    ],
+    "answers": {
+      "1": [
+        "flip",
+        "flop"
+      ]
+    },
+    "notes": ""
+  },
+  "E7A04": {
+    "question": [
+      "flip",
+      "flops",
+      "16"
+    ],
+    "answers": {
+      "0": [
+        "4"
+      ]
+    },
+    "notes": "2 to the power of 4"
+  },
+  "E7A05": {
+    "question": [
+      "alternates",
+      "continuously"
+    ],
+    "answers": {
+      "3": [
+        "astable"
+      ]
+    },
+    "notes": ""
+  },
+  "E7A06": {
+    "question": [
+      "monostable"
+    ],
+    "answers": {
+      "0": [
+        "alternate",
+        "state"
+      ]
+    },
+    "notes": ""
+  },
+  "E7A07": {
+    "question": [
+      "nand"
+    ],
+    "answers": {
+      "3": [
+        "0",
+        "all",
+        "1"
+      ]
+    },
+    "notes": ""
+  },
+  "E7A08": {
+    "question": [
+      "or"
+    ],
+    "answers": {
+      "0": [
+        "1",
+        "any"
+      ]
+    },
+    "notes": ""
+  },
+  "E7A09": {
+    "question": [
+      "exclusive",
+      "nor"
+    ],
+    "answers": {
+      "2": [
+        "0",
+        "one",
+        "and",
+        "only",
+        "1"
+      ]
+    },
+    "notes": ""
+  },
+  "E7A10": {
+    "question": [
+      "truth"
+    ],
+    "answers": {
+      "1": [
+        "device",
+        "digital"
+      ]
+    },
+    "notes": ""
+  },
+  "E7A11": {
+    "question": [
+      "positive"
+    ],
+    "answers": {
+      "1": [
+        "high",
+        "1"
+      ]
+    },
+    "notes": ""
+  },
+  "E7B01": {
+    "question": [
+      "ab"
+    ],
+    "answers": {
+      "0": [
+        "180",
+        "less",
+        "360",
+        "more"
+      ]
+    },
+    "notes": ""
+  },
+  "E7B02": {
+    "question": [
+      "d"
+    ],
+    "answers": {
+      "0": [
+        "efficiency",
+        "switching"
+      ]
+    },
+    "notes": ""
+  },
+  "E7B03": {
+    "question": [
+      "amplifier"
+    ],
+    "answers": {
+      "0": [
+        "harmonic",
+        "content"
+      ]
+    },
+    "notes": ""
+  },
+  "E7B04": {
+    "question": [
+      "a",
+      "class"
+    ],
+    "answers": {
+      "0": [
+        "saturation",
+        "cutoff"
+      ]
+    },
+    "notes": ""
+  },
+  "E7B05": {
+    "question": [
+      "unwanted",
+      "prevent"
+    ],
+    "answers": {
+      "2": [
+        "suppressors",
+        "parasitic"
+      ]
+    },
+    "notes": ""
+  },
+  "E7B06": {
+    "question": [
+      "grounded",
+      "grid"
+    ],
+    "answers": {
+      "1": [
+        "low",
+        "impedance"
+      ]
+    },
+    "notes": ""
+  },
+  "E7B07": {
+    "question": [
+      "class",
+      "c"
+    ],
+    "answers": {
+      "3": [
+        "bandwidth"
+      ]
+    },
+    "notes": ""
+  },
+  "E7B08": {
+    "question": [
+      "switching",
+      "linear"
+    ],
+    "answers": {
+      "1": [
+        "saturation",
+        "cutoff"
+      ]
+    },
+    "notes": ""
+  },
+  "E7B09": {
+    "question": [
+      "common",
+      "collector"
+    ],
+    "answers": {
+      "3": [
+        "in",
+        "phase"
+      ]
+    },
+    "notes": ""
+  },
+  "E7B10": {
+    "question": [
+      "r1",
+      "r2"
+    ],
+    "answers": {
+      "1": [
+        "voltage",
+        "divider"
+      ]
+    },
+    "notes": ""
+  },
+  "E7B11": {
+    "question": [
+      "r3"
+    ],
+    "answers": {
+      "3": [
+        "self"
+      ]
+    },
+    "notes": ""
+  },
+  "E7B12": {
+    "question": [
+      "amplifier"
+    ],
+    "answers": {
+      "2": [
+        "emitter",
+        "common"
+      ]
+    },
+    "notes": ""
+  },
+  "E7C01": {
+    "question": [
+      "pi"
+    ],
+    "answers": {
+      "3": [
+        "capacitor",
+        "inductor"
+      ]
+    },
+    "notes": ""
+  },
+  "E7C02": {
+    "question": [
+      "shunt"
+    ],
+    "answers": {
+      "1": [
+        "high"
+      ]
+    },
+    "notes": ""
+  },
+  "E7C03": {
+    "question": [
+      "l",
+      "pi"
+    ],
+    "answers": {
+      "0": [
+        "harmonic",
+        "suppression"
+      ]
+    },
+    "notes": ""
+  },
+  "E7C04": {
+    "question": [
+      "matching"
+    ],
+    "answers": {
+      "2": [
+        "desired"
+      ]
+    },
+    "notes": ""
+  },
+  "E7C05": {
+    "question": [
+      "ripple"
+    ],
+    "answers": {
+      "3": [
+        "chebyshev"
+      ]
+    },
+    "notes": ""
+  },
+  "E7C06": {
+    "question": [
+      "elliptical"
+    ],
+    "answers": {
+      "2": [
+        "cutoff",
+        "sharp"
+      ]
+    },
+    "notes": ""
+  },
+  "E7C07": {
+    "question": [
+      "l",
+      "pi"
+    ],
+    "answers": {
+      "1": [
+        "inductor",
+        "pi"
+      ]
+    },
+    "notes": ""
+  },
+  "E7C08": {
+    "question": [
+      "notch"
+    ],
+    "answers": {
+      "1": [
+        "helical"
+      ]
+    },
+    "notes": ""
+  },
+  "E7C09": {
+    "question": [
+      "crystal"
+    ],
+    "answers": {
+      "3": [
+        "crystals",
+        "signals"
+      ]
+    },
+    "notes": ""
+  },
+  "E7C10": {
+    "question": [
+      "2"
+    ],
+    "answers": {
+      "1": [
+        "cavity"
+      ]
+    },
+    "notes": ""
+  },
+  "E7C11": {
+    "question": [
+      "reject"
+    ],
+    "answers": {
+      "2": [
+        "shape"
+      ]
+    },
+    "notes": ""
+  },
+  "E7D01": {
+    "question": [
+      "regulator"
+    ],
+    "answers": {
+      "3": [
+        "constant",
+        "voltage"
+      ]
+    },
+    "notes": ""
+  },
+  "E7D02": {
+    "question": [
+      "switchmode"
+    ],
+    "answers": {
+      "1": [
+        "filter"
+      ]
+    },
+    "notes": ""
+  },
+  "E7D03": {
+    "question": [
+      "stable"
+    ],
+    "answers": {
+      "0": [
+        "zener"
+      ]
+    },
+    "notes": ""
+  },
+  "E7D04": {
+    "question": [
+      "three",
+      "terminal"
+    ],
+    "answers": {
+      "1": [
+        "series"
+      ]
+    },
+    "notes": "three in question is series, otherwise it's shunt"
+  },
+  "E7D05": {
+    "question": [
+      "unregulated"
+    ],
+    "answers": {
+      "3": [
+        "shunt",
+        "regulator"
+      ]
+    },
+    "notes": "three in question is series, otherwise it's shunt"
+  },
+  "E7D06": {
+    "question": [
+      "q1"
+    ],
+    "answers": {
+      "0": [
+        "provides"
+      ],
+      "1": [
+        "provides"
+      ],
+      "2": [
+        "controls"
+      ],
+      "3": [
+        "provides"
+      ]
+    },
+    "notes": ""
+  },
+  "E7D07": {
+    "question": [
+      "c2"
+    ],
+    "answers": {
+      "0": [
+        "d1"
+      ]
+    },
+    "notes": ""
+  },
+  "E7D08": {
+    "question": [
+      "circuit"
+    ],
+    "answers": {
+      "2": [
+        "linear",
+        "regulator"
+      ]
+    },
+    "notes": ""
+  },
+  "E7D09": {
+    "question": [
+      "battery",
+      "time"
+    ],
+    "answers": {
+      "2": [
+        "amp",
+        "hours",
+        "divided"
+      ]
+    },
+    "notes": ""
+  },
+  "E7D10": {
+    "question": [
+      "switching"
+    ],
+    "answers": {
+      "2": [
+        "inverter"
+      ]
+    },
+    "notes": ""
+  },
+  "E7D11": {
+    "question": [
+      "inverter"
+    ],
+    "answers": {
+      "3": [
+        "convert"
+      ]
+    },
+    "notes": ""
+  },
+  "E7D12": {
+    "question": [
+      "dropout"
+    ],
+    "answers": {
+      "2": [
+        "maintain",
+        "regulation"
+      ]
+    },
+    "notes": ""
+  },
+  "E7D13": {
+    "question": [
+      "dissipated"
+    ],
+    "answers": {
+      "2": [
+        "difference"
+      ]
+    },
+    "notes": ""
+  },
+  "E7D14": {
+    "question": [
+      "resistors",
+      "across"
+    ],
+    "answers": {
+      "3": [
+        "all"
+      ]
+    },
+    "notes": ""
+  },
+  "E7D15": {
+    "question": [
+      "step",
+      "start"
+    ],
+    "answers": {
+      "3": [
+        "charge"
+      ]
+    },
+    "notes": ""
+  },
+  "E7E01": {
+    "question": [
+      "fm"
+    ],
+    "answers": {
+      "1": [
+        "reactance",
+        "oscillator"
+      ]
+    },
+    "notes": ""
+  },
+  "E7E02": {
+    "question": [
+      "modulator"
+    ],
+    "answers": {
+      "3": [
+        "capacitance"
+      ]
+    },
+    "notes": ""
+  },
+  "E7E03": {
+    "question": [
+      "discriminator"
+    ],
+    "answers": {
+      "3": [
+        "detecting",
+        "fm"
+      ]
+    },
+    "notes": ""
+  },
+  "E7E04": {
+    "question": [
+      "produce"
+    ],
+    "answers": {
+      "0": [
+        "filter"
+      ]
+    },
+    "notes": ""
+  },
+  "E7E05": {
+    "question": [
+      "boost",
+      "fm"
+    ],
+    "answers": {
+      "3": [
+        "pre",
+        "emphasis"
+      ]
+    },
+    "notes": ""
+  },
+  "E7E06": {
+    "question": [
+      "de",
+      "emphasis"
+    ],
+    "answers": {
+      "0": [
+        "phase"
+      ]
+    },
+    "notes": ""
+  },
+  "E7E07": {
+    "question": [
+      "baseband"
+    ],
+    "answers": {
+      "1": [
+        "prior",
+        "frequency"
+      ]
+    },
+    "notes": ""
+  },
+  "E7E08": {
+    "question": [
+      "mixer"
+    ],
+    "answers": {
+      "2": [
+        "sum",
+        "difference"
+      ]
+    },
+    "notes": ""
+  },
+  "E7E09": {
+    "question": [
+      "levels"
+    ],
+    "answers": {
+      "0": [
+        "spurious"
+      ]
+    },
+    "notes": ""
+  },
+  "E7E10": {
+    "question": [
+      "envelope"
+    ],
+    "answers": {
+      "0": [
+        "filtering"
+      ]
+    },
+    "notes": ""
+  },
+  "E7E11": {
+    "question": [
+      "demodulating"
+    ],
+    "answers": {
+      "2": [
+        "product"
+      ]
+    },
+    "notes": ""
+  },
+  "E7F01": {
+    "question": [
+      "sampling"
+    ],
+    "answers": {
+      "2": [
+        "analog",
+        "to",
+        "digital"
+      ]
+    },
+    "notes": ""
+  },
+  "E7F02": {
+    "question": [
+      "noise"
+    ],
+    "answers": {
+      "0": [
+        "an"
+      ],
+      "1": [
+        "a"
+      ],
+      "2": [
+        "a"
+      ],
+      "3": [
+        "a"
+      ]
+    },
+    "notes": ""
+  },
+  "E7F03": {
+    "question": [
+      "generate"
+    ],
+    "answers": {
+      "2": [
+        "hilbert"
+      ]
+    },
+    "notes": ""
+  },
+  "E7F04": {
+    "question": [
+      "generates"
+    ],
+    "answers": {
+      "3": [
+        "phase"
+      ]
+    },
+    "notes": ""
+  },
+  "E7F05": {
+    "question": [
+      "sampled"
+    ],
+    "answers": {
+      "1": [
+        "twice"
+      ]
+    },
+    "notes": ""
+  },
+  "E7F06": {
+    "question": [
+      "bits"
+    ],
+    "answers": {
+      "3": [
+        "10"
+      ]
+    },
+    "notes": ""
+  },
+  "E7F07": {
+    "question": [
+      "fast",
+      "fourier"
+    ],
+    "answers": {
+      "2": [
+        "time",
+        "domain",
+        "frequency"
+      ]
+    },
+    "notes": ""
+  },
+  "E7F08": {
+    "question": [
+      "decimation"
+    ],
+    "answers": {
+      "1": [
+        "removing",
+        "samples"
+      ]
+    },
+    "notes": ""
+  },
+  "E7F09": {
+    "question": [
+      "anti",
+      "aliasing"
+    ],
+    "answers": {
+      "0": [
+        "removes",
+        "high"
+      ]
+    },
+    "notes": ""
+  },
+  "E7F10": {
+    "question": [
+      "conversion"
+    ],
+    "answers": {
+      "0": [
+        "rate"
+      ]
+    },
+    "notes": ""
+  },
+  "E7F11": {
+    "answers": {
+      "1": [
+        "sample",
+        "width"
+      ]
+    },
+    "question": [
+      "direct",
+      "sampling"
+    ],
+    "notes": ""
+  },
+  "E7F12": {
+    "question": [
+      "fir"
+    ],
+    "answers": {
+      "0": [
+        "delay"
+      ]
+    },
+    "notes": ""
+  },
+  "E7F13": {
+    "question": [
+      "taps"
+    ],
+    "answers": {
+      "3": [
+        "delays"
+      ]
+    },
+    "notes": ""
+  },
+  "E7F14": {
+    "question": [
+      "sharper"
+    ],
+    "answers": {
+      "1": [
+        "more"
+      ]
+    },
+    "notes": ""
+  },
+  "E7G01": {
+    "question": [
+      "op",
+      "amp",
+      "output"
+    ],
+    "answers": {
+      "0": [
+        "low"
+      ]
+    },
+    "notes": "Input hIgh, Output lOw"
+  },
+  "E7G02": {
+    "question": [
+      "capacitor"
+    ],
+    "answers": {
+      "1": [
+        "low"
+      ]
+    },
+    "notes": ""
+  },
+  "E7G03": {
+    "question": [
+      "input",
+      "op",
+      "amp"
+    ],
+    "answers": {
+      "3": [
+        "high"
+      ]
+    },
+    "notes": "Input hIgh, Output lOw"
+  },
+  "E7G04": {
+    "question": [
+      "offset"
+    ],
+    "answers": {
+      "2": [
+        "zero"
+      ]
+    },
+    "notes": ""
+  },
+  "E7G05": {
+    "answers": {
+      "0": [
+        "restrict",
+        "gain",
+        "q"
+      ]
+    },
+    "question": [
+      "ringing"
+    ],
+    "notes": ""
+  },
+  "E7G06": {
+    "question": [
+      "bandwidth",
+      "gain"
+    ],
+    "answers": {
+      "1": [
+        "one"
+      ]
+    },
+    "notes": ""
+  },
+  "E7G07": {
+    "question": [
+      "gain",
+      "470"
+    ],
+    "answers": {
+      "2": [
+        "47"
+      ]
+    },
+    "notes": ""
+  },
+  "E7G08": {
+    "question": [
+      "frequency"
+    ],
+    "answers": {
+      "3": [
+        "not",
+        "does"
+      ]
+    },
+    "notes": ""
+  },
+  "E7G09": {
+    "question": [
+      "23"
+    ],
+    "answers": {
+      "3": [
+        "2"
+      ]
+    },
+    "notes": ""
+  },
+  "E7G10": {
+    "question": [
+      "gain"
+    ],
+    "answers": {
+      "2": [
+        "38"
+      ]
+    },
+    "notes": ""
+  },
+  "E7G11": {
+    "question": [
+      "47"
+    ],
+    "answers": {
+      "1": [
+        "14"
+      ]
+    },
+    "notes": ""
+  },
+  "E7G12": {
+    "question": [
+      "operational",
+      "amplifier"
+    ],
+    "answers": {
+      "0": [
+        "very",
+        "high",
+        "input",
+        "low",
+        "output"
+      ]
+    },
+    "notes": ""
+  },
+  "E7H01": {
+    "question": [
+      "oscillator"
+    ],
+    "answers": {
+      "3": [
+        "colpitts"
+      ]
+    },
+    "notes": ""
+  },
+  "E7H02": {
+    "question": [
+      "microphonic"
+    ],
+    "answers": {
+      "2": [
+        "vibration",
+        "mechanical"
+      ]
+    },
+    "notes": ""
+  },
+  "E7H03": {
+    "question": [
+      "phase",
+      "locked"
+    ],
+    "answers": {
+      "2": [
+        "phase",
+        "detector"
+      ]
+    },
+    "notes": ""
+  },
+  "E7H04": {
+    "question": [
+      "colpitts"
+    ],
+    "answers": {
+      "2": [
+        "capacitive",
+        "divider"
+      ]
+    },
+    "notes": ""
+  },
+  "E7H05": {
+    "question": [
+      "pierce"
+    ],
+    "answers": {
+      "3": [
+        "quartz"
+      ]
+    },
+    "notes": ""
+  },
+  "E7H06": {
+    "question": [
+      "phase",
+      "locked"
+    ],
+    "answers": {
+      "1": [
+        "synthesis"
+      ]
+    },
+    "notes": ""
+  },
+  "E7H07": {
+    "question": [
+      "microphonic"
+    ],
+    "answers": {
+      "3": [
+        "mechanically",
+        "isolate"
+      ]
+    },
+    "notes": ""
+  },
+  "E7H08": {
+    "question": [
+      "crystal"
+    ],
+    "answers": {
+      "0": [
+        "np0"
+      ]
+    },
+    "notes": ""
+  },
+  "E7H09": {
+    "question": [
+      "synthesizer"
+    ],
+    "answers": {
+      "0": [
+        "digital",
+        "synthesizer"
+      ]
+    },
+    "notes": ""
+  },
+  "E7H10": {
+    "question": [
+      "lookup"
+    ],
+    "answers": {
+      "1": [
+        "desired"
+      ]
+    },
+    "notes": ""
+  },
+  "E7H11": {
+    "question": [
+      "spectral"
+    ],
+    "answers": {
+      "2": [
+        "spurious",
+        "signals"
+      ]
+    },
+    "notes": ""
+  },
+  "E7H12": {
+    "question": [
+      "crystal"
+    ],
+    "answers": {
+      "1": [
+        "capacitance"
+      ]
+    },
+    "notes": ""
+  },
+  "E7H13": {
+    "question": [
+      "microwave"
+    ],
+    "answers": {
+      "3": [
+        "all"
+      ]
+    },
+    "notes": ""
+  },
+  "E8A01": {
+    "question": [
+      "sine",
+      "square"
+    ],
+    "answers": {
+      "0": [
+        "fourier"
+      ]
+    },
+    "notes": ""
+  },
+  "E8A02": {
+    "answers": {
+      "0": [
+        "successive"
+      ]
+    },
+    "question": [
+      "analog",
+      "digital"
+    ],
+    "notes": ""
+  },
+  "E8A03": {
+    "question": [
+      "time",
+      "domain"
+    ],
+    "answers": {
+      "1": [
+        "amplitude",
+        "times"
+      ]
+    },
+    "notes": ""
+  },
+  "E8A04": {
+    "question": [
+      "dither"
+    ],
+    "answers": {
+      "1": [
+        "noise"
+      ]
+    },
+    "notes": ""
+  },
+  "E8A05": {
+    "question": [
+      "rms"
+    ],
+    "answers": {
+      "3": [
+        "sinusoidal"
+      ]
+    },
+    "notes": ""
+  },
+  "E8A06": {
+    "answers": {
+      "0": [
+        "2",
+        "5"
+      ]
+    },
+    "question": [
+      "pep"
+    ],
+    "notes": ""
+  },
+  "E8A07": {
+    "question": [
+      "pep",
+      "average"
+    ],
+    "answers": {
+      "1": [
+        "speech"
+      ]
+    },
+    "notes": ""
+  },
+  "E8A08": {
+    "question": [
+      "flash"
+    ],
+    "answers": {
+      "2": [
+        "high",
+        "speed"
+      ]
+    },
+    "notes": ""
+  },
+  "E8A09": {
+    "answers": {
+      "3": [
+        "256"
+      ]
+    },
+    "question": [
+      "encoded"
+    ],
+    "notes": ""
+  },
+  "E8A10": {
+    "question": [
+      "low",
+      "pass"
+    ],
+    "answers": {
+      "2": [
+        "spurious",
+        "artifacts"
+      ]
+    },
+    "notes": ""
+  },
+  "E8A11": {
+    "question": [
+      "quality"
+    ],
+    "answers": {
+      "0": [
+        "distortion"
+      ]
+    },
+    "notes": ""
+  },
+  "E8B01": {
+    "question": [
+      "index",
+      "modulation"
+    ],
+    "answers": {
+      "0": [
+        "frequency"
+      ]
+    },
+    "notes": ""
+  },
+  "E8B02": {
+    "question": [
+      "modulation",
+      "index"
+    ],
+    "answers": {
+      "3": [
+        "does",
+        "not"
+      ]
+    },
+    "notes": ""
+  },
+  "E8B03": {
+    "question": [
+      "3000",
+      "1000"
+    ],
+    "answers": {
+      "0": [
+        "3"
+      ]
+    },
+    "notes": ""
+  },
+  "E8B04": {
+    "question": [
+      "6",
+      "2"
+    ],
+    "answers": {
+      "1": [
+        "3"
+      ]
+    },
+    "notes": ""
+  },
+  "E8B05": {
+    "question": [
+      "5",
+      "3"
+    ],
+    "answers": {
+      "3": [
+        "1",
+        "67"
+      ]
+    },
+    "notes": ""
+  },
+  "E8B06": {
+    "question": [
+      "7",
+      "3",
+      "5"
+    ],
+    "answers": {
+      "0": [
+        "2",
+        "14"
+      ]
+    },
+    "notes": ""
+  },
+  "E8B07": {
+    "question": [
+      "orthogonal"
+    ],
+    "answers": {
+      "0": [
+        "digital"
+      ]
+    },
+    "notes": ""
+  },
+  "E8B08": {
+    "question": [
+      "ofdm"
+    ],
+    "answers": {
+      "3": [
+        "intersymbol",
+        "interference"
+      ]
+    },
+    "notes": ""
+  },
+  "E8B09": {
+    "question": [
+      "deviation",
+      "ratio"
+    ],
+    "answers": {
+      "1": [
+        "maximum"
+      ]
+    },
+    "notes": ""
+  },
+  "E8B10": {
+    "question": [
+      "fdm"
+    ],
+    "answers": {
+      "1": [
+        "data",
+        "stream"
+      ]
+    },
+    "notes": ""
+  },
+  "E8B11": {
+    "question": [
+      "time"
+    ],
+    "answers": {
+      "1": [
+        "time",
+        "slots"
+      ]
+    },
+    "notes": ""
+  },
+  "E8C01": {
+    "question": [
+      "qam"
+    ],
+    "answers": {
+      "0": [
+        "a"
+      ],
+      "1": [
+        "transmission"
+      ],
+      "2": [
+        "a"
+      ],
+      "3": [
+        "a"
+      ]
+    },
+    "notes": ""
+  },
+  "E8C02": {
+    "answers": {
+      "2": [
+        "changes"
+      ]
+    },
+    "question": [
+      "symbol",
+      "rate"
+    ],
+    "notes": ""
+  },
+  "E8C03": {
+    "question": [
+      "psk"
+    ],
+    "answers": {
+      "0": [
+        "bandwidth"
+      ]
+    },
+    "notes": ""
+  },
+  "E8C04": {
+    "question": [
+      "psk31"
+    ],
+    "answers": {
+      "2": [
+        "sinusoidal"
+      ]
+    },
+    "notes": ""
+  },
+  "E8C05": {
+    "answers": {
+      "2": [
+        "52"
+      ]
+    },
+    "question": [
+      "code",
+      "morse"
+    ],
+    "notes": ""
+  },
+  "E8C06": {
+    "question": [
+      "ft8"
+    ],
+    "answers": {
+      "1": [
+        "50"
+      ]
+    },
+    "notes": ""
+  },
+  "E8C07": {
+    "answers": {
+      "0": [
+        "15",
+        "36"
+      ]
+    },
+    "notes": ""
+  },
+  "E8C08": {
+    "question": [
+      "arq"
+    ],
+    "answers": {
+      "3": [
+        "retransmission",
+        "requested"
+      ]
+    },
+    "notes": ""
+  },
+  "E8C09": {
+    "question": [
+      "one",
+      "bit"
+    ],
+    "answers": {
+      "3": [
+        "gray"
+      ]
+    },
+    "notes": ""
+  },
+  "E8C10": {
+    "question": [
+      "increased"
+    ],
+    "answers": {
+      "2": [
+        "more",
+        "efficient"
+      ]
+    },
+    "notes": ""
+  },
+  "E8C11": {
+    "question": [
+      "symbol",
+      "baud",
+      "rate"
+    ],
+    "answers": {
+      "0": [
+        "same"
+      ]
+    },
+    "notes": ""
+  },
+  "E8C12": {
+    "question": [
+      "bandwidth"
+    ],
+    "answers": {
+      "2": [
+        "rise",
+        "fall"
+      ]
+    },
+    "notes": ""
+  },
+  "E8C13": {
+    "question": [
+      "qam",
+      "qpsk"
+    ],
+    "answers": {
+      "1": [
+        "phase"
+      ]
+    },
+    "notes": ""
+  },
+  "E8C14": {
+    "question": [
+      "nodes"
+    ],
+    "answers": {
+      "2": [
+        "ip"
+      ]
+    },
+    "notes": ""
+  },
+  "E8C15": {
+    "question": [
+      "technique"
+    ],
+    "answers": {
+      "2": [
+        "link",
+        "discovery"
+      ]
+    },
+    "notes": ""
+  },
+  "E8D01": {
+    "question": [
+      "spread",
+      "spectrum"
+    ],
+    "answers": {
+      "0": [
+        "suppressed"
+      ]
+    },
+    "notes": ""
+  },
+  "E8D02": {
+    "question": [
+      "spectrum",
+      "spread",
+      "phase"
+    ],
+    "answers": {
+      "1": [
+        "sequence"
+      ]
+    },
+    "notes": ""
+  },
+  "E8D03": {
+    "question": [
+      "frequency",
+      "hopping"
+    ],
+    "answers": {
+      "3": [
+        "frequency",
+        "pseudorandom"
+      ]
+    },
+    "notes": ""
+  },
+  "E8D04": {
+    "question": [
+      "rise",
+      "fall"
+    ],
+    "answers": {
+      "2": [
+        "clicks",
+        "key"
+      ]
+    },
+    "notes": ""
+  },
+  "E8D05": {
+    "question": [
+      "key",
+      "clicks"
+    ],
+    "answers": {
+      "0": [
+        "rise",
+        "fall",
+        "increase"
+      ]
+    },
+    "notes": ""
+  },
+  "E8D06": {
+    "question": [
+      "parity"
+    ],
+    "answers": {
+      "3": [
+        "errors"
+      ]
+    },
+    "notes": ""
+  },
+  "E8D07": {
+    "question": [
+      "overmodulation"
+    ],
+    "answers": {
+      "3": [
+        "excessive",
+        "levels"
+      ]
+    },
+    "notes": ""
+  },
+  "E8D08": {
+    "question": [
+      "distortion"
+    ],
+    "answers": {
+      "3": [
+        "imd"
+      ]
+    },
+    "notes": ""
+  },
+  "E8D09": {
+    "question": [
+      "psk"
+    ],
+    "answers": {
+      "3": [
+        "30"
+      ]
+    },
+    "notes": ""
+  },
+  "E8D10": {
+    "question": [
+      "baudot"
+    ],
+    "answers": {
+      "1": [
+        "5"
+      ]
+    },
+    "notes": ""
+  },
+  "E8D11": {
+    "question": [
+      "ascii"
+    ],
+    "answers": {
+      "2": [
+        "both"
+      ]
+    },
+    "notes": ""
+  },
+  "E9A01": {
+    "question": [
+      "isotropic"
+    ],
+    "answers": {
+      "2": [
+        "hypothetical"
+      ]
+    },
+    "notes": ""
+  },
+  "E9A02": {
+    "question": [
+      "150"
+    ],
+    "answers": {
+      "3": [
+        "286"
+      ]
+    },
+    "notes": "Next up from 150 is 286"
+  },
+  "E9A03": {
+    "question": [
+      "radiated"
+    ],
+    "answers": {
+      "2": [
+        "radiated"
+      ]
+    },
+    "notes": ""
+  },
+  "E9A04": {
+    "question": [
+      "feed"
+    ],
+    "answers": {
+      "1": [
+        "height"
+      ]
+    },
+    "notes": ""
+  },
+  "E9A05": {
+    "question": [
+      "ground",
+      "gain"
+    ],
+    "answers": {
+      "3": [
+        "reflections"
+      ]
+    },
+    "notes": ""
+  },
+  "E9A06": {
+    "question": [
+      "200"
+    ],
+    "answers": {
+      "0": [
+        "317"
+      ]
+    },
+    "notes": "300 is next up from 200, but it's too sus, so it's 317"
+  },
+  "E9A07": {
+    "question": [
+      "200"
+    ],
+    "answers": {
+      "1": [
+        "252"
+      ]
+    },
+    "notes": "252 is next up from 200"
+  },
+  "E9A08": {
+    "question": [
+      "fresnel"
+    ],
+    "answers": {
+      "0": [
+        "5",
+        "8"
+      ]
+    },
+    "notes": "Shortest is smallest"
+  },
+  "E9A09": {
+    "question": [
+      "efficiency"
+    ],
+    "answers": {
+      "1": [
+        "total",
+        "radiation"
+      ]
+    },
+    "notes": ""
+  },
+  "E9A10": {
+    "question": [
+      "efficiency"
+    ],
+    "answers": {
+      "0": [
+        "radial"
+      ]
+    },
+    "notes": ""
+  },
+  "E9A11": {
+    "question": [
+      "losses"
+    ],
+    "answers": {
+      "2": [
+        "soil"
+      ]
+    },
+    "notes": ""
+  },
+  "E9A12": {
+    "question": [
+      "6"
+    ],
+    "answers": {
+      "0": [
+        "3"
+      ]
+    },
+    "notes": ""
+  },
+  "E9B01": {
+    "answers": {
+      "1": [
+        "50"
+      ]
+    },
+    "question": [
+      "3"
+    ],
+    "notes": "-25 + 25"
+  },
+  "E9B02": {
+    "answers": {
+      "3": [
+        "18"
+      ]
+    },
+    "notes": "Half way between 12 and 24, 18"
+  },
+  "E9B03": {
+    "answers": {
+      "3": [
+        "14"
+      ]
+    },
+    "notes": "",
+    "question": [
+      "side"
+    ]
+  },
+  "E9B04": {
+    "question": [
+      "front",
+      "back"
+    ],
+    "answers": {
+      "1": [
+        "28"
+      ]
+    },
+    "notes": "Just under 30"
+  },
+  "E9B05": {
+    "question": [
+      "pattern"
+    ],
+    "answers": {
+      "0": [
+        "elevation"
+      ]
+    },
+    "notes": ""
+  },
+  "E9B06": {
+    "question": [
+      "angle"
+    ],
+    "answers": {
+      "2": [
+        "7",
+        "5"
+      ]
+    },
+    "notes": "Half of 15 deg"
+  },
+  "E9B07": {
+    "question": [
+      "isotropic",
+      "lossless"
+    ],
+    "answers": {
+      "2": [
+        "same"
+      ]
+    },
+    "notes": ""
+  },
+  "E9B08": {
+    "question": [
+      "far"
+    ],
+    "answers": {
+      "3": [
+        "no",
+        "longer",
+        "varies"
+      ]
+    },
+    "notes": ""
+  },
+  "E9B09": {
+    "answers": {
+      "1": [
+        "moments",
+        "method"
+      ]
+    },
+    "question": [
+      "antennas",
+      "modeling"
+    ],
+    "notes": ""
+  },
+  "E9B10": {
+    "question": [
+      "method",
+      "moments"
+    ],
+    "answers": {
+      "0": [
+        "segments",
+        "current",
+        "uniform"
+      ]
+    },
+    "notes": ""
+  },
+  "E9B11": {
+    "question": [
+      "10"
+    ],
+    "answers": {
+      "2": [
+        "impedance",
+        "feed",
+        "point"
+      ]
+    },
+    "notes": ""
+  },
+  "E9C01": {
+    "answers": {
+      "3": [
+        "along",
+        "axis"
+      ]
+    },
+    "question": [
+      "180",
+      "2"
+    ],
+    "notes": "1/2 apart is broadside when in phase, along axis when not"
+  },
+  "E9C02": {
+    "question": [
+      "4"
+    ],
+    "answers": {
+      "0": [
+        "cardioid"
+      ]
+    },
+    "notes": "1/4 apart is cardioid"
+  },
+  "E9C03": {
+    "question": [
+      "2",
+      "phase",
+      "in"
+    ],
+    "answers": {
+      "2": [
+        "broadside"
+      ]
+    },
+    "notes": "1/2 apart is broadside when in phase, along axis when not"
+  },
+  "E9C04": {
+    "question": [
+      "unterminated"
+    ],
+    "answers": {
+      "1": [
+        "additional",
+        "antenna"
+      ]
+    },
+    "notes": ""
+  },
+  "E9C05": {
+    "question": [
+      "ocfd"
+    ],
+    "answers": {
+      "0": [
+        "bands",
+        "multiple"
+      ]
+    },
+    "notes": ""
+  },
+  "E9C06": {
+    "question": [
+      "resistor",
+      "terminating"
+    ],
+    "answers": {
+      "1": [
+        "unidirectional"
+      ]
+    },
+    "notes": ""
+  },
+  "E9C07": {
+    "question": [
+      "two",
+      "wire"
+    ],
+    "answers": {
+      "0": [
+        "300"
+      ]
+    },
+    "notes": ""
+  },
+  "E9C08": {
+    "question": [
+      "folded"
+    ],
+    "answers": {
+      "2": [
+        "parallel"
+      ]
+    },
+    "notes": ""
+  },
+  "E9C09": {
+    "question": [
+      "g5rv"
+    ],
+    "answers": {
+      "0": [
+        "wire"
+      ]
+    },
+    "notes": ""
+  },
+  "E9C10": {
+    "question": [
+      "zepp"
+    ],
+    "answers": {
+      "1": [
+        "dipole"
+      ]
+    },
+    "notes": ""
+  },
+  "E9C11": {
+    "question": [
+      "seawater"
+    ],
+    "answers": {
+      "3": [
+        "increases"
+      ]
+    },
+    "notes": ""
+  },
+  "E9C12": {
+    "question": [
+      "extended",
+      "double",
+      "zepp"
+    ],
+    "answers": {
+      "2": [
+        "1",
+        "25"
+      ]
+    },
+    "notes": ""
+  },
+  "E9C13": {
+    "question": [
+      "height",
+      "increasing"
+    ],
+    "answers": {
+      "1": [
+        "decreases",
+        "angle"
+      ]
+    },
+    "notes": ""
+  },
+  "E9C14": {
+    "question": [
+      "slope"
+    ],
+    "answers": {
+      "1": [
+        "decreases",
+        "takeoff",
+        "angle"
+      ]
+    },
+    "notes": ""
+  },
+  "E9D01": {
+    "question": [
+      "parabolic",
+      "ideal"
+    ],
+    "answers": {
+      "3": [
+        "6"
+      ]
+    },
+    "notes": ""
+  },
+  "E9D02": {
+    "question": [
+      "linearly",
+      "polarized"
+    ],
+    "answers": {
+      "2": [
+        "perpendicular"
+      ]
+    },
+    "notes": ""
+  },
+  "E9D03": {
+    "question": [
+      "location"
+    ],
+    "answers": {
+      "0": [
+        "center"
+      ]
+    },
+    "notes": ""
+  },
+  "E9D04": {
+    "question": [
+      "coils"
+    ],
+    "answers": {
+      "2": [
+        "efficiency"
+      ]
+    },
+    "notes": ""
+  },
+  "E9D05": {
+    "question": [
+      "driven"
+    ],
+    "answers": {
+      "3": [
+        "2",
+        "1"
+      ]
+    },
+    "notes": ""
+  },
+  "E9D06": {
+    "question": [
+      "swr",
+      "bandwidth"
+    ],
+    "answers": {
+      "1": [
+        "decreased"
+      ]
+    },
+    "notes": ""
+  },
+  "E9D07": {
+    "answers": {
+      "3": [
+        "efficiency"
+      ]
+    },
+    "question": [
+      "top",
+      "loading"
+    ],
+    "notes": ""
+  },
+  "E9D08": {
+    "question": [
+      "q"
+    ],
+    "answers": {
+      "1": [
+        "swr",
+        "decreases"
+      ]
+    },
+    "notes": ""
+  },
+  "E9D09": {
+    "question": [
+      "loading",
+      "coil"
+    ],
+    "answers": {
+      "3": [
+        "capacitive"
+      ]
+    },
+    "notes": ""
+  },
+  "E9D10": {
+    "question": [
+      "whip"
+    ],
+    "answers": {
+      "1": [
+        "decreases"
+      ]
+    },
+    "notes": ""
+  },
+  "E9D11": {
+    "question": [
+      "reflector"
+    ],
+    "answers": {
+      "3": [
+        "gain"
+      ]
+    },
+    "notes": ""
+  },
+  "E9D12": {
+    "question": [
+      "parasitic"
+    ],
+    "answers": {
+      "2": [
+        "shift",
+        "phase"
+      ]
+    },
+    "notes": ""
+  },
+  "E9E01": {
+    "question": [
+      "insulated"
+    ],
+    "answers": {
+      "1": [
+        "hairpin"
+      ]
+    },
+    "notes": ""
+  },
+  "E9E02": {
+    "question": [
+      "fraction"
+    ],
+    "answers": {
+      "0": [
+        "gamma"
+      ]
+    },
+    "notes": "Not to confuse this with the stub match one, where there is a mention of a short line"
+  },
+  "E9E03": {
+    "question": [
+      "short"
+    ],
+    "answers": {
+      "3": [
+        "stub"
+      ]
+    },
+    "notes": "Short length line, not gamma match"
+  },
+  "E9E04": {
+    "question": [
+      "series",
+      "capacitor"
+    ],
+    "answers": {
+      "1": [
+        "inductive"
+      ]
+    },
+    "notes": ""
+  },
+  "E9E05": {
+    "question": [
+      "driven"
+    ],
+    "answers": {
+      "0": [
+        "capacitive"
+      ]
+    },
+    "notes": ""
+  },
+  "E9E06": {
+    "question": [
+      "100",
+      "50"
+    ],
+    "answers": {
+      "2": [
+        "75"
+      ]
+    },
+    "notes": "75 is between 100 and 50"
+  },
+  "E9E07": {
+    "question": [
+      "interaction"
+    ],
+    "answers": {
+      "1": [
+        "reflection"
+      ]
+    },
+    "notes": ""
+  },
+  "E9E08": {
+    "question": [
+      "wilkinson"
+    ],
+    "answers": {
+      "2": [
+        "50"
+      ]
+    },
+    "notes": "The only answer with numbers"
+  },
+  "E9E09": {
+    "question": [
+      "shunt",
+      "feed"
+    ],
+    "answers": {
+      "2": [
+        "gamma"
+      ]
+    },
+    "notes": ""
+  },
+  "E9E11": {
+    "question": [
+      "phasing"
+    ],
+    "answers": {
+      "0": [
+        "radiation",
+        "pattern"
+      ]
+    },
+    "notes": ""
+  },
+  "E9F01": {
+    "question": [
+      "velocity",
+      "factor"
+    ],
+    "answers": {
+      "3": [
+        "light",
+        "vacuum",
+        "divided"
+      ]
+    },
+    "notes": ""
+  },
+  "E9F02": {
+    "question": [
+      "biggest",
+      "effect"
+    ],
+    "answers": {
+      "2": [
+        "insulating",
+        "dielectric"
+      ]
+    },
+    "notes": ""
+  },
+  "E9F03": {
+    "question": [
+      "electrical",
+      "physical"
+    ],
+    "answers": {
+      "3": [
+        "slowly",
+        "air"
+      ]
+    },
+    "notes": ""
+  },
+  "E9F04": {
+    "answers": {
+      "1": [
+        "low"
+      ]
+    },
+    "question": [
+      "shorted",
+      "1",
+      "2"
+    ],
+    "notes": "Cap't'in LoHiLo:\n1/8 open (Cap), 1/8 short (Ind), 1/4 open (Low), 1/4 short (High), 1/2 short (Low)"
+  },
+  "E9F05": {
+    "question": [
+      "microstrip"
+    ],
+    "answers": {
+      "3": [
+        "interconnects",
+        "precision"
+      ]
+    },
+    "notes": ""
+  },
+  "E9F06": {
+    "question": [
+      "14",
+      "10"
+    ],
+    "answers": {
+      "2": [
+        "10",
+        "6"
+      ]
+    },
+    "notes": ""
+  },
+  "E9F07": {
+    "question": [
+      "parallel",
+      "conductor"
+    ],
+    "answers": {
+      "0": [
+        "lower",
+        "loss"
+      ]
+    },
+    "notes": ""
+  },
+  "E9F08": {
+    "question": [
+      "foam"
+    ],
+    "answers": {
+      "3": [
+        "all"
+      ]
+    },
+    "notes": ""
+  },
+  "E9F09": {
+    "question": [
+      "1",
+      "4",
+      "shorted"
+    ],
+    "answers": {
+      "0": [
+        "high"
+      ]
+    },
+    "notes": "Cap't'in LoHiLo:\n1/8 open (Cap), 1/8 short (Ind), 1/4 open (Low), 1/4 short (High), 1/2 short (Low)"
+  },
+  "E9F10": {
+    "answers": {
+      "2": [
+        "inductive"
+      ]
+    },
+    "question": [
+      "1",
+      "8",
+      "shorted"
+    ],
+    "notes": "Cap't'in LoHiLo:\n1/8 open (Cap), 1/8 short (Ind), 1/4 open (Low), 1/4 short (High), 1/2 short (Low)"
+  },
+  "E9F11": {
+    "question": [
+      "1",
+      "8",
+      "open"
+    ],
+    "answers": {
+      "2": [
+        "capacitive"
+      ]
+    },
+    "notes": "Cap't'in LoHiLo:\n1/8 open (Cap), 1/8 short (Ind), 1/4 open (Low), 1/4 short (High), 1/2 short (Low)"
+  },
+  "E9F12": {
+    "question": [
+      "1",
+      "4",
+      "open"
+    ],
+    "answers": {
+      "3": [
+        "low"
+      ]
+    },
+    "notes": "Cap't'in LoHiLo:\n1/8 open (Cap), 1/8 short (Ind), 1/4 open (Low), 1/4 short (High), 1/2 short (Low)"
+  },
+  "E9G01": {
+    "question": [
+      "smith"
+    ],
+    "answers": {
+      "0": [
+        "transmission",
+        "lines"
+      ]
+    },
+    "notes": ""
+  },
+  "E9G02": {
+    "question": [
+      "coordinate",
+      "smith"
+    ],
+    "answers": {
+      "1": [
+        "resistance",
+        "reactance",
+        "arcs",
+        "circles"
+      ]
+    },
+    "notes": ""
+  },
+  "E9G03": {
+    "question": [
+      "smith"
+    ],
+    "answers": {
+      "2": [
+        "swr"
+      ]
+    },
+    "notes": ""
+  },
+  "E9G04": {
+    "question": [
+      "circles",
+      "smith"
+    ],
+    "answers": {
+      "2": [
+        "resistance",
+        "reactance"
+      ]
+    },
+    "notes": ""
+  },
+  "E9G05": {
+    "question": [
+      "smith"
+    ],
+    "answers": {
+      "0": [
+        "stub"
+      ]
+    },
+    "notes": ""
+  },
+  "E9G06": {
+    "question": [
+      "smith",
+      "reactance",
+      "arcs"
+    ],
+    "answers": {
+      "1": [
+        "axis",
+        "reactance"
+      ]
+    },
+    "notes": ""
+  },
+  "E9G07": {
+    "question": [
+      "straight",
+      "line",
+      "smith"
+    ],
+    "answers": {
+      "3": [
+        "resistance",
+        "axis"
+      ]
+    },
+    "notes": ""
+  },
+  "E9G08": {
+    "question": [
+      "normalized",
+      "smith"
+    ],
+    "answers": {
+      "0": [],
+      "2": [
+        "prime",
+        "impedance"
+      ]
+    },
+    "notes": ""
+  },
+  "E9G09": {
+    "question": [
+      "circles",
+      "smith"
+    ],
+    "answers": {
+      "0": [
+        "swr"
+      ]
+    },
+    "notes": ""
+  },
+  "E9G10": {
+    "question": [
+      "smith",
+      "arcs"
+    ],
+    "answers": {
+      "3": [
+        "reactance"
+      ]
+    },
+    "notes": ""
+  },
+  "E9G11": {
+    "question": [
+      "smith"
+    ],
+    "answers": {
+      "1": [
+        "transmission",
+        "wavelength"
+      ]
+    },
+    "notes": ""
+  },
+  "E9H01": {
+    "question": [
+      "beverage"
+    ],
+    "answers": {
+      "3": [
+        "one",
+        "wavelength",
+        "long"
+      ]
+    },
+    "notes": ""
+  },
+  "E9H02": {
+    "question": [
+      "160",
+      "80"
+    ],
+    "answers": {
+      "0": [
+        "atmospheric",
+        "noise"
+      ]
+    },
+    "notes": ""
+  },
+  "E9H03": {
+    "question": [
+      "rdf"
+    ],
+    "answers": {
+      "3": [
+        "hemisphere"
+      ]
+    },
+    "notes": ""
+  },
+  "E9H04": {
+    "question": [
+      "shield",
+      "direction"
+    ],
+    "answers": {
+      "1": [
+        "depth",
+        "nulls"
+      ]
+    },
+    "notes": ""
+  },
+  "E9H05": {
+    "answers": {
+      "0": [
+        "bidirectional",
+        "null"
+      ]
+    },
+    "question": [
+      "challenge",
+      "direction"
+    ],
+    "notes": ""
+  },
+  "E9H06": {
+    "question": [
+      "beverage",
+      "resistance"
+    ],
+    "answers": {
+      "3": [
+        "swr"
+      ]
+    },
+    "notes": ""
+  },
+  "E9H07": {
+    "question": [
+      "beverage",
+      "resistor"
+    ],
+    "answers": {
+      "1": [
+        "reverse"
+      ]
+    },
+    "notes": ""
+  },
+  "E9H08": {
+    "question": [
+      "sense"
+    ],
+    "answers": {
+      "0": [
+        "null",
+        "only",
+        "direction",
+        "one",
+        "in"
+      ]
+    },
+    "notes": ""
+  },
+  "E9H09": {
+    "question": [
+      "pennant"
+    ],
+    "answers": {
+      "0": [
+        "cardioid"
+      ]
+    },
+    "notes": ""
+  },
+  "E9H10": {
+    "question": [
+      "increased"
+    ],
+    "answers": {
+      "2": [
+        "increasing"
+      ]
+    },
+    "notes": ""
+  },
+  "E9H11": {
+    "question": [
+      "cardioid"
+    ],
+    "answers": {
+      "1": [
+        "single",
+        "null"
+      ]
+    },
+    "notes": ""
+  },
+  "E0A01": {
+    "question": [
+      "ground",
+      "rod"
+    ],
+    "answers": {
+      "1": [
+        "lightning"
+      ]
+    },
+    "notes": ""
+  },
+  "E0A02": {
+    "question": [
+      "exposure"
+    ],
+    "answers": {
+      "1": [
+        "uncontrolled",
+        "exposure"
+      ]
+    },
+    "notes": ""
+  },
+  "E0A03": {
+    "question": [
+      "exposure"
+    ],
+    "answers": {
+      "2": [
+        "30",
+        "300"
+      ]
+    },
+    "notes": ""
+  },
+  "E0A04": {
+    "question": [
+      "over",
+      "exposure"
+    ],
+    "answers": {
+      "2": [
+        "5",
+        "percent"
+      ]
+    },
+    "notes": ""
+  },
+  "E0A05": {
+    "question": [
+      "microwave"
+    ],
+    "answers": {
+      "1": [
+        "exposure"
+      ]
+    },
+    "notes": ""
+  },
+  "E0A06": {
+    "question": [
+      "e",
+      "h",
+      "300"
+    ],
+    "answers": {
+      "3": [
+        "all"
+      ]
+    },
+    "notes": ""
+  },
+  "E0A07": {
+    "question": [
+      "tie",
+      "off"
+    ],
+    "answers": {
+      "1": [
+        "one",
+        "lanyard"
+      ]
+    },
+    "notes": ""
+  },
+  "E0A08": {
+    "question": [
+      "sar"
+    ],
+    "answers": {
+      "2": [
+        "absorbed"
+      ]
+    },
+    "notes": ""
+  },
+  "E0A09": {
+    "question": [
+      "exempt"
+    ],
+    "answers": {
+      "2": [
+        "hand",
+        "held"
+      ]
+    },
+    "notes": ""
+  },
+  "E0A10": {
+    "question": [
+      "exposure",
+      "80"
+    ],
+    "answers": {
+      "0": [
+        "always"
+      ]
+    },
+    "notes": ""
+  },
+  "E0A11": {
+    "question": [
+      "attached"
+    ],
+    "answers": {
+      "3": [
+        "legs"
+      ]
+    },
+    "notes": ""
+  },
+  "E0A12": {
+    "answers": {
+      "0": [
+        "above",
+        "head"
+      ]
+    },
+    "question": [
+      "lanyard"
+    ],
+    "notes": ""
+  },
+  "E1C11": {
+    "answers": {
+      "0": [
+        "cept"
+      ]
+    },
+    "question": [
+      "european"
+    ],
+    "notes": ""
+  }
+}
