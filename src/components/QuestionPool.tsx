@@ -59,7 +59,12 @@ export function QuestionPool({ questions, currentQuestionId, seenQuestionIds, an
           const groupIndex = groupIndices[index] ?? 0;
           const borderGroupClass = groupIndex % 2 === 0 ? 'border-black/10 dark:border-white/20' : 'border-black/20 dark:border-white/40';
           // For seen (but not answered) questions use alternating blue shades; greens reserved for correct answers
-          const seenBlueClass = groupIndex % 2 === 0 ? 'bg-blue-600' : 'bg-sky-600';
+          const seenBlueClass = groupIndex % 2 === 0 ? 'bg-blue-600' : 'bg-blue-600';
+          // Alternate shades for correct/wrong to preserve group delineation
+          const correctClass = groupIndex % 2 === 0 ? 'bg-green-500' : 'bg-emerald-600';
+          const wrongClass = groupIndex % 2 === 0 ? 'bg-rose-600' : 'bg-rose-500';
+          // Unanswered base alternation for subtle striping
+          const unseenClass = groupIndex % 2 === 0 ? 'bg-black/10 dark:bg-white/5' : 'bg-black/20 dark:bg-white/10';
           const result = res; // true=correct, false=wrong, undefined=unanswered
 
           return (
@@ -69,12 +74,12 @@ export function QuestionPool({ questions, currentQuestionId, seenQuestionIds, an
                   isCurrent
                     ? 'bg-blue-500 ring-2 ring-black dark:ring-white'
                     : result === false
-                      ? 'bg-rose-600'
+                      ? wrongClass
                       : result === true
-                        ? 'bg-green-500'
+                        ? correctClass
                         : isSeen
                           ? seenBlueClass
-                          : 'bg-black/10 dark:bg-white/5'
+                          : unseenClass
                 }`}
                 style={{
                   width: `${squareSize}px`,
