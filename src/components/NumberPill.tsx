@@ -5,8 +5,8 @@ import { Badge } from '@/components/ui/badge';
 export function NumberPill({ id, floating = false }: { id: string; floating?: boolean }) {
   const pill = (
     <Badge
-      variant="outline"
-      className="text-[11px] leading-none px-2 py-0.5 border-black/20 text-slate-700 dark:text-white/70 dark:border-white/20 bg-white/70 dark:bg-black/50 backdrop-blur-sm"
+      variant="naked"
+      className="text-[11px] leading-none py-0.5 text-slate-300 dark:text-white/20"
     >
       {id}
     </Badge>

@@ -305,7 +305,7 @@ export function Flashcard({ question, mode, onAnswer, onNext, isHard = false, on
 
   const renderMultipleChoiceMode = () => (
     <div className={`${hasImage ? 'flex-1' : ''} space-y-6`}>
-      <div className="space-y-4">
+      <div className="space-y-5">
         <NumberPill id={question.id} />
         <h3 className="text-lg font-medium leading-relaxed break-words whitespace-normal">
           {showHints ? renderWithHighlights(cleanText, (hints[question.id]?.question || [])) : cleanText}
@@ -372,15 +372,15 @@ export function Flashcard({ question, mode, onAnswer, onNext, isHard = false, on
       role={isTapToAdvance ? 'button' : undefined}
       aria-label={isTapToAdvance ? 'Next card' : undefined}
     >
-      <CardContent className={`p-8 flex relative ${hasImage ? 'gap-8' : 'min-h-[320px] justify-center items-center'}`}>
+      <CardContent className={`p-8 flex flex-wrap relative ${hasImage ? 'gap-8 pt-10' : 'pt-4 min-h-[320px] justify-center items-center'}`}>
         {/* Hard toggle button + Hints controls */}
-        <div className="absolute top-3 right-3 z-20">
+        <div className="absolute top-2 right-6 flex items-center">
           <button
             onClick={(e) => { e.stopPropagation(); if (onToggleHard) onToggleHard(); }}
             className={`text-[11px] px-2 py-1 rounded-md border transition-colors cursor-pointer ${
               isHard
                 ? 'bg-amber-500/20 text-amber-700 border-amber-500/40 dark:bg-amber-400/20 dark:text-amber-300'
-                : 'bg-black/10 text-slate-700 border-black/10 hover:bg-black/20 dark:bg-white/10 dark:text-white/80 dark:border-white/20 dark:hover:bg-white/20'
+                : 'text-slate-700 border-black/10 hover:bg-black/5 dark:bg-white/10 dark:text-white/80 dark:border-white/20 dark:hover:bg-white/20'
             }`}
             aria-pressed={isHard}
             aria-label={isHard ? 'Unmark hard' : 'Mark as hard'}
@@ -394,8 +394,8 @@ export function Flashcard({ question, mode, onAnswer, onNext, isHard = false, on
               aria-label={showHints ? 'Hide hints' : 'Show hints'}
               className={`ml-2 text-[11px] px-2 py-1 rounded-md border transition-colors cursor-pointer ${
                 showHints
-                  ? 'bg-amber-400/30 text-amber-800 border-amber-500/40 dark:bg-amber-300/30 dark:text-black'
-                  : 'bg-black/10 text-slate-700 border-black/10 hover:bg-black/20 dark:bg-white/10 dark:text-white/80 dark:border-white/20 dark:hover:bg-white/20'
+                  ? 'bg-amber-400/10 border-amber-500/40 dark:text-amber-300'
+                  : 'text-slate-700 border-black/10 hover:bg-black/5 dark:bg-white/10 dark:text-white/80 dark:border-white/20 dark:hover:bg-white/20'
               }`}
             >
               {showHints ? 'Hints on' : 'Hints'}
@@ -407,7 +407,7 @@ export function Flashcard({ question, mode, onAnswer, onNext, isHard = false, on
               className={`ml-2 text-[11px] px-2 py-1 rounded-md border transition-colors cursor-pointer ${
                 editHints
                   ? 'bg-sky-500/20 text-sky-700 border-sky-500/40 dark:bg-sky-400/20 dark:text-sky-300'
-                  : 'bg-black/10 text-slate-700 border-black/10 hover:bg-black/20 dark:bg-white/10 dark:text-white/80 dark:border-white/20 dark:hover:bg-white/20'
+                  : 'text-slate-700 border-black/10 hover:bg-black/5 dark:bg-white/10 dark:text-white/80 dark:border-white/20 dark:hover:bg-white/20'
               }`}
             >
               {editHints ? 'Exit hints edit' : 'Edit hints'}
@@ -415,7 +415,7 @@ export function Flashcard({ question, mode, onAnswer, onNext, isHard = false, on
           )}
         </div>
         {hasImage && (
-          <div className="shrink-0">
+          <div className="shrink-0 flex items-center justify-center">
             <Image 
               src={`/${imageFilename}`}
               alt="Question diagram"
